@@ -1,0 +1,1613 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>시간표 전문가 · AI 교무실</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--nv:#343e4e;--bg:#f8f9fc;--side:#f1f6fc;--sf:#ffffff;--sf2:#f5f7fa;--sf3:#f0f3f7;
+--ln:#e3e7ee;--ln2:#eaedf3;--ln3:#cfd6e1;
+--tx:#202938;--tx2:#435066;--tx3:#687487;--tx4:#7e8999;
+--pr:#3e7de0;--pr-h:#2f6dd3;--pr-d:#356ae6;--pr-t:#3d73bf;--pr-s:#edf3ff;--pr-l:#c9ddfb;--nav-a:#eaf3ff;--nav-g:#eef5fd;
+--ok:#1c9a6c;--ok-s:#e7f6ef;--ok-t:#12805a;--wn:#d9822b;--wn-s:#fff3e0;--wn-t:#a35f0c;--er:#d94a4a;--er-s:#fdeded;--er-t:#b83232;--ai:#7a5af0;--ai-s:#f2eefe;--ai-t:#6847e0;
+--sh:0 1px 2px rgba(20,30,50,.04),0 8px 24px rgba(20,30,50,.07);
+--cs:85%;--cl:94%;--ct:27%;--cb:84%;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--nv:#c9d1de;--bg:#0f131a;--side:#131a24;--sf:#171e29;--sf2:#1c2431;--sf3:#222b3a;--ln:#2a3445;--ln2:#252e3d;--ln3:#3a465a;--tx:#e9edf4;--tx2:#c3cbd8;--tx3:#98a3b5;--tx4:#8390a3;--pr:#4a85e8;--pr-h:#6397f0;--pr-d:#86adff;--pr-t:#8fb3ff;--pr-s:#1a2a4b;--pr-l:#2c4678;--nav-a:#1b2d52;--nav-g:#18253b;--ok:#35c48b;--ok-s:#10261f;--ok-t:#5fd7a8;--wn:#f0a24b;--wn-s:#2b2112;--wn-t:#f5b86c;--er:#f27070;--er-s:#2d1618;--er-t:#f79a9a;--ai:#9d86ff;--ai-s:#221c3e;--ai-t:#baa9ff;--sh:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);--cs:30%;--cl:21%;--ct:82%;--cb:32%;color-scheme:dark}}
+:root[data-theme="dark"]{--nv:#c9d1de;--bg:#0f131a;--side:#131a24;--sf:#171e29;--sf2:#1c2431;--sf3:#222b3a;--ln:#2a3445;--ln2:#252e3d;--ln3:#3a465a;--tx:#e9edf4;--tx2:#c3cbd8;--tx3:#98a3b5;--tx4:#8390a3;--pr:#4a85e8;--pr-h:#6397f0;--pr-d:#86adff;--pr-t:#8fb3ff;--pr-s:#1a2a4b;--pr-l:#2c4678;--nav-a:#1b2d52;--nav-g:#18253b;--ok:#35c48b;--ok-s:#10261f;--ok-t:#5fd7a8;--wn:#f0a24b;--wn-s:#2b2112;--wn-t:#f5b86c;--er:#f27070;--er-s:#2d1618;--er-t:#f79a9a;--ai:#9d86ff;--ai-s:#221c3e;--ai-t:#baa9ff;--sh:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);--cs:30%;--cl:21%;--ct:82%;--cb:32%;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--tx);font:14.5px/1.55 'Pretendard Variable','Pretendard','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic','Noto Sans CJK KR',system-ui,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--sf);z-index:10}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--pr);outline-offset:2px;border-radius:8px}
+h1,h2,h3,p{margin:0}
+.app{display:flex;height:100%}
+.sb{width:248px;flex:none;background:var(--side);border-right:1px solid var(--ln);display:flex;flex-direction:column;overflow-y:auto;padding:18px 14px 28px;scrollbar-width:thin;scrollbar-color:var(--ln3) transparent;transition:margin .2s}
+.app.hide .sb{margin-left:-248px}
+.sb-top{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 16px}
+.logo{font-size:20px;font-weight:800;letter-spacing:-.03em}
+.sqb{width:36px;height:36px;border:1px solid var(--ln);background:var(--sf);border-radius:10px;display:grid;place-items:center;color:var(--tx3)}
+.sqb:hover{color:var(--pr-t)}
+.pcard{background:var(--sf);border:1px solid var(--ln);border-radius:16px;padding:16px 14px 14px;box-shadow:0 1px 2px rgba(20,30,50,.03)}
+.pcard h3{font-size:15px;font-weight:700}
+.prow{display:flex;align-items:center;gap:10px;margin-top:14px}
+.av{width:34px;height:34px;border-radius:50%;border:1px solid var(--ln);display:grid;place-items:center;color:var(--tx3);flex:none}
+.pname{font-weight:700;font-size:15px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.psub{font-size:12.5px;color:var(--tx3)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.tile{background:var(--sf2);border-radius:12px;padding:10px 12px;font-size:12.5px;color:var(--tx3);line-height:1.35}
+.tile b{display:block;font-size:19px;color:var(--pr-t);margin-top:6px;font-weight:700}
+.tile b small{font-size:12.5px;color:var(--tx3);font-weight:500;margin-left:2px}
+.lvl{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;font-size:12px;color:var(--tx4)}
+.seg{display:inline-flex;gap:2px;padding:3px;background:var(--sf);border:1px solid var(--ln);border-radius:10px}
+.seg button{padding:5px 11px;border-radius:7px;font-size:13px;font-weight:600;color:var(--tx3);white-space:nowrap}
+.seg button.on{background:var(--pr-s);color:var(--pr-d)}
+.seg button:hover:not(.on){color:var(--tx)}
+.lvl .seg button{padding:3px 8px;font-size:12px}
+.nav{margin-top:14px}
+.nv-home{display:block;width:100%;text-align:left;padding:12px 12px;font-weight:700;font-size:15px;border-radius:10px;color:var(--tx)}
+.nv-home.on{background:var(--nav-a);color:var(--pr-t)}
+.nv-gh{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;padding:12px 10px 12px 12px;border-radius:10px;font-weight:700;font-size:15px;color:var(--tx);margin-top:6px}
+.nv-gh span{display:flex;align-items:center;gap:6px}
+.nv-gh .ic{color:var(--tx4);transition:transform .15s}
+.nv-gh[aria-expanded=false] .ic{transform:rotate(-90deg)}
+.nv-gh.on{background:var(--nav-g);color:var(--pr-t)}
+.s2{font-style:normal;font-size:10.5px;font-weight:700;background:var(--sf3);color:var(--tx3);border-radius:5px;padding:1px 6px}
+.nv-sub{display:flex;flex-direction:column;gap:2px;margin:4px 0 6px}
+.nv-i{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:8px 10px 8px 14px;border:1px solid transparent;border-radius:9px;color:var(--nv);font-size:14.5px}
+.nv-i .ic{color:var(--tx3);flex:none}
+.nv-i>span:not(.sti){flex:1;min-width:0}
+.nv-i:hover{background:color-mix(in srgb,var(--sf) 70%,transparent)}
+.nv-i.on{background:var(--nav-a);border-color:var(--pr-l);color:var(--pr-t);font-weight:600}
+.nv-i.on .ic{color:var(--pr-t)}
+.ai-dot{font-size:10px;font-weight:800;color:var(--ai-t);background:var(--ai-s);border-radius:5px;padding:0 5px;line-height:17px}
+.sti{width:8px;height:8px;border-radius:50%;flex:none}
+.sti.wn{background:var(--wn)}.sti.dg{background:var(--pr)}
+.sti.dn{color:var(--ok);width:auto;height:auto;background:none;display:grid}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{height:74px;flex:none;background:var(--sf);border-bottom:1px solid var(--ln);display:flex;align-items:center;gap:14px;padding:0 28px}
+.mbtn{display:none}
+.app.hide .mbtn{display:grid}
+.crumb{display:flex;align-items:center;gap:8px;color:var(--tx4);font-size:14.5px;min-width:0;flex-wrap:nowrap;overflow:hidden;white-space:nowrap}
+.crumb i{font-style:normal;color:var(--ln3)}
+.crumb b{color:var(--tx);font-weight:700}
+.tr{margin-left:auto;display:flex;align-items:center;gap:12px;flex:none}
+.savest{font-size:13px;color:var(--tx4)}
+.bell{position:relative;width:46px;height:42px;border:1px solid var(--ln);border-radius:10px;background:var(--sf);display:grid;place-items:center;color:var(--tx3)}
+.bell em{position:absolute;top:-7px;right:-6px;min-width:20px;height:20px;border-radius:10px;background:var(--pr);color:#fff;font-style:normal;font-size:11px;font-weight:700;display:grid;place-items:center;padding:0 5px}
+.content{flex:1;overflow:auto;background:var(--bg)}
+.page{max-width:1500px;margin:0 auto;padding:52px clamp(18px,4.8vw,92px) 140px}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:26px}
+.ph h1{font-size:34px;line-height:1.25;font-weight:800;letter-spacing:-.025em;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ph-d{margin-top:10px;color:var(--tx3);font-size:15px;max-width:760px}
+.ph-a{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--ln);background:var(--sf);color:var(--tx);font-weight:700;font-size:14px;white-space:nowrap;transition:background .12s,border-color .12s}
+.btn:hover{border-color:var(--ln3);background:var(--sf2)}
+.btn.p{background:var(--pr);border-color:var(--pr);color:#fff}
+.btn.p:hover{background:var(--pr-h);border-color:var(--pr-h)}
+.btn.ai{background:var(--ai-s);border-color:transparent;color:var(--ai-t)}
+.btn.ai:hover{filter:brightness(.97)}
+.btn.s{height:32px;padding:0 12px;font-size:13px;border-radius:8px}
+.btn.g{border-color:transparent;background:none}
+.btn.g:hover{background:var(--sf3)}
+.btn.er{color:var(--er-t)}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.bdg{display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:700;white-space:nowrap;vertical-align:middle;background:var(--sf3);color:var(--tx3)}
+.bdg.bl{background:var(--pr-s);color:var(--pr-d)}
+.bdg.bk{background:var(--ok-s);color:var(--ok-t)}
+.bdg.ba{background:var(--wn-s);color:var(--wn-t)}
+.bdg.br{background:var(--er-s);color:var(--er-t)}
+.bdg.bi{background:var(--ai-s);color:var(--ai-t)}
+.bdg.pl{height:24px;border-radius:12px;padding:0 10px}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:16px;margin-bottom:20px;min-width:0}
+.ch{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:20px 24px 4px}
+.ct{font-size:18px;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.cd{color:var(--tx3);font-size:13.5px;margin-top:4px}
+.cb{padding:18px 24px 24px}
+.ch+.cb{padding-top:14px}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sp{flex:1}
+.g2,.g3,.g4{display:grid;gap:20px;align-items:start}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g2>.card,.g3>.card,.g4>.card{margin-bottom:0}
+.g2.s,.g3.s,.g4.s{align-items:stretch}
+.mt{margin-top:20px}.mt1{margin-top:10px}
+.mut{color:var(--tx3)}.mut4{color:var(--tx4)}.sm{font-size:13px}.xs{font-size:12px}
+.b7{font-weight:700}
+.num{font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--sf2);border-radius:12px;padding:14px 16px}
+.kpi small{display:block;color:var(--tx3);font-size:13px}
+.kpi b{display:block;font-size:24px;color:var(--pr-t);margin-top:4px;letter-spacing:-.02em}
+.kpi b.ok{color:var(--ok-t)}.kpi b.wn{color:var(--wn-t)}.kpi b.er{color:var(--er-t)}.kpi b.tx{color:var(--tx)}
+.kpi span{font-size:12.5px;color:var(--tx4)}
+.tw{overflow-x:auto;border-radius:0 0 16px 16px}
+.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:14.5px;font-variant-numeric:tabular-nums}
+.tbl th{background:var(--sf2);color:var(--tx3);font-weight:600;font-size:13.5px;text-align:left;padding:13px 16px;white-space:nowrap;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln)}
+.tbl td{padding:12px 16px;border-bottom:1px solid var(--ln2);color:var(--tx2);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tbody tr:hover td{background:color-mix(in srgb,var(--sf2) 60%,transparent)}
+.tbl .c{text-align:center}.tbl .r{text-align:right}
+.tbl td b{color:var(--tx)}
+.tbl.nb th{border-top:0}
+.tbl.dense td{padding:8px 12px}.tbl.dense th{padding:10px 12px}
+.tbl tr.sub td{background:var(--sf2);font-weight:700;color:var(--tx)}
+.tbl tr.bad td{background:var(--er-s)}
+.tabs{display:flex;gap:26px;border-bottom:1px solid var(--ln);margin-bottom:22px;overflow-x:auto;scrollbar-width:none}
+.tab{position:relative;padding:14px 2px;font-size:15px;font-weight:700;color:var(--tx4);white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab:hover{color:var(--tx2)}
+.tab.on{color:var(--pr-t)}
+.tab.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--pr-t);border-radius:2px}
+.tab em{font-style:normal;font-size:11.5px;min-width:20px;height:20px;border-radius:10px;background:var(--sf3);color:var(--tx3);display:grid;place-items:center;padding:0 6px}
+.tab em.wn{background:var(--wn-s);color:var(--wn-t)}.tab em.er{background:var(--er-s);color:var(--er-t)}
+.inp,.sel,.ta{height:40px;border:1px solid var(--ln);background:var(--sf);color:var(--tx);border-radius:10px;padding:0 12px;font:inherit;font-size:14.5px;min-width:0;max-width:100%}
+.ta{height:auto;padding:12px;line-height:1.6;width:100%;resize:vertical}
+.sel{appearance:none;-webkit-appearance:none;padding-right:34px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237e8999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.sel.s,.inp.s{height:32px;font-size:13.5px;border-radius:8px}
+.sel.s{padding-right:28px}
+.inp.n{width:84px;text-align:center}
+.inp:disabled,.sel:disabled{background:var(--sf3);color:var(--tx4)}
+.srch{position:relative;display:inline-flex;align-items:center}
+.srch .ic{position:absolute;left:12px;color:var(--tx4);pointer-events:none}
+.srch .inp{padding-left:36px;width:280px}
+.fld{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fld>label,.lbl{font-size:13px;font-weight:600;color:var(--tx3)}
+.frm{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.sw{position:relative;display:inline-flex;flex:none;cursor:pointer}
+.sw input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.sw i{width:40px;height:24px;border-radius:12px;background:var(--ln3);position:relative;transition:background .15s}
+.sw i::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .15s}
+.sw input:checked+i{background:var(--pr)}
+.sw input:checked+i::after{transform:translateX(16px)}
+.sw input:focus-visible+i{outline:2px solid var(--pr);outline-offset:2px}
+.chip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 13px;border-radius:16px;border:1px solid var(--ln);background:var(--sf);font-size:13.5px;font-weight:600;color:var(--tx2);white-space:nowrap}
+.chip:hover{border-color:var(--ln3)}
+.chip.on{background:var(--pr-s);border-color:var(--pr-l);color:var(--pr-d)}
+.chip.sq{border-radius:9px;min-width:40px;justify-content:center}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--ln);border-radius:9px;background:var(--sf);overflow:hidden}
+.stepper button{width:30px;height:32px;display:grid;place-items:center;color:var(--tx3);font-size:16px}
+.stepper button:hover{background:var(--sf3);color:var(--tx)}
+.stepper b{min-width:34px;text-align:center;font-size:14px;font-variant-numeric:tabular-nums}
+.steps{display:flex;gap:0;margin-bottom:24px;overflow-x:auto}
+.stp{flex:1;min-width:130px;display:flex;align-items:center;gap:10px;padding:0 6px;color:var(--tx4);font-weight:700;font-size:14px;position:relative}
+.stp+.stp::before{content:"";position:absolute;left:-30px;width:28px;height:2px;background:var(--ln);top:50%}
+.stp.dn+.stp::before,.stp.on+.stp::before{background:var(--pr-l)}
+.stp i{width:28px;height:28px;border-radius:50%;border:2px solid var(--ln3);display:grid;place-items:center;font-style:normal;font-size:13px;flex:none;background:var(--sf)}
+.stp.on{color:var(--pr-t)}.stp.on i{border-color:var(--pr);background:var(--pr);color:#fff}
+.stp.dn{color:var(--tx2)}.stp.dn i{border-color:var(--pr);color:var(--pr)}
+.stp button{display:flex;align-items:center;gap:10px;font-weight:inherit;color:inherit;text-align:left}
+.bar{height:8px;border-radius:4px;background:var(--sf3);overflow:hidden;position:relative}
+.bar i{display:block;height:100%;background:var(--pr);border-radius:4px;transition:width .35s}
+.bar.ok i{background:var(--ok)}.bar.wn i{background:var(--wn)}.bar.er i{background:var(--er)}
+.note{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:var(--sf2);color:var(--tx2);font-size:13.5px}
+.note .ic{flex:none;margin-top:2px;color:var(--tx3)}
+.note.wn{background:var(--wn-s)}.note.wn .ic{color:var(--wn)}
+.note.er{background:var(--er-s)}.note.er .ic{color:var(--er)}
+.note.ok{background:var(--ok-s)}.note.ok .ic{color:var(--ok)}
+.note.bl{background:var(--pr-s)}.note.bl .ic{color:var(--pr)}
+.note.ai{background:var(--ai-s)}.note.ai .ic{color:var(--ai)}
+.note b{color:var(--tx)}
+.list{display:flex;flex-direction:column}
+.li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--ln2)}
+.li:last-child{border-bottom:0}
+.li .sp b{display:block;color:var(--tx)}
+.li small{color:var(--tx3);font-size:13px}
+.empty{padding:44px 20px;text-align:center;color:var(--tx3)}
+.empty .ic{color:var(--ln3);margin-bottom:8px}
+.empty b{display:block;color:var(--tx);margin-bottom:4px;font-size:16px}
+.drop{border:2px dashed var(--ln3);border-radius:16px;padding:44px 20px;text-align:center;background:var(--sf2)}
+.drop .ic{color:var(--pr)}
+.drop b{display:block;font-size:17px;margin:10px 0 4px}
+.srow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.srow .lb{font-weight:700}
+.srow .sel{min-width:160px}
+.hint{font-size:13.5px;color:var(--tx3);margin-bottom:22px}
+.link{color:var(--pr-t);font-weight:700;cursor:pointer}
+.link:hover{text-decoration:underline}
+.opt{border:1px solid var(--ln);border-radius:14px;padding:16px 18px;background:var(--sf);text-align:left;width:100%}
+.opt.on{border-color:var(--pr);background:var(--pr-s);box-shadow:0 0 0 1px var(--pr)}
+.opt b{display:flex;align-items:center;gap:8px;font-size:16px}
+.opt p{margin-top:6px;color:var(--tx3);font-size:13.5px}
+/* timetable */
+.tt{display:grid;grid-template-columns:52px repeat(5,minmax(0,1fr));gap:6px;min-width:520px}
+.tt-h{text-align:center;font-weight:700;font-size:13.5px;color:var(--tx3);padding:6px 0}
+.tt-p{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:var(--tx4);line-height:1.2}
+.tt-p b{font-size:15px;color:var(--tx)}
+.tt-l{grid-column:1/-1;text-align:center;font-size:12px;color:var(--tx4);background:var(--sf2);border-radius:8px;padding:3px}
+.cell{position:relative;min-height:76px;padding:8px 10px;border-radius:10px;border:1px solid hsl(var(--h,215) 50% var(--cb));background:hsl(var(--h,215) var(--cs) var(--cl));color:hsl(var(--h,215) 45% var(--ct));display:flex;flex-direction:column;gap:1px;font-size:12px;text-align:left;min-width:0}
+.cell b{font-size:14px;line-height:1.25}
+.cell span{opacity:.9}
+.cell em{font-style:normal;opacity:.7;font-size:11px}
+.cell.cl{cursor:pointer}
+.cell.cl:hover{filter:brightness(.97)}
+.cell.bad{outline:2px solid var(--er);outline-offset:-1px}
+.cell.warn{outline:2px dashed var(--wn);outline-offset:-1px}
+.cell.sel{outline:2px solid var(--pr);outline-offset:1px}
+.cell.tgt{outline:2px dashed var(--pr);outline-offset:1px}
+.cell.mv{box-shadow:inset 0 0 0 2px var(--pr)}
+.cell.blk{background:repeating-linear-gradient(135deg,var(--sf2) 0 8px,var(--sf3) 8px 16px);border-color:var(--ln);color:var(--tx3);align-items:center;justify-content:center;text-align:center}
+.cell.mini{min-height:44px;padding:4px 6px;font-size:11px}.cell.mini b{font-size:12px}
+.cell .lk{position:absolute;top:5px;right:5px;width:22px;height:22px;border-radius:6px;display:grid;place-items:center;color:inherit;opacity:.45}
+.cell .lk:hover{opacity:1;background:rgba(0,0,0,.08)}
+.cell.lked .lk{opacity:.95}
+.cell .wr{position:absolute;bottom:5px;right:6px;color:var(--er)}
+.cell[draggable=true]{cursor:grab}
+.cell.drag{opacity:.4}
+.ttw{overflow-x:auto;padding-bottom:4px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--tx3)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:5px;vertical-align:-1px;background:hsl(var(--h,215) var(--cs) var(--cl));border:1px solid hsl(var(--h,215) 50% var(--cb))}
+.edl{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:20px;align-items:start}
+.pl{padding:12px 14px;border:1px solid var(--ln);border-radius:12px;display:flex;gap:10px;align-items:flex-start;background:var(--sf)}
+.pl+.pl{margin-top:8px}
+.pl .ic{flex:none;margin-top:3px}
+.pl.er .ic{color:var(--er)}.pl.wn .ic{color:var(--wn)}
+.pl b{display:block;color:var(--tx);font-size:14px}
+.pl small{color:var(--tx3);font-size:12.5px}
+.cand{padding:12px 14px;border:1px solid var(--ln);border-radius:12px}
+.cand+.cand{margin-top:8px}
+.cand.best{border-color:var(--pr-l);background:var(--pr-s)}
+.hm{display:grid;grid-template-columns:48px repeat(5,minmax(0,1fr));gap:5px;min-width:440px}
+.hm div{border-radius:8px;text-align:center;padding:9px 0;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.hm .h{color:var(--tx3);padding:4px 0}
+.hm .a{background:var(--ok-s);color:var(--ok-t);outline:2px solid var(--ok);outline-offset:-2px}
+.hm .b{background:var(--sf3);color:var(--tx3)}
+.hm .o{background:var(--wn-s);color:var(--wn-t)}
+.hm .x{background:var(--er-s);color:var(--er-t)}
+.hm .z{background:var(--sf2);color:var(--tx4)}
+.gc{display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:6px}
+.gc button{height:40px;border-radius:8px;border:1px solid var(--ln);background:var(--sf);font-size:13px;font-weight:600;color:var(--tx3)}
+.gc button.u{background:var(--er-s);border-color:transparent;color:var(--er-t)}
+.gc button.k{background:var(--sf3);color:var(--tx4);pointer-events:none}
+.ring{--v:80;width:132px;height:132px;border-radius:50%;background:conic-gradient(var(--pr) calc(var(--v)*1%),var(--sf3) 0);display:grid;place-items:center;flex:none}
+.ring div{width:104px;height:104px;border-radius:50%;background:var(--sf);display:grid;place-items:center;text-align:center;line-height:1.2}
+.ring b{font-size:34px;letter-spacing:-.03em}.ring small{display:block;font-size:12px;color:var(--tx3)}
+.mrow{display:grid;grid-template-columns:150px 1fr 56px;gap:12px;align-items:center;padding:9px 0}
+.mrow span:last-child{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.vbars{display:flex;align-items:flex-end;gap:4px;height:72px}
+.vbars i{flex:1;background:var(--pr-l);border-radius:3px 3px 0 0;min-width:4px}
+.vbars i.t{background:var(--pr)}
+/* ops / phone */
+.ops{display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:28px;align-items:start}
+.phone{width:352px;max-width:100%;height:min(700px,max(540px,calc(100vh - 110px)));border:10px solid #1c2331;border-radius:42px;background:var(--sf);display:flex;flex-direction:column;overflow:hidden;margin:0 auto;box-shadow:var(--sh);position:sticky;top:12px}
+.ph-sb{display:flex;justify-content:space-between;padding:10px 22px 4px;font-size:12px;font-weight:700;color:var(--tx)}
+.ph-hd{padding:8px 18px 10px}
+.ph-hd b{font-size:20px;letter-spacing:-.02em;display:block}
+.ph-hd span{font-size:12.5px;color:var(--tx3)}
+.ph-bd{flex:1;overflow-y:auto;padding:4px 14px 16px;background:var(--bg);scrollbar-width:none}
+.ph-tabs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ln);background:var(--sf);padding:6px 4px 8px}
+.ph-tabs button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--tx4);font-weight:600;padding:4px 0}
+.ph-tabs button.on{color:var(--pr-t)}
+.pc{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:12px 14px;margin-top:10px}
+.pc.cur{border-color:var(--pr);box-shadow:0 0 0 1px var(--pr)}
+.pc.free{background:transparent;border-style:dashed;color:var(--tx4);padding:8px 14px}
+.pc .bar-l{display:flex;gap:10px;align-items:center}
+.pc .pn{width:30px;height:30px;border-radius:9px;background:var(--sf3);display:grid;place-items:center;font-weight:800;font-size:14px;flex:none}
+.pc .sb2{width:4px;align-self:stretch;border-radius:3px;background:hsl(var(--h,215) 60% 55%);flex:none}
+.pc small{color:var(--tx3);font-size:12px}
+.pc b{font-size:14.5px}
+.pbtn{width:100%;height:42px;border-radius:12px;background:var(--pr);color:#fff;font-weight:700;margin-top:12px}
+.pbtn.g{background:var(--sf);color:var(--tx);border:1px solid var(--ln)}
+.at{display:flex;gap:4px}
+.at button{flex:1;height:30px;border-radius:8px;border:1px solid var(--ln);font-size:12.5px;font-weight:700;color:var(--tx3);background:var(--sf)}
+.at button.on.o{background:var(--ok-s);color:var(--ok-t);border-color:transparent}
+.at button.on.l{background:var(--wn-s);color:var(--wn-t);border-color:transparent}
+.at button.on.a{background:var(--er-s);color:var(--er-t);border-color:transparent}
+.nti{display:flex;gap:10px;padding:12px 4px;border-bottom:1px solid var(--ln2);text-align:left;width:100%}
+.nti i{width:8px;height:8px;border-radius:50%;background:var(--pr);margin-top:7px;flex:none}
+.nti.rd i{background:transparent}
+.nti.rd{opacity:.65}
+.nti b{display:block;font-size:14px}
+.nti small{color:var(--tx3);font-size:12.5px}
+/* floating AI + overlays */
+.fab{position:fixed;right:28px;bottom:calc(28px + env(safe-area-inset-bottom,0px));width:62px;height:62px;border-radius:18px;background:var(--pr);color:#fff;font-weight:800;font-size:12.5px;box-shadow:0 8px 24px rgba(62,125,224,.4);z-index:30;display:grid;place-items:center;line-height:1.15;text-align:center}
+.fab:hover{background:var(--pr-h)}
+.aip{position:fixed;right:28px;bottom:calc(104px + env(safe-area-inset-bottom,0px));width:360px;max-width:calc(100vw - 32px);max-height:min(560px,calc(100vh - 160px));background:var(--sf);border:1px solid var(--ln);border-radius:18px;box-shadow:var(--sh);z-index:31;display:none;flex-direction:column;overflow:hidden}
+.aip.on{display:flex}
+.aip-h{padding:14px 16px;border-bottom:1px solid var(--ln);display:flex;align-items:center;gap:8px;font-weight:800}
+.aip-b{padding:14px 16px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:10px}
+.bub{padding:10px 13px;border-radius:14px;font-size:13.5px;max-width:88%}
+.bub.m{background:var(--sf2);align-self:flex-start;border-top-left-radius:4px}
+.bub.u{background:var(--pr);color:#fff;align-self:flex-end;border-top-right-radius:4px}
+.sug{display:flex;flex-direction:column;gap:6px}
+.sug button{text-align:left;padding:9px 12px;border:1px solid var(--ln);border-radius:10px;font-size:13.5px;background:var(--sf);font-weight:600;color:var(--tx2)}
+.sug button:hover{border-color:var(--pr-l);background:var(--pr-s);color:var(--pr-d)}
+.toast{position:fixed;left:50%;bottom:calc(32px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:#222b3b;color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:.2s;z-index:60;max-width:calc(100vw - 32px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.mdl{position:fixed;inset:0;background:rgba(15,20,30,.5);z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
+.mdl.on{display:flex}
+.mbox{background:var(--sf);border-radius:18px;width:520px;max-width:100%;max-height:calc(100vh - 40px);display:flex;flex-direction:column;box-shadow:var(--sh);border:1px solid var(--ln)}
+.mh{display:flex;align-items:center;justify-content:space-between;padding:18px 22px 6px;font-size:18px}
+.mb{padding:10px 22px 18px;overflow-y:auto}
+.mf{padding:14px 22px;border-top:1px solid var(--ln);display:flex;justify-content:flex-end;gap:8px}
+.pop{position:fixed;z-index:40;background:var(--sf);border:1px solid var(--ln);border-radius:14px;box-shadow:var(--sh);padding:8px;min-width:240px;display:none}
+.pop.on{display:block}
+.pop .pi{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;padding:10px 12px;border-radius:9px;font-weight:600;font-size:14px}
+.pop .pi:hover{background:var(--sf2)}
+.pop .pi.on{background:var(--pr-s);color:var(--pr-d)}
+.pop h4{margin:6px 12px 6px;font-size:12px;color:var(--tx4);font-weight:600}
+.scrim{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{animation:spin .9s linear infinite}
+@media (max-width:1180px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}.edl{grid-template-columns:1fr}.ops{grid-template-columns:1fr}.phone{position:relative;top:0}}
+@media (max-width:900px){
+.crumb>*:not(b){display:none}
+.sb{position:fixed;left:0;top:0;bottom:0;z-index:45;margin-left:-260px;box-shadow:var(--sh)}
+.app.mnav .sb{margin-left:0}
+.app.mnav .scrim{display:block;position:fixed;inset:0;background:rgba(15,20,30,.4);z-index:44}
+.app.hide .sb{margin-left:-260px}
+.mbtn,.app.hide .mbtn{display:grid}
+.sqb.in{display:none}
+.top{padding:0 16px}.savest{display:none}
+.page{padding-top:32px}
+.ph h1{font-size:27px}
+.g2,.g3,.g4{grid-template-columns:1fr}
+.srch .inp{width:100%}.srch{flex:1;min-width:200px}
+.mrow{grid-template-columns:110px 1fr 44px}
+.aip{right:12px}.fab{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:56px;height:56px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media print{.sb,.top,.fab,.aip,.noprint{display:none!important}.content{overflow:visible}.page{padding:0}}
+.wg{display:grid;grid-template-columns:48px repeat(5,minmax(0,1fr));gap:6px;max-width:680px}
+.wg .h{display:grid;place-items:center;font-weight:700;color:var(--tx3);font-size:13.5px;padding:4px 0}
+.wg .lc{grid-column:1/-1;text-align:center;font-size:12px;color:var(--tx4);background:var(--sf2);border-radius:8px;padding:3px}
+.wc{height:42px;border-radius:9px;border:1px solid var(--ln);background:var(--sf);font-weight:700;font-size:13px;color:var(--tx3)}
+.wc:hover{border-color:var(--ln3)}
+.wc.s1{background:hsl(265 var(--cs) var(--cl));color:hsl(265 45% var(--ct));border-color:hsl(265 50% var(--cb))}
+.wc.s2{background:repeating-linear-gradient(135deg,var(--sf2) 0 6px,var(--sf3) 6px 12px);color:var(--tx4)}
+.wc.off{opacity:.35;pointer-events:none}
+.lbl{font-size:13px;font-weight:600;color:var(--tx3)}
+.tt.sm{min-width:0;gap:4px}
+.tt.sm .cell{min-height:52px;padding:5px 7px}
+.tt.sm .tt-p span{display:none}
+button.cell{font:inherit;cursor:pointer}
+code{font:inherit;font-size:13px;background:var(--sf3);padding:1px 6px;border-radius:5px;color:var(--tx2)}
+.opt[aria-pressed]{cursor:pointer}
+.edl aside>.card:first-child{margin-top:0}
+.nw{white-space:nowrap}
+
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <aside class="sb" id="sb" aria-label="사이드바">
+    <div class="sb-top"><span class="logo">AI 교무실</span><button class="sqb in" data-act="side" aria-label="사이드바 접기"></button></div>
+    <div class="pcard" id="prof"></div>
+    <nav class="nav" id="nav" aria-label="시간표 전문가 메뉴"></nav>
+  </aside>
+  <div class="scrim" data-act="side"></div>
+  <div class="main">
+    <header class="top" id="top"></header>
+    <main class="content" id="content" tabindex="-1"><div class="page" id="page"></div></main>
+  </div>
+</div>
+<button class="fab" data-act="ai" aria-label="AI 비서 열기">AI<br>비서</button>
+<div class="aip" id="aip" role="dialog" aria-label="AI 비서"></div>
+<div class="pop" id="pop"></div>
+<div class="mdl" id="mdl"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+/* ===== 구조 데이터 · 계산 (샘플: 고등학교 2학년 8학급) ===== */
+const DAYS=['월','화','수','목','금'];
+const PSTART=['09:00','10:00','11:00','12:00','13:40','14:40','15:40'];
+const PEND=['09:50','10:50','11:50','12:50','14:30','15:30','16:30'];
+const BLOCK={'2,6':1,'2,7':1,'4,7':2}; // 1 창체, 2 공강
+const TSLOT={A:[[0,2],[2,3],[4,5]],B:[[0,4],[2,2],[3,6]],C:[[1,3],[3,2],[4,3]],D:[[1,6],[2,5],[3,4]]};
+const SUBJ={KOR:{n:'국어',h:3,hue:8},MAT:{n:'수학',h:3,hue:222},ENG:{n:'영어',h:4,hue:145},HIK:{n:'한국사',h:2,hue:30},PE:{n:'체육',h:3,hue:98},MUS:{n:'음악',h:1,hue:305},ART:{n:'미술',h:1,hue:340},INF:{n:'정보',h:1,hue:196},MOR:{n:'도덕',h:1,hue:50},CAR:{n:'진로',h:1,hue:172}};
+const HOMET={KOR:['박지훈','이수연'],MAT:['최민호','정하윤'],ENG:['한서준','오지민'],HIK:['강태영','윤서아'],PE:['윤태호','서도윤'],MUS:['이서연'],ART:['문가은'],INF:['임도현'],MOR:['송유진'],CAR:['배수빈']};
+const hTeacher=(sk,c)=>{const a=HOMET[sk];return a.length<2?a[0]:(c<=4?a[0]:a[1])};
+const COURSES=[
+ {k:'PHY',n:'물리학',g:'과학',hue:222,room:'물리실',cnt:{A:1,B:1,C:1,D:0},t:['김도현','장예린']},
+ {k:'CHE',n:'화학',g:'과학',hue:172,room:'화학실',cnt:{A:1,B:1,C:1,D:1},t:['신유나','권혁준']},
+ {k:'BIO',n:'생명과학',g:'과학',hue:128,room:'생물실',cnt:{A:2,B:1,C:1,D:1},t:['조은서','홍민재']},
+ {k:'EAR',n:'지구과학',g:'과학',hue:28,room:'지구과학실',cnt:{A:1,B:0,C:1,D:1},t:['류시현']},
+ {k:'ECO',n:'경제',g:'사회',hue:44,cnt:{A:1,B:1,C:1,D:1},t:['문수아','양준서']},
+ {k:'LAW',n:'정치와 법',g:'사회',hue:344,cnt:{A:0,B:1,C:0,D:1},t:['마서진']},
+ {k:'SOC',n:'사회·문화',g:'사회',hue:302,cnt:{A:1,B:1,C:1,D:1},t:['표지원','하다은']},
+ {k:'GEO',n:'한국지리',g:'사회',hue:84,cnt:{A:1,B:1,C:1,D:1},t:['우재민','엄서현']},
+ {k:'WHI',n:'세계사',g:'사회',hue:262,cnt:{A:0,B:1,C:1,D:1},t:['연지호','도하린']}
+];
+const TM={'연지호':{ty:'시간강사',days:[0,2,3]},'윤서아':{ty:'시간강사',days:[0,1,3]},'임도현':{ty:'순회교사',days:[0,1,3]},'배수빈':{ty:'순회교사',days:[1,2,4]},'오세진':{ty:'시간강사',days:[1,3]},'맹현우':{ty:'순회교사',days:[2,4]}};
+const UNAV={'박지훈':new Set(['0,1']),'최민호':new Set(['4,4','4,6']),'정하윤':new Set(['0,1','1,1']),'한서준':new Set(['3,7'])};
+const avail=(t,d,p)=>{const m=TM[t];if(m&&!m.days.includes(d))return false;const u=UNAV[t];return !(u&&u.has(d+','+p))};
+const rng=seed=>{let s=seed>>>0||1;return()=>{s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296}};
+const ROOMLOC={'물리실':'과학관 2층','화학실':'과학관 2층','생물실':'과학관 3층','지구과학실':'과학관 3층','음악실':'예술관 1층','미술실':'예술관 2층','컴퓨터실':'본관 4층','체육관':'체육관 1층','운동장':'운동장','선택강의실':'본관 3층'};
+const roomLoc=r=>ROOMLOC[r.replace(/\d+$/,'')]||(/교실/.test(r)?'본관 2층':'본관');
+const roomOf=l=>l.s==='PE'?(l.t==='윤태호'?'체육관':'운동장'):l.s==='MUS'?'음악실':l.s==='ART'?'미술실':l.s==='INF'?'컴퓨터실':'2-'+l.c+' 교실';
+
+function buildSections(){
+  const secs=[],seq={},load={};
+  ['A','B','C','D'].forEach(T=>{
+    const used=new Set(),inT=[],rc={};let sel=0;
+    COURSES.forEach(c=>{for(let i=0;i<(c.cnt[T]||0);i++)inT.push(c)});
+    const mine=[];
+    inT.forEach(c=>{
+      seq[c.k]=(seq[c.k]||0)+1;
+      const cand=c.t.filter(t=>!used.has(t)&&TSLOT[T].every(([d,p])=>avail(t,d,p))).sort((a,b)=>(load[a]||0)-(load[b]||0));
+      const t=cand[0];used.add(t);load[t]=(load[t]||0)+1;
+      let room;
+      if(c.room){rc[c.room]=(rc[c.room]||0)+1;room=c.room}else{sel++;room='선택강의실'+sel}
+      const s={id:c.k+seq[c.k],k:c.k,n:c.n,q:seq[c.k],T,t,room,h:3};
+      mine.push(s);secs.push(s);
+    });
+    const bases=mine.map(s=>s.room);mine.forEach((s,i)=>{if(rc[bases[i]]>1)s.room=bases[i]+bases.slice(0,i+1).filter(b=>b===bases[i]).length});
+  });
+  return secs;
+}
+function teacherDays(L,secs){
+  const m={};const add=(t,d,p)=>{((m[t]=m[t]||[[],[],[],[],[]])[d]).push(p)};
+  L.forEach(l=>add(l.t,l.d,l.p));
+  secs.forEach(s=>TSLOT[s.T].forEach(([d,p])=>add(s.t,d,p)));
+  for(const t in m)m[t].forEach(a=>a.sort((x,y)=>x-y));
+  return m;
+}
+function hardItems(L,secs){
+  const map={},out=[];
+  const put=(t,d,p,o)=>{const k=t+'|'+d+'|'+p;(map[k]=map[k]||[]).push(o)};
+  L.forEach(l=>put(l.t,l.d,l.p,{id:l.id,c:l.c}));
+  secs.forEach(s=>TSLOT[s.T].forEach(([d,p])=>put(s.t,d,p,{sec:s.id})));
+  for(const k in map){
+    const [t,d,p]=k.split('|'),a=map[k],ids=a.filter(x=>x.id!=null).map(x=>x.id);
+    if(a.length>1)out.push({k:'dbl',t,d:+d,p:+p,ids,cls:a.filter(x=>x.c).map(x=>x.c)});
+    if(ids.length&&!avail(t,+d,+p))out.push({k:'una',t,d:+d,p:+p,ids,cls:a.filter(x=>x.c).map(x=>x.c)});
+  }
+  const dm={};L.forEach(l=>{const k=l.c+'|'+l.d+'|'+l.s;(dm[k]=dm[k]||[]).push(l)});
+  for(const k in dm){const a=dm[k];if(a.length>1)out.push({k:'dup',t:a[0].t,d:a[0].d,p:a[1].p,s:a[0].s,ids:a.map(x=>x.id),cls:[a[0].c]})}
+  return out;
+}
+function softItems(L,secs){
+  const m=teacherDays(L,secs),out=[];
+  for(const t in m){
+    const ds=m[t],tot=ds.reduce((a,x)=>a+x.length,0);
+    ds.forEach((a,d)=>{
+      for(let i=1;i<a.length;i++)if(a[i]-a[i-1]===2)out.push({k:'gap',t,d,w:2,m:a[i-1]+'·'+a[i]+'교시 사이 공강 1'});
+      let run=1;
+      for(let i=1;i<=a.length;i++){
+        if(i<a.length&&a[i]-a[i-1]===1&&!(a[i-1]===4)){run++}
+        else{if(run>=4)out.push({k:'run',t,d,w:3,m:run+'시간 연속 수업'});run=1}
+      }
+    });
+    if(tot>=10){const ls=ds.map(a=>a.length),df=Math.max(...ls)-Math.min(...ls);if(df>=4)out.push({k:'bal',t,d:ls.indexOf(Math.max(...ls)),w:2,m:'요일별 수업량 편차 '+df+'시간'})}
+    const e1=ds.reduce((a,x)=>a+(x[0]===1?1:0),0);if(e1>2)out.push({k:'edge',t,d:0,w:1,m:'1교시 '+e1+'회 (상한 2회)'});
+    const e7=ds.reduce((a,x)=>a+(x.includes(7)?1:0),0);if(e7>2)out.push({k:'edge',t,d:0,w:1,m:'7교시 '+e7+'회 (상한 2회)'});
+  }
+  L.forEach(l=>{if(['KOR','MAT','ENG'].includes(l.s)&&l.p>=6)out.push({k:'pos',t:l.t,c:l.c,d:l.d,p:l.p,id:l.id,w:1,m:'주요 교과가 '+l.p+'교시에 배치'})});
+  return out;
+}
+if(typeof module!=='undefined')module.exports={DAYS,TSLOT,BLOCK,SUBJ,HOMET,hTeacher,COURSES,TM,UNAV,avail,buildSections,hardItems,softItems,teacherDays,rng};
+
+/* ===== 샘플 학생 · 교사 명단 (가상 데이터) ===== */
+const SN=['김','이','박','최','정','강','조','윤','장','임','한','오','서','신','권','황','안','송','류','홍'];
+const GN=['서준','하준','도윤','시우','지호','예준','주원','민준','지우','서연','서윤','하윤','지유','수아','하은','채원','지민','윤서','다은','소율','예린','유진','민서','채은','나은'];
+const BADSTU={17:'선택한 과목 중 1과목이 정원 초과 (물리학)',88:'정원 초과로 대기 중 (생명과학)',154:'신청 과목 4개를 같은 타임에 배치할 수 없음'};
+function buildStudents(secs){
+  const R0=rng(2026),idx=[...Array(500).keys()];
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(R0()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]]}
+  const names=idx.slice(0,200).map(i=>SN[i%20]+GN[Math.floor(i/20)]);
+  for(let seed=1;seed<500;seed++){
+    const R=rng(seed*7919+13);
+    const st=names.map((n,i)=>({i,n,c:Math.floor(i/25)+1,no:i%25+1,id:'2'+String(Math.floor(i/25)+1).padStart(2,'0')+String(i%25+1).padStart(2,'0'),sx:((i*7+3)%5<2)?'남':'여',secs:{},cs:new Set()}));
+    let ok=true;
+    for(const T of ['A','B','C','D']){
+      const S2=secs.filter(s=>s.T===T).map(s=>({id:s.id,k:s.k,left:25}));
+      const order=st.filter(s=>!(s.i in BADSTU));
+      for(let i=order.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
+      for(const s of order){
+        const c=S2.filter(x=>x.left>0&&!s.cs.has(x.k)).sort((a,b)=>b.left-a.left||R()-.5)[0];
+        if(!c){ok=false;break}
+        c.left--;s.secs[T]=c.id;s.cs.add(c.k);
+      }
+      if(!ok)break;
+    }
+    if(ok){st.forEach(s=>{s.why=BADSTU[s.i]||null});return st}
+  }
+  return null;
+}
+if(typeof module!=='undefined')module.exports={buildStudents,BADSTU};
+
+const LESSONS_RAW=[[8,4,1,"ENG","오지민"],[3,0,1,"ENG","한서준"],[2,0,7,"PE","윤태호"],[1,0,6,"MAT","최민호"],[7,0,1,"INF","임도현"],[6,3,7,"HIK","윤서아"],[5,0,3,"PE","서도윤"],[4,1,2,"ART","문가은"],[7,3,1,"ENG","오지민"],[4,1,5,"ENG","한서준"],[2,1,1,"MAT","최민호"],[3,0,3,"PE","윤태호"],[1,1,4,"KOR","박지훈"],[5,4,4,"KOR","이수연"],[8,0,5,"HIK","윤서아"],[6,1,1,"PE","서도윤"],[5,3,7,"ENG","오지민"],[1,3,3,"ENG","한서준"],[4,0,1,"MAT","최민호"],[8,1,5,"MAT","정하윤"],[2,4,6,"KOR","박지훈"],[6,0,5,"INF","임도현"],[7,0,5,"KOR","이수연"],[3,0,6,"MOR","송유진"],[2,3,1,"ENG","한서준"],[7,3,7,"MAT","정하윤"],[6,2,4,"ENG","오지민"],[3,4,1,"KOR","박지훈"],[8,1,7,"PE","서도윤"],[1,4,1,"PE","윤태호"],[5,0,6,"HIK","윤서아"],[4,0,6,"INF","임도현"],[3,1,4,"MAT","최민호"],[8,3,5,"KOR","이수연"],[4,3,3,"PE","윤태호"],[6,4,4,"MAT","정하윤"],[2,0,1,"HIK","강태영"],[7,0,7,"HIK","윤서아"],[1,0,7,"INF","임도현"],[5,1,1,"MUS","이서연"],[3,4,4,"ENG","한서준"],[8,1,1,"ENG","오지민"],[6,4,1,"PE","서도윤"],[5,3,3,"CAR","배수빈"],[7,1,1,"KOR","이수연"],[4,1,1,"KOR","박지훈"],[1,2,4,"PE","윤태호"],[2,0,5,"MAT","최민호"],[1,2,1,"ENG","한서준"],[6,4,6,"ENG","오지민"],[2,2,1,"CAR","배수빈"],[3,3,3,"MAT","최민호"],[5,1,2,"MAT","정하윤"],[8,1,2,"KOR","이수연"],[7,0,6,"PE","서도윤"],[4,0,5,"HIK","강태영"],[2,1,4,"ENG","한서준"],[7,1,4,"ENG","오지민"],[3,1,2,"CAR","배수빈"],[6,0,7,"MAT","정하윤"],[5,1,4,"INF","임도현"],[1,4,4,"KOR","박지훈"],[4,1,4,"MUS","이서연"],[8,1,4,"HIK","윤서아"],[5,0,7,"ENG","오지민"],[4,0,3,"ENG","한서준"],[6,3,1,"KOR","이수연"],[7,1,5,"CAR","배수빈"],[3,4,2,"PE","윤태호"],[1,1,5,"MAT","최민호"],[2,1,7,"ART","문가은"],[8,4,2,"PE","서도윤"],[8,0,3,"MAT","정하윤"],[2,0,3,"MOR","송유진"],[3,0,5,"INF","임도현"],[7,1,7,"MUS","이서연"],[5,1,7,"HIK","윤서아"],[4,2,4,"MAT","최민호"],[6,1,7,"CAR","배수빈"],[1,4,2,"HIK","강태영"],[1,1,2,"ENG","한서준"],[5,2,1,"ENG","오지민"],[2,3,7,"PE","윤태호"],[3,3,5,"KOR","박지훈"],[6,3,3,"ART","문가은"],[7,1,2,"PE","서도윤"],[4,4,1,"MAT","최민호"],[8,3,1,"MAT","정하윤"],[3,1,1,"ENG","한서준"],[6,0,1,"ENG","오지민"],[5,2,4,"KOR","이수연"],[4,1,7,"MOR","송유진"],[2,2,4,"KOR","박지훈"],[1,0,1,"ART","문가은"],[8,2,4,"CAR","배수빈"],[7,4,2,"MAT","정하윤"],[2,0,6,"ENG","한서준"],[7,4,4,"ENG","오지민"],[5,3,1,"PE","서도윤"],[6,4,2,"KOR","이수연"],[3,4,6,"HIK","강태영"],[4,3,1,"KOR","박지훈"],[1,1,1,"PE","윤태호"],[8,0,1,"MUS","이서연"],[1,0,5,"ENG","한서준"],[6,1,4,"MOR","송유진"],[7,3,3,"HIK","윤서아"],[8,3,3,"ENG","오지민"],[2,3,3,"INF","임도현"],[3,2,1,"KOR","박지훈"],[5,0,5,"ART","문가은"],[4,2,1,"PE","윤태호"],[4,4,2,"ENG","한서준"],[5,4,1,"MAT","정하윤"],[2,3,5,"HIK","강태영"],[8,2,1,"KOR","이수연"],[1,3,7,"MUS","이서연"],[3,0,7,"MAT","최민호"],[6,1,2,"ENG","오지민"],[7,3,5,"MOR","송유진"],[6,0,3,"HIK","윤서아"],[8,3,7,"INF","임도현"],[7,2,1,"PE","서도윤"],[1,3,5,"MAT","최민호"],[4,3,7,"HIK","강태영"],[3,3,7,"ART","문가은"],[5,4,2,"MOR","송유진"],[2,1,2,"PE","윤태호"],[4,0,7,"KOR","박지훈"],[2,4,1,"ENG","한서준"],[5,4,6,"PE","서도윤"],[8,0,6,"ENG","오지민"],[6,2,1,"MAT","정하윤"],[3,1,5,"MUS","이서연"],[7,4,1,"KOR","이수연"],[1,3,1,"MOR","송유진"],[2,4,2,"MAT","최민호"],[6,1,5,"KOR","이수연"],[1,4,6,"CAR","배수빈"],[8,4,4,"ART","문가은"],[5,1,5,"ENG","오지민"],[4,3,5,"ENG","한서준"],[3,3,1,"HIK","강태영"],[7,2,4,"MAT","정하윤"],[2,4,4,"MUS","이서연"],[3,1,7,"PE","윤태호"],[1,0,3,"KOR","박지훈"],[6,3,5,"PE","서도윤"],[5,0,1,"KOR","이수연"],[4,4,4,"CAR","배수빈"],[7,0,3,"ENG","오지민"],[8,4,6,"MOR","송유진"],[2,1,5,"KOR","박지훈"],[8,0,7,"PE","서도윤"],[7,4,6,"ART","문가은"],[5,3,5,"MAT","정하윤"],[4,4,6,"PE","윤태호"],[1,1,7,"HIK","강태영"],[3,2,4,"ENG","한서준"],[6,0,6,"MUS","이서연"]];
+const LOCKS=[79,6,32,22,24];
+
+/* ===== core: 유틸 · 아이콘 · 상태 · 셸 ===== */
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const attrs=o=>Object.entries(o||{}).map(([k,v])=>` data-${k}="${esc(v)}"`).join('');
+const IC={
+home:'<path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/>',
+gear:'<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>',
+users:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M16 5.2a3 3 0 010 5.6M18 14.8c1.8.7 3 2.4 3 5.2"/>',
+user:'<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/>',
+book:'<path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3V4z"/><path d="M5 17a3 3 0 013-3h11"/>',
+upload:'<path d="M12 16V5M7 9l5-5 5 5M4 19h16"/>',
+download:'<path d="M12 4v11M7 11l5 5 5-5M4 20h16"/>',
+layers:'<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12.5l9 5 9-5M3 17l9 5 9-5"/>',
+table:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16M15 4v16"/>',
+usercheck:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M16 11l2 2 4-4"/>',
+activity:'<path d="M3 12h4l3-8 4 16 3-8h4"/>',
+sparkle:'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 16v4M17 18h4"/>',
+sliders:'<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>',
+play:'<path d="M7 5l12 7-12 7V5z"/>',
+chart:'<path d="M5 20V11M11 20V4M17 20v-6M3 20h18"/>',
+edit:'<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/>',
+eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+send:'<path d="M4 12l16-8-6 16-3-7-7-1z"/>',
+calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+swap:'<path d="M7 4L3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/>',
+bell:'<path d="M6 17v-6a6 6 0 1112 0v6l2 2H4l2-2z"/><path d="M10 21h4"/>',
+clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+pin:'<path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+clip:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM8 12h8M8 16h5"/>',
+flag:'<path d="M5 21V4M5 4h12l-2 4 2 4H5"/>',
+file:'<path d="M6 3h8l5 5v13H6V3z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+printer:'<path d="M7 9V3h10v6M7 17H4v-7h16v7h-3"/><rect x="7" y="14" width="10" height="7"/>',
+key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',
+school:'<path d="M3 21h18M5 21V9l7-5 7 5v12M10 21v-5h4v5"/>',
+repeat:'<path d="M17 3l4 4-4 4M3 11V9a2 2 0 012-2h16M7 21l-4-4 4-4M21 13v2a2 2 0 01-2 2H3"/>',
+check:'<path d="M5 12l5 5L20 7"/>',
+alert:'<path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5M12 18h.01"/>',
+info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
+x:'<path d="M6 6l12 12M18 6L6 18"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',
+minus:'<path d="M5 12h14"/>',
+chev:'<path d="M6 9l6 6 6-6"/>',
+search:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/>',
+lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 118 0v3"/>',
+unlock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 017.5-2"/>',
+menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',
+panel:'<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/>',
+refresh:'<path d="M20 11a8 8 0 10-2.3 5.7M20 4v7h-7"/>',
+trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',
+arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+list:'<path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/>',
+door:'<path d="M5 21V4a1 1 0 011-1h9l3 3v15M3 21h18M13 12h.01"/>',
+undo:'<path d="M9 14L4 9l5-5M4 9h10a6 6 0 010 12h-3"/>',
+wand:'<path d="M5 19L17 7M14 4l1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2zM19 12l.7 1.3L21 14l-1.3.7L19 16l-.7-1.3L17 14l1.3-.7L19 12z"/>',
+cap:'<path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/>',
+shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/>',
+grid:'<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
+phone:'<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>'
+};
+const ic=(n,s=18)=>`<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]||''}</svg>`;
+
+/* ----- 상태 ----- */
+const S={level:'high',role:'class',route:'home',open:{g1:true,g2:true},v:{},ai:{open:false,log:[]},saved:new Date()};
+const V=(k,init)=>S.v[k]||(S.v[k]=typeof init==='function'?init():init);
+const pget=p=>p.split('.').reduce((o,k)=>o==null?o:o[k],S.v);
+const pset=(p,val)=>{const ks=p.split('.'),l=ks.pop();ks.reduce((o,k)=>o[k],S.v)[l]=val};
+const ST={setup:'done',teachers:'warn',subjects:'done',import:'doing',classing:'',hours:'done',assign:'warn',diagnose:'warn','ai-gen':'',conditions:'doing',generate:'',quality:'',edit:'warn',view:'',publish:''};
+const setSt=(r,v)=>{ST[r]=v};
+const ROLES={class:{t:'수업계',sub:'교무부 · 수학'},dept:{t:'교과 협의',sub:'수학과 협의회 담당'},teacher:{t:'교사',sub:'2학년 3반 담임'}};
+const fmtT=d=>{const h=d.getHours();return `${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}. ${h<12?'오전':'오후'} ${h%12||12}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`};
+const schoolName=()=>S.level==='high'?'인천송도고등학교':'인천송도중학교';
+
+/* ----- 도메인 데이터 ----- */
+const SECS=buildSections(),SECMAP=Object.fromEntries(SECS.map(s=>[s.id,s]));
+const CMAP=Object.fromEntries(COURSES.map(c=>[c.k,c]));
+const TSK={};Object.entries(TSLOT).forEach(([T,a])=>a.forEach(([d,p])=>TSK[d+','+p]=T));
+const LL=LESSONS_RAW.map((r,i)=>({id:i,c:r[0],d:r[1],p:r[2],s:r[3],t:r[4],lock:LOCKS.includes(i)}));
+const BASE=LL.map(l=>({d:l.d,p:l.p}));
+const STUS=buildStudents(SECS);
+const secName=s=>`${s.n} ${s.q}반`;
+const slotTxt=(d,p)=>`${DAYS[d]} ${p}교시`;
+const TL0=[['박지훈','교사','국어','2-1',5],['이수연','교사','국어','2-5',4],['최민호','교사','수학','2-2',6],['정하윤','교사','수학','2-6',4],['한서준','교사','영어','2-3',2],['오지민','교사','영어','2-7',3],['강태영','교사','한국사','2-4',9],['윤서아','교사','한국사','',4],['윤태호','교사','체육','2-8',6],['서도윤','교사','체육','',9],['이서연','교사','음악','',9],['문가은','교사','미술','',9],['임도현','교사','정보','',3],['송유진','교사','도덕','',9],['배수빈','교사','진로','',4],['김도현','교사','물리학','3-1',10],['장예린','교사','물리학','1-3',13],['신유나','교사','화학','1-2',10],['권혁준','교사','화학','3-6',8],['조은서','교사','생명과학','3-3',8],['홍민재','교사','생명과학','3-5',11],['류시현','교사','지구과학','3-4',8],['문수아','교사','경제','1-4',11],['양준서','교사','경제','',10],['마서진','교사','정치와 법','',11],['표지원','교사','사회·문화','3-2',11],['하다은','교사','사회·문화','1-5',10],['우재민','교사','한국지리','1-1',11],['엄서현','교사','한국지리','1-6',12],['연지호','교사','세계사','',8],['도하린','교사','세계사','',11],['오세진','교사','일본어','',8],['맹현우','교사','한문','',6],['노은채','교사','상담','',0],['백지원','교사','기술·가정','',0,'휴직']];
+const TL=TL0.map(r=>({n:r[0],ty:TM[r[0]]?TM[r[0]].ty:'교사',sj:r[2],hr:r[3],o:r[4],st:r[5]||'재직'}));
+const TLM=Object.fromEntries(TL.map(t=>[t.n,t]));
+const RANGE=[15,20];
+const teacherHours=(tch)=>{
+  const m={};const get=n=>m[n]||(m[n]={h:0,m:0,o:(TLM[n]||{}).o||0});
+  LL.forEach(l=>{get(l.t).h++});
+  SECS.forEach(s=>{get((tch&&tch[s.id])||s.t).m+=s.h});
+  Object.values(m).forEach(x=>x.tot=x.h+x.m+x.o);return m;
+};
+const hv=()=>hardItems(LL,SECS),sv=()=>softItems(LL,SECS),sum=a=>a.reduce((x,y)=>x+(y.w||0),0);
+const lessonAt=(c,d,p)=>LL.find(l=>l.c===c&&l.d===d&&l.p===p);
+const NOTI=[{id:1,t:'수업교환이 승인됐어요',d:'화 3교시 ↔ 목 2교시 · 2-2 수학',at:'방금',rd:0,r:'ops-swap'},{id:2,t:'결강 보강 시간이 배정됐어요',d:'금 5교시 · 2-7 영어',at:'32분 전',rd:0,r:'ops-swap'},{id:3,t:'시간표 v3이 수정됐어요',d:'2-1 · 2-3 수업 위치가 바뀌었어요',at:'1시간 전',rd:0,r:'view'},{id:4,t:'이동수업 출석부를 제출해 주세요',d:'목 4교시 · 화학 2반',at:'어제',rd:0,r:'ops-attend'},{id:5,t:'회의 요청이 도착했어요',d:'수학과 협의회 · 수 4교시',at:'어제',rd:1,r:'ops-meet'},{id:6,t:'담임이 정해지지 않은 학급이 있어요',d:'1-7 · 1-8 · 3-7 · 3-8',at:'2일 전',rd:1,r:'teachers'}];
+const unread=()=>NOTI.filter(n=>!n.rd).length;
+const simNow=()=>{const n=new Date(),w=n.getDay(),m=n.getHours()*60+n.getMinutes();let d=w>=1&&w<=5?w-1:0,p=3;const st=[540,600,660,720,820,880,940];if(w>=1&&w<=5&&m>=540&&m<1010){p=1;st.forEach((x,i)=>{if(m>=x)p=i+1})}return{d,p}};
+S.sim=simNow();
+
+/* ----- 내비게이션 ----- */
+const NAV=[
+{r:'home',t:'홈'},
+{g:'g1',t:'1. 시수편제·반편성',full:'반편성을 위한 시수편제',items:[
+ {r:'setup',t:'기초설정',i:'gear',ro:'c'},{r:'teachers',t:'교사 관리',i:'users',ro:'c'},{r:'subjects',t:'과목·편제',i:'book',ro:'cd'},
+ {r:'import',t:'수강신청 가져오기',i:'upload',ro:'c',ai:1},{r:'classing',t:'반편성',i:'layers',ro:'c',ai:1,hi:1},{r:'hours',t:'시수표',i:'table',ro:'cd'},
+ {r:'assign',t:'담당교사 배정',i:'usercheck',ro:'cd'},{r:'diagnose',t:'구조 진단',i:'activity',ro:'c',ai:1}]},
+{g:'g2',t:'2. 시간표 만들기',items:[
+ {r:'ai-gen',t:'AI로 한 번에 만들기',i:'sparkle',ro:'c'},{r:'conditions',t:'조건 설정',i:'sliders',ro:'c',ai:1},{r:'generate',t:'시간표 생성',i:'play',ro:'c'},
+ {r:'quality',t:'품질 분석',i:'chart',ro:'c'},{r:'edit',t:'시간표 수정',i:'edit',ro:'c'},{r:'view',t:'시간표 보기',i:'eye',ro:'cdt'},{r:'publish',t:'공개·내보내기',i:'send',ro:'c'}]},
+{g:'g3',t:'3. 시간표 운영',s2:'2단계 · 모바일 우선',items:[
+ {r:'ops-my',t:'나의 일과',i:'calendar',ro:'cdt'},{r:'ops-swap',t:'수업교환·결보강',i:'swap',ro:'cdt'},{r:'ops-notice',t:'변경 알림',i:'bell',ro:'cdt'},
+ {r:'ops-meet',t:'회의 시간 찾기',i:'clock',ro:'cdt'},{r:'ops-find',t:'학생 위치 찾기',i:'pin',ro:'cdt'},{r:'ops-event',t:'행사·시수 관리',i:'flag',ro:'c'},{r:'ops-attend',t:'이동수업 출석부',i:'clip',ro:'cdt'}]},
+{g:'g4',t:'4. 고사 시간표',s2:'2단계',items:[
+ {r:'exam-setup',t:'시험 설정',i:'gear',ro:'c'},{r:'exam-class',t:'시험반 구성',i:'users',ro:'c'},{r:'exam-place',t:'과목 배치',i:'grid',ro:'c'},{r:'exam-proctor',t:'정·부감독 배정',i:'usercheck',ro:'c'},{r:'exam-print',t:'출력',i:'printer',ro:'c'}]},
+{g:'g5',t:'공통 설정',items:[
+ {r:'common-school',t:'학교 정보',i:'school',ro:'c'},{r:'common-year',t:'학년도·학기 이월',i:'repeat',ro:'c'},{r:'common-roles',t:'사용자 권한',i:'key',ro:'c'},{r:'common-noti',t:'알림',i:'bell',ro:'cdt'}]}
+];
+const META={home:{t:'홈',g:'',gt:''}};
+NAV.slice(1).forEach(g=>g.items.forEach(i=>META[i.r]={t:i.t,g:g.g,gt:g.t.replace(/^\d\.\s*/,''),s2:g.s2,ai:i.ai,full:g.full}));
+const allowed=r=>{if(r==='home')return true;const m=NAV.slice(1).flatMap(g=>g.items).find(i=>i.r===r);return !!m&&m.ro.includes(S.role[0])&&!(m.hi&&S.level==='mid')};
+const stIcon=r=>{const s=ST[r];return s==='done'?`<span class="sti dn" title="완료">${ic('check',14)}</span>`:s==='warn'?'<span class="sti wn" title="확인이 필요해요"></span>':s==='doing'?'<span class="sti dg" title="진행 중"></span>':''};
+function renderNav(){
+  let h=`<button class="nv-home ${S.route==='home'?'on':''}" data-act="go" data-r="home">홈</button>`;
+  NAV.slice(1).forEach(g=>{
+    const items=g.items.filter(i=>allowed(i.r));if(!items.length)return;
+    const has=items.some(i=>i.r===S.route),open=!!S.open[g.g];
+    h+=`<div><button class="nv-gh ${has?'on':''}" data-act="grp" data-g="${g.g}" aria-expanded="${open}"><span>${g.t}${g.s2?'<em class="s2">2단계</em>':''}</span>${ic('chev',16)}</button>`;
+    if(open)h+=`<div class="nv-sub">`+items.map(i=>`<button class="nv-i ${i.r===S.route?'on':''}" data-act="go" data-r="${i.r}" ${i.r===S.route?'aria-current="page"':''}>${ic(i.i,17)}<span>${i.t}</span>${i.ai?'<b class="ai-dot">AI</b>':''}${stIcon(i.r)}</button>`).join('')+`</div>`;
+    h+='</div>';
+  });
+  $('#nav').innerHTML=h;
+  const sbE=$('#sb'),a=$('.nv-i.on',sbE);if(a){const r=a.getBoundingClientRect(),q=sbE.getBoundingClientRect();if(r.bottom>q.bottom-8)sbE.scrollTop+=r.bottom-q.bottom+48;else if(r.top<q.top+90)sbE.scrollTop-=q.top+90-r.top}
+}
+function renderProfile(){
+  const ro=ROLES[S.role];
+  $('#prof').innerHTML=`<h3>${schoolName()}</h3><div class="prow"><div class="av">${ic('user',18)}</div><div><div class="pname">김은지 <span class="bdg bl">${ro.t}</span></div><div class="psub">${ro.sub}</div></div></div><div class="tiles"><div class="tile">오늘 일정<b>3<small>건</small></b></div><div class="tile">미확인<br>알림<b>${unread()}<small>건</small></b></div></div><div class="lvl"><span>학교급 보기</span><div class="seg"><button class="${S.level==='mid'?'on':''}" data-act="level" data-v="mid">중</button><button class="${S.level==='high'?'on':''}" data-act="level" data-v="high">고</button></div></div>`;
+}
+function renderTop(){
+  const m=META[S.route],c=S.route==='home'?`<span>시간표 전문가</span><i>›</i><b>홈</b>`:`<span>시간표 전문가</span><i>›</i><span>${m.gt}</span><i>›</i><b>${m.t}</b>`;
+  $('#top').innerHTML=`<button class="sqb mbtn" data-act="side" aria-label="메뉴 열기">${ic('menu',18)}</button><nav class="crumb" aria-label="현재 위치">${c}</nav><div class="tr"><span id="savest" class="savest">모든 변경사항 저장됨</span><button class="btn" data-act="help">도움말</button><button class="bell" data-act="bell" data-pop aria-label="알림 ${unread()}건">${ic('bell',19)}${unread()?`<em>${unread()}</em>`:''}</button><button class="btn" data-act="user" data-pop>김은지 <span style="color:var(--tx4)">▾</span></button></div>`;
+}
+let saveT;
+function touch(){const el=$('#savest');if(!el)return;S.saved=new Date();el.textContent='저장 중…';clearTimeout(saveT);saveT=setTimeout(()=>{el.textContent='모든 변경사항 저장됨';const t=$('#saveTime');if(t)t.textContent='저장 '+fmtT(S.saved)},450)}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2600)}
+function modal(title,body,foot){const m=$('#mdl');m.innerHTML=`<div class="mbox" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="mh"><b>${title}</b><button class="btn g s" data-act="mclose" aria-label="닫기">${ic('x',18)}</button></div><div class="mb">${body}</div>${foot?`<div class="mf">${foot}</div>`:''}</div>`;m.classList.add('on');const f=$('input,select,.btn.p',m);f&&f.focus()}
+const closeModal=()=>{const m=$('#mdl');m.classList.remove('on');m.innerHTML=''};
+function popAt(el,html){const p=$('#pop');p.innerHTML=html;p.classList.add('on');const r=el.getBoundingClientRect(),w=p.offsetWidth;p.style.top=(r.bottom+8)+'px';p.style.left=Math.max(8,Math.min(innerWidth-w-8,r.right-w))+'px'}
+const closePop=()=>$('#pop').classList.remove('on');
+
+/* ----- 공통 UI 조각 ----- */
+const bdg=(t,k='')=>`<span class="bdg ${k}">${t}</span>`;
+const AIB=(t='AI')=>`<span class="bdg bi">${ic('sparkle',12)}${t}</span>`;
+const btn=(t,act,o={})=>`<button class="btn ${o.k||''}" data-act="${act}"${attrs(o.d)}${o.dis?' disabled':''}>${o.i?ic(o.i,16):''}${t}</button>`;
+const tabs=(g,items,cur)=>`<div class="tabs" role="tablist">${items.map(([k,t,n,nk])=>`<button class="tab ${k===cur?'on':''}" role="tab" aria-selected="${k===cur}" data-act="tab" data-g="${g}" data-k="${k}">${t}${n!=null&&n!==''?`<em class="${nk||''}">${n}</em>`:''}</button>`).join('')}</div>`;
+const kpi=(l,v,s,k='')=>`<div class="kpi"><small>${l}</small><b class="${k}">${v}</b>${s?`<span>${s}</span>`:''}</div>`;
+const tbl=(heads,rows,o={})=>`<div class="tw"><table class="tbl ${o.c||''}"><thead><tr>${heads.map(h=>typeof h==='string'?`<th>${h}</th>`:`<th class="${h.c||''}">${h.t}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>{const cells=Array.isArray(r)?r:r.r,cl=Array.isArray(r)?'':r.c||'';return `<tr class="${cl}">${cells.map((c,i)=>`<td class="${(heads[i]&&heads[i].c)||''}">${c}</td>`).join('')}</tr>`}).join('')}</tbody></table></div>`;
+const seg=(p,opts,cur)=>`<div class="seg" role="group">${opts.map(([k,t])=>`<button class="${k===cur?'on':''}" data-act="set" data-p="${p}" data-v="${k}" aria-pressed="${k===cur}">${t}</button>`).join('')}</div>`;
+const sw=(p,on,label)=>`<label class="sw" ${label?`aria-label="${esc(label)}"`:''}><input type="checkbox" data-bind="${p}" ${on?'checked':''}><i></i></label>`;
+const stp=(p,val,min,max,after)=>`<div class="stepper"><button data-act="step" data-p="${p}" data-d="-1" data-min="${min}" data-max="${max}" data-after="${after||''}" aria-label="줄이기">−</button><b>${val}</b><button data-act="step" data-p="${p}" data-d="1" data-min="${min}" data-max="${max}" data-after="${after||''}" aria-label="늘리기">+</button></div>`;
+const sel=(p,opts,cur,cls='',extra='')=>`<select class="sel ${cls}" data-bind="${p}" ${extra}>${opts.map(o=>{const[v,t]=Array.isArray(o)?o:[o,o];return `<option value="${esc(v)}" ${String(v)===String(cur)?'selected':''}>${esc(t)}</option>`}).join('')}</select>`;
+const inp=(p,val,ph,cls='',extra='')=>`<input class="inp ${cls}" data-bind="${p}" value="${esc(val)}" placeholder="${esc(ph||'')}" ${extra}>`;
+const bar=(pct,k='')=>`<div class="bar ${k}"><i style="width:${Math.max(0,Math.min(100,pct))}%"></i></div>`;
+const note=(k,icn,html)=>`<div class="note ${k}">${ic(icn,18)}<div>${html}</div></div>`;
+const card=(title,desc,body,right,o={})=>`<section class="card ${o.c||''}"><div class="ch"><div><div class="ct">${title}</div>${desc?`<div class="cd">${desc}</div>`:''}</div>${right?`<div class="sp"></div>${right}`:''}</div><div class="cb ${o.b||''}">${body}</div></section>`;
+const cardT=(title,desc,table,right)=>`<section class="card"><div class="ch" style="padding-bottom:16px"><div><div class="ct">${title}</div>${desc?`<div class="cd">${desc}</div>`:''}</div>${right?`<div class="sp"></div>${right}`:''}</div>${table}</section>`;
+const saveRow=(extra,right)=>`<div class="srow"><span class="lb">학년도</span><select class="sel" aria-label="학년도" data-bind="year.y" style="min-width:150px"><option>2026학년도</option><option>2025학년도</option></select><span class="bdg bl pl">저장됨</span><span class="xs mut" id="saveTime">저장 ${fmtT(S.saved)}</span>${extra||''}<span class="sp"></span>${right||''}</div>`;
+const nameOf=()=>S.level==='high'?'고등학교':'중학교';
+V('year',{y:'2026학년도'});
+
+/* ----- 시간표 격자 ----- */
+function ttGrid(cellFn,o={}){
+  let h=`<div class="ttw"><div class="tt ${o.c||''}"><div></div>`+DAYS.map(d=>`<div class="tt-h">${d}</div>`).join('');
+  for(let p=1;p<=7;p++){
+    h+=`<div class="tt-p"><b>${p}</b><span>${PSTART[p-1]}</span></div>`;
+    for(let d=0;d<5;d++)h+=cellFn(d,p);
+    if(p===4)h+='<div class="tt-l">점심시간 12:50 – 13:40</div>';
+  }
+  return h+'</div></div>';
+}
+const cBlk=(d,p)=>`<div class="cell blk"><b>${BLOCK[d+','+p]===1?'창체':'공강'}</b><span>${BLOCK[d+','+p]===1?'동아리·자율':'수업 없음'}</span></div>`;
+const cBox=(a,b,c,hue,x='',cl='')=>`<div class="cell ${cl}" style="--h:${hue}"><b>${a}</b><span>${b||''}</span><em>${c||''}</em>${x}</div>`;
+const cTime=(d,p,mini)=>`<div class="cell ${mini?'mini':''}" style="--h:265"><b>선택 ${TSK[d+','+p]}</b><span>이동수업</span></div>`;
+
+/* ----- 렌더 · 라우터 ----- */
+const VW={};const view=(r,o)=>{VW[r]=o};
+function render(keep){
+  if(!VW[S.route])S.route='home';
+  const v=VW[S.route],m=META[S.route],ct=$('#content'),sc=ct.scrollTop;
+  const a=document.activeElement,key=a&&a.dataset&&a.dataset.bind,car=a&&a.selectionStart;
+  const title=S.route==='home'?'시간표 전문가':m.t;
+  $('#page').innerHTML=`<div class="ph"><div><h1>${title}${m.s2?` <span class="bdg pl" style="font-size:12.5px">${m.s2}</span>`:''}</h1>${v.d?`<p class="ph-d">${typeof v.d==='function'?v.d():v.d}</p>`:''}</div><div class="ph-a">${v.act?v.act():''}</div></div>`+v.body();
+  renderNav();renderTop();renderProfile();
+  document.title=(S.route==='home'?'':m.t+' · ')+'시간표 전문가 · AI 교무실';
+  if(keep)ct.scrollTop=sc;
+  if(key){const el=$(`[data-bind="${key}"]`);if(el){el.focus();try{if(car!=null)el.setSelectionRange(car,car)}catch(e){}}}
+  v.after&&v.after();
+}
+function go(r,o={}){
+  if(!VW[r])r='home';
+  if(!allowed(r)){const m0=NAV.slice(1).flatMap(g=>g.items).find(i=>i.r===r);toast(m0&&m0.hi&&S.level==='mid'?'중학교에서는 반편성 단계를 쓰지 않아요.':'현재 역할에서는 열 수 없는 화면이에요.');r='home'}
+  const ch=r!==S.route;S.route=r;const m=META[r];if(m.g)S.open[m.g]=true;
+  closePop();$('#app').classList.remove('mnav');
+  if(ch){S.ai.log=[];try{history.replaceState(null,'','#'+r)}catch(e){}}
+  render(!ch);if(ch){$('#content').scrollTop=0;$('#content').focus&&0}
+  renderAI();
+}
+const ACT={};
+ACT.go=el=>go(el.dataset.r);
+ACT.grp=el=>{const g=el.dataset.g;S.open[g]=!S.open[g];renderNav()};
+ACT.tab=el=>{V(el.dataset.g).tab=el.dataset.k;render(true)};
+ACT.set=el=>{pset(el.dataset.p,el.dataset.v);touch();render(true)};
+ACT.step=el=>{const p=el.dataset.p,n=Math.max(+el.dataset.min,Math.min(+el.dataset.max,pget(p)+(+el.dataset.d)));pset(p,n);touch();if(el.dataset.after&&ACT[el.dataset.after])ACT[el.dataset.after](el);render(true)};
+ACT.tog=el=>{pset(el.dataset.p,!pget(el.dataset.p));touch();render(true)};
+ACT.toast=el=>toast(el.dataset.m);
+ACT.mclose=()=>closeModal();
+ACT.noop=()=>{};
+ACT.side=()=>{const a=$('#app');if(matchMedia('(max-width:900px)').matches)a.classList.toggle('mnav');else a.classList.toggle('hide')};
+ACT.level=el=>{if(S.level===el.dataset.v)return;S.level=el.dataset.v;if(!allowed(S.route)){toast('중학교는 반편성 단계를 숨기고 시수편제로 이어져요.');S.route='subjects'}else toast(S.level==='mid'?'중학교 보기: 반편성 메뉴가 숨겨졌어요.':'고등학교 보기: 반편성 메뉴가 열렸어요.');render(true)};
+ACT.role=el=>{S.role=el.dataset.v;closePop();NAV.slice(1).forEach(g=>{S.open[g.g]=S.role==='class'?(g.g==='g1'||g.g==='g2'):g.items.some(i=>allowed(i.r))});toast(`${ROLES[S.role].t} 역할로 보고 있어요.`);if(!allowed(S.route))S.route='home';render(true)};
+ACT.user=el=>popAt(el,`<h4>역할 보기 (프로토타입)</h4>${Object.entries(ROLES).map(([k,r])=>`<button class="pi ${S.role===k?'on':''}" data-act="role" data-v="${k}">${r.t}${S.role===k?ic('check',16):''}</button>`).join('')}<div style="border-top:1px solid var(--ln);margin:6px 0"></div><button class="pi" data-act="go" data-r="common-roles">사용자 권한 보기${ic('arrow',16)}</button>`);
+ACT.bell=el=>popAt(el,`<h4>알림 ${unread()}건 읽지 않음</h4>${NOTI.slice(0,4).map(n=>`<button class="pi" data-act="noti-go" data-id="${n.id}" style="align-items:flex-start"><span><b style="display:block;font-size:13.5px">${n.t}</b><small class="mut">${n.d}</small></span>${n.rd?'':'<i class="sti dg" style="margin-top:6px"></i>'}</button>`).join('')}<div style="border-top:1px solid var(--ln);margin:6px 0"></div><button class="pi" data-act="go" data-r="ops-notice">모든 알림 보기${ic('arrow',16)}</button>`);
+ACT['noti-go']=el=>{const n=NOTI.find(x=>x.id==el.dataset.id);n.rd=1;go(n.r)};
+ACT.help=()=>{const m=META[S.route],v=VW[S.route];modal('도움말',`<p class="b7" style="font-size:16px">${S.route==='home'?'시간표 전문가':m.t}</p><p class="mut mt1">${typeof v.d==='function'?v.d():(v.d||'')}</p><div class="note bl mt">${ic('info',18)}<div>이 화면은 클릭해서 둘러보는 프로토타입이에요. 입력한 값은 새로고침하면 사라져요.</div></div>`,btn('확인','mclose',{k:'p'}))};
+function doBind(el){
+  let v=el.type==='checkbox'?el.checked:el.value;if(el.dataset.num!=null)v=+v;
+  try{pset(el.dataset.bind,v)}catch(e){return}
+  touch();if(el.dataset.after&&ACT[el.dataset.after])ACT[el.dataset.after](el);
+  if(el.dataset.nr==null)render(true);
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#pop')&&!e.target.closest('[data-pop]'))closePop();
+  if(e.target.id==='mdl')closeModal();
+  const el=e.target.closest('[data-act]');if(!el||el.disabled)return;
+  const f=ACT[el.dataset.act];if(f)f(el,e);
+});
+document.addEventListener('change',e=>{const el=e.target;if(el.dataset&&el.dataset.bind)doBind(el)});
+document.addEventListener('input',e=>{const el=e.target;if(el.dataset&&el.dataset.bind&&el.dataset.live!=null)doBind(el)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closePop();$('#aip').classList.remove('on')}});
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(VW[h]&&h!==S.route)go(h)});
+
+/* ----- AI 비서 (보조 기능은 화면마다, 별도 메뉴는 두지 않아요) ----- */
+const AIS={
+ home:[['오늘 먼저 해야 할 일을 알려 줘','수강신청 가져오기를 마치면 반편성을 시작할 수 있어요. 담당교사 배정의 같은 타임 충돌 1건도 확인해 주세요.','assign']],
+ setup:[['중·고 기본 교시표를 추천해 줘','고등학교는 하루 7교시, 수요일 6·7교시를 창체로 두는 구성이 가장 흔해요. 공강 칸은 학년당 1~2칸을 권해요.']],
+ import:[['열 이름을 자동으로 맞춰 줘','‘성명’은 이름, ‘선택1~4’는 선택과목 1~4지망으로 인식했어요. 열 매핑 단계에서 확인해 보세요.']],
+ classing:[['타임 수와 고정반 후보를 추천해 줘','선택과목이 9개이고 4과목을 고르는 구조라 타임 4개가 가장 균형이 좋아요. 경제·사회문화 1반은 2학기에도 같은 학생이 이어서 듣도록 고정반 후보로 추천해요.']],
+ diagnose:[['시간표가 안 나오는 이유를 설명해 줘','3학년은 동시수업 15칸을 빼면 남는 칸이 17칸인데 원반수업은 18시간이 필요해요. 금요일 7교시 공강을 수업 칸으로 바꾸면 해결돼요.']],
+ conditions:[['조건을 문장으로 입력하는 방법을 알려 줘','“최민호 선생님은 금요일 4·6교시 불가”처럼 교사 이름, 요일, 교시를 함께 적으면 조건으로 바꿔 줘요. 자연어 조건 탭에서 바로 해 보세요.','conditions']],
+ edit:[['필수 위반을 고치는 가장 작은 변경을 찾아 줘','선택한 수업과 맞바꿀 수 있는 후보를 변경이 가장 적은 순서로 보여 드려요. 오른쪽 패널에서 후보를 눌러 보세요.']],
+ quality:[['등급을 올리는 방법을 알려 줘','필수 조건 위반을 먼저 0건으로 만들고, 퐁당퐁당이 많은 교사부터 수업을 모아 주면 등급이 가장 많이 올라가요.','edit']]
+};
+const AID=[['이 화면에서 할 수 있는 일을 알려 줘','왼쪽 메뉴의 순서대로 진행하면 돼요. 막히면 오른쪽 위 도움말에서 이 화면의 설명을 볼 수 있어요.']];
+function renderAI(){
+  const p=$('#aip'),sug=AIS[S.route]||AID;
+  p.innerHTML=`<div class="aip-h">${ic('sparkle',18)} AI 비서<span class="sp"></span><button class="btn g s" data-act="ai" aria-label="닫기">${ic('x',16)}</button></div><div class="aip-b"><div class="bub m">${S.route==='home'?'무엇을 도와드릴까요?':`지금 <b>${META[S.route].t}</b> 화면이에요. 이 화면에서 도와드릴 수 있는 일이에요.`}</div>${S.ai.log.map(l=>`<div class="bub ${l.u?'u':'m'}">${l.t}${l.r?`<div class="mt1"><button class="btn s" data-act="go" data-r="${l.r}">화면으로 이동</button></div>`:''}</div>`).join('')}<div class="sug">${sug.map((s,i)=>`<button data-act="ai-q" data-i="${i}">${s[0]}</button>`).join('')}</div></div>`;
+  p.classList.toggle('on',S.ai.open);
+}
+ACT.ai=()=>{S.ai.open=!S.ai.open;renderAI();if(S.ai.open){const b=$('#aip .sug button');b&&b.focus()}};
+ACT['ai-q']=el=>{const s=(AIS[S.route]||AID)[+el.dataset.i];S.ai.log.push({u:1,t:s[0]});renderAI();setTimeout(()=>{S.ai.log.push({t:s[1],r:s[2]});renderAI();const b=$('#aip .aip-b');b.scrollTop=b.scrollHeight},450)};
+
+/* ----- 부팅 ----- */
+function boot(){
+  const h=location.hash.slice(1);if(VW[h])S.route=h;
+  const m=META[S.route];if(m&&m.g)S.open[m.g]=true;
+  renderAI();render(false);
+}
+
+/* ===== 1. 시수편제·반편성 (1/2): 기초설정 · 교사 관리 · 과목·편제 · 수강신청 가져오기 ===== */
+ACT.save=()=>{touch();toast('저장했어요.')};
+const FREE=[];for(let d=0;d<5;d++)for(let p=1;p<=7;p++){const k=d+','+p;if(!BLOCK[k]&&!TSK[k])FREE.push([d,p])}
+
+/* --- 기초설정 --- */
+const setupInit=()=>({cls:{high:[8,8,8],mid:[7,7,7]},per:{high:25,mid:27},days:[1,1,1,1,1],np:7,lunch:'4교시 후',grid:[0,1,2,3,4].map(d=>[0,1,2,3,4,5,6,7].map(p=>p?(BLOCK[d+','+p]||0):0))});
+ACT.gcell=el=>{const s=V('setup',setupInit),d=+el.dataset.d,p=+el.dataset.p;s.grid[d][p]=(s.grid[d][p]+1)%3;touch();render(true)};
+ACT.day=el=>{const s=V('setup',setupInit),d=+el.dataset.d;s.days[d]=s.days[d]?0:1;touch();render(true)};
+view('setup',{
+ d:'학교급과 학년·학급 수, 요일·교시, 창체·공강 칸을 정하면 이후 모든 단계의 기준이 돼요.',
+ act:()=>btn('양식 다운로드','toast',{i:'download',d:{m:'기초설정 양식을 내려받았어요. (프로토타입)'}})+btn('저장','save',{k:'p'}),
+ body(){
+  const s=V('setup',setupInit),hi=S.level==='high',cls=s.cls[S.level];
+  const ad=s.days.filter(Boolean).length,tot=ad*s.np;let ct=0,gk=0;
+  s.grid.forEach((col,d)=>{if(!s.days[d])return;for(let p=1;p<=s.np;p++){if(col[p]===1)ct++;if(col[p]===2)gk++}});
+  const rows=cls.map((n,g)=>[`<b>${g+1}학년</b>`,stp(`setup.cls.${S.level}.${g}`,n,1,14),`${s.per[S.level]}명`,`${n*s.per[S.level]}명`]);
+  rows.push({c:'sub',r:['합계',`${cls.reduce((a,b)=>a+b,0)}학급`,'',`${cls.reduce((a,b)=>a+b,0)*s.per[S.level]}명`]});
+  const wg=`<div class="wg"><div></div>${DAYS.map((d,i)=>`<div class="h">${d}</div>`).join('')}${Array.from({length:s.np},(_,i)=>i+1).map(p=>`<div class="h">${p}</div>`+DAYS.map((d,di)=>{const v=s.grid[di][p];return `<button class="wc s${v}${s.days[di]?'':' off'}" data-act="gcell" data-d="${di}" data-p="${p}" aria-label="${d}요일 ${p}교시 ${['수업','창체','공강'][v]}">${['수업','창체','공강'][v]}</button>`}).join('')+(p===4?'<div class="lc">점심시간</div>':'')).join('')}</div>`;
+  return saveRow()+`<p class="hint">학교급을 먼저 고르세요. 선택한 학교급에 맞춰 메뉴와 입력 항목이 달라져요.</p>
+  <div class="g2" style="margin-bottom:20px">
+   <button class="opt ${hi?'on':''}" data-act="level" data-v="high" aria-pressed="${hi}"><b>${ic('school',20)} 고등학교 ${hi?bdg('선택됨','bl'):''}</b><p>학점·지정/선택과목과 택수를 다루고, 선택과목 반편성(분반·타임·학생 배정)까지 지원해요.</p></button>
+   <button class="opt ${!hi?'on':''}" data-act="level" data-v="mid" aria-pressed="${!hi}"><b>${ic('school',20)} 중학교 ${!hi?bdg('선택됨','bl'):''}</b><p>같은 구조에서 반편성 단계를 숨기고, 학급 단위 시수로 시간표를 구성해요.</p></button>
+  </div>
+  <div class="g2 s" style="grid-template-columns:minmax(0,5fr) minmax(0,7fr)">
+   ${card('학년·학급 수','학급 수를 바꾸면 시수표와 시간표 학급 목록이 함께 바뀌어요.',tbl(['학년','학급 수','학급당 인원','학생 수'],rows,{c:'nb'}).replace('class="tw"','class="tw" style="margin:0 -24px -24px"'))}
+   ${card('요일·교시','수업 요일과 하루 교시 수를 정하세요.',`<div class="lbl">수업 요일</div><div class="chips mt1">${DAYS.map((d,i)=>`<button class="chip sq ${s.days[i]?'on':''}" data-act="day" data-d="${i}" aria-pressed="${!!s.days[i]}">${d}</button>`).join('')}</div>
+    <div class="row mt"><div class="fld"><label>하루 교시 수</label>${stp('setup.np',s.np,5,8)}</div><div class="fld"><label>점심시간 위치</label>${sel('setup.lunch',['3교시 후','4교시 후','5교시 후'],s.lunch,'s')}</div><div class="fld"><label>수업 시간</label><span class="b7" style="line-height:32px">50분 · 쉬는 시간 10분</span></div></div>
+    <div class="kpis mt">${kpi('주간 전체 칸',tot,ad+'일 × '+s.np+'교시','tx')}${kpi('창체·공강 칸',ct+gk,'창체 '+ct+' · 공강 '+gk,'wn')}${kpi('수업 가능 칸',tot-ct-gk,'시간표 배치 기준','')}</div>`)}
+  </div>
+  ${card('창체·공강 칸 지정','칸을 누를 때마다 수업 → 창체 → 공강 순서로 바뀌어요. 창체와 공강 칸에는 수업이 배치되지 않아요.',wg+`<div class="legend mt1"><span><i style="--h:215"></i>수업</span><span><i style="--h:265"></i>창체</span><span><i style="background:var(--sf3);border-color:var(--ln)"></i>공강</span></div>`)}`;
+ }
+});
+
+/* --- 교사 관리 --- */
+const tInit=()=>({q:'',ty:'',sj:'',st:'',edit:false,list:TL.map(t=>({...t}))});
+ACT['t-new']=()=>modal('교사 등록',`<div class="frm"><div class="fld"><label for="tn">이름</label><input id="tn" class="inp" placeholder="예: 김서연"></div><div class="fld"><label for="tt">구분</label><select id="tt" class="sel"><option>교사</option><option>시간강사</option><option>순회교사</option></select></div><div class="fld"><label for="ts">담당 교과</label><input id="ts" class="inp" placeholder="예: 수학"></div><div class="fld"><label for="th">담임 예정</label><select id="th" class="sel"><option value="">없음</option>${[1,2,3].flatMap(g=>Array.from({length:8},(_,i)=>`<option>${g}-${i+1}</option>`)).join('')}</select></div></div><p class="xs mut mt1">시간강사·순회교사의 출근일은 조건 설정의 ‘배정 제한’에서 정해요.</p>`,btn('취소','mclose')+btn('등록','t-add',{k:'p'}));
+ACT['t-add']=()=>{const n=$('#tn').value.trim();if(!n){toast('이름을 입력해 주세요.');return}const s=V('teachers',tInit);s.list.push({n,ty:$('#tt').value,sj:$('#ts').value||'미정',hr:$('#th').value,o:0,st:'재직'});closeModal();touch();toast(`${n} 선생님을 등록했어요.`);render(true)};
+view('teachers',{
+ d:'교사·시간강사·순회교사를 구분해 등록하고, 담당 교과와 담임 예정 학급을 정해요.',
+ act:()=>btn('양식 다운로드','toast',{d:{m:'교사 등록 양식을 내려받았어요. (프로토타입)'}})+btn('일괄 등록','toast',{d:{m:'엑셀 파일을 올리면 한 번에 등록돼요. (프로토타입)'}}),
+ body(){
+  const s=V('teachers',tInit),th=teacherHours(),q=s.q.trim();
+  const list=s.list.map((t,i)=>({...t,i})).filter(t=>(!q||(t.n+t.sj+t.hr).includes(q))&&(!s.ty||t.ty===s.ty)&&(!s.sj||t.sj===s.sj)&&(!s.st||t.st===s.st));
+  const cnt=ty=>s.list.filter(t=>t.ty===ty).length,hr=s.list.filter(t=>t.hr).length;
+  const rows=list.map(t=>{const h=th[t.n],tot=h?h.tot:t.o,over=t.ty==='교사'&&h&&tot>RANGE[1],under=t.ty==='교사'&&h&&tot<RANGE[0]&&t.st==='재직';const dys=TM[t.n]?TM[t.n].days.map(d=>DAYS[d]).join('·'):'—';
+   return [`<b>${esc(t.n)}</b>`,s.edit?sel(`teachers.list.${t.i}.ty`,['교사','시간강사','순회교사'],t.ty,'s'):(t.ty==='교사'?'교사':bdg(t.ty,t.ty==='시간강사'?'ba':'bi')),esc(t.sj),s.edit?sel(`teachers.list.${t.i}.hr`,[['','없음'],...[1,2,3].flatMap(g=>Array.from({length:8},(_,i)=>g+'-'+(i+1)))],t.hr,'s'):(t.hr||'—'),dys,t.st==='재직'||!h?`${tot}시간 ${over?bdg('초과','br'):under?bdg('미달','ba'):''}`:`${tot}시간`,s.edit?sel(`teachers.list.${t.i}.st`,['재직','휴직'],t.st,'s'):bdg(t.st,t.st==='재직'?'bl':'')]});
+  const sj=[...new Set(TL.map(t=>t.sj))];
+  return saveRow()+`<div class="kpis" style="margin-bottom:20px">${kpi('전체 교직원',s.list.length+'명','샘플 데이터','tx')}${kpi('교사',cnt('교사')+'명')}${kpi('시간강사',cnt('시간강사')+'명','출근일 제한',cnt('시간강사')?'wn':'')}${kpi('순회교사',cnt('순회교사')+'명','출근일 제한','wn')}${kpi('담임 예정',hr+'/24학급','미정 '+(24-hr)+'학급',hr<24?'wn':'ok')}</div>
+  ${24-hr?note('wn','alert',`<b>담임이 정해지지 않은 학급이 ${24-hr}개 있어요.</b> 1-7 · 1-8 · 3-7 · 3-8 학급의 담임 예정 교사를 지정해 주세요.`)+'<div style="height:16px"></div>':''}
+  <section class="card"><div class="row" style="padding:18px 20px">
+   <span class="srch">${ic('search',17)}<input class="inp" data-bind="teachers.q" data-live aria-label="교사 검색" placeholder="이름, 담당 교과, 담임 반 검색" value="${esc(s.q)}"></span>
+   ${sel('teachers.ty',[['','전체 구분'],'교사','시간강사','순회교사'],s.ty,'')}${sel('teachers.sj',[['','전체 교과'],...sj],s.sj,'')}${sel('teachers.st',[['','전체 상태'],'재직','휴직'],s.st,'')}
+   <span class="sp"></span><span class="bdg pl" style="height:26px">${list.length}명</span>${btn('+ 교사 등록','t-new',{k:'p'})}${btn(s.edit?'수정 완료':'수정','tog',{d:{p:'teachers.edit'}})}</div>
+   ${list.length?tbl(['이름','구분','담당 교과','담임 예정','출근일','주당 시수','상태'],rows,{c:'nb'}):`<div class="empty">${ic('search',32)}<b>조건에 맞는 교직원이 없어요</b>검색어나 필터를 바꿔 보세요.</div>`}</section>
+  <p class="xs mut">주당 시수는 2학년 샘플 시간표와 타 학년 담당분을 합친 값이에요. 교사 기준은 주 ${RANGE[0]}~${RANGE[1]}시간이에요.</p>`;
+ }
+});
+
+/* --- 과목·편제 --- */
+const SUBJ_ROWS=()=>{
+ const m=(a)=>a.map(r=>[...r]);
+ const sel2=COURSES.map(c=>[c.g==='과학'?'과학':'사회',c.n,'선택',3,'이동(분반)','선택군 Ⅰ · 9택 4']);
+ const g2=Object.values(SUBJ).map(x=>[({국어:'국어',수학:'수학',영어:'영어',한국사:'사회',체육:'체육',음악:'예술',미술:'예술',정보:'기술·가정',도덕:'도덕',진로:'진로'})[x.n],x.n,'지정',x.h,'원반','']).concat(sel2);
+ return{high:{1:m([['국어','국어','지정',4,'원반',''],['수학','수학','지정',4,'원반',''],['영어','영어','지정',4,'원반',''],['사회','통합사회','지정',3,'원반',''],['과학','통합과학','지정',3,'원반',''],['사회','한국사','지정',3,'원반',''],['체육','체육','지정',3,'원반',''],['예술','음악','지정',1,'원반',''],['예술','미술','지정',1,'원반',''],['기술·가정','정보','지정',2,'원반',''],['도덕','도덕','지정',1,'원반',''],['진로','진로','지정',1,'원반',''],['과학','과학탐구실험','지정',2,'원반','']]),
+  2:g2,
+  3:m([['국어','국어','지정',3,'원반',''],['수학','수학','지정',3,'원반',''],['영어','영어','지정',4,'원반',''],['체육','체육','지정',2,'원반',''],['예술','음악','지정',1,'원반',''],['예술','미술','지정',1,'원반',''],['기술·가정','정보','지정',1,'원반',''],['도덕','도덕','지정',1,'원반',''],['진로','진로','지정',1,'원반',''],...['미적분','확률과 통계','물리학Ⅱ','화학Ⅱ','생명과학Ⅱ','지구과학Ⅱ','사회문제 탐구','윤리와 사상','심리학','영미 문학 읽기'].map(n=>['선택',n,'선택',3,'이동(분반)','선택군 Ⅰ · 10택 5'])])},
+ mid:{1:null}};
+};
+const MID_ROWS=()=>[['국어','국어','지정',4,'원반',''],['수학','수학','지정',4,'원반',''],['영어','영어','지정',4,'원반',''],['사회','사회','지정',4,'원반',''],['도덕','도덕','지정',1,'원반',''],['과학','과학','지정',4,'원반',''],['체육','체육','지정',3,'원반',''],['예술','음악','지정',1,'원반',''],['예술','미술','지정',1,'원반',''],['기술·가정','기술·가정','지정',2,'원반',''],['기술·가정','정보','지정',1,'원반',''],['선택','한문·일본어 택 1','선택',2,'이동(분반)','택 1'],['진로','진로','지정',1,'원반','']];
+const subInit=()=>{const h=SUBJ_ROWS().high;return{tab:2,rows:{high:h,mid:{1:MID_ROWS(),2:MID_ROWS(),3:MID_ROWS()}},sel:{2:{n:9,k:4,cr:3},3:{n:10,k:5,cr:3}}}};
+view('subjects',{
+ d:'교과별 학점(주당 시수)과 지정·선택 구분, 선택과목 택수를 정해요. 합계가 시간표 가용 칸과 맞아야 해요.',
+ act:()=>btn('양식 다운로드','toast',{d:{m:'과목·편제 양식을 내려받았어요. (프로토타입)'}})+btn('저장','save',{k:'p'}),
+ body(){
+  const s=V('subjects',subInit),hi=S.level==='high',g=+s.tab||2,rows=s.rows[S.level][g];
+  const tot=rows.reduce((a,r)=>a+r[3],0),fx=rows.filter(r=>r[2]==='지정').reduce((a,r)=>a+r[3],0),sl=hi&&s.sel[g]?s.sel[g].k*s.sel[g].cr:rows.filter(r=>r[2]==='선택').reduce((a,r)=>a+r[3],0);
+  const total=fx+sl,avail=32,gap=total-avail;
+  const body=rows.map((r,i)=>[esc(r[0]),`<b>${esc(r[1])}</b>`,bdg(r[2],r[2]==='선택'?'bi':'bl'),stp(`subjects.rows.${S.level}.${g}.${i}.3`,r[3],0,8),r[4]==='원반'?'원반수업':bdg('이동수업','bi'),r[5]?bdg(r[5],'bi'):'—']);
+  const gs=s.sel[g];
+  return saveRow()+tabs('subjects',[[1,'1학년'],[2,'2학년'],[3,'3학년']],g)+`
+  <div class="kpis" style="margin-bottom:20px">${kpi(hi?'총 이수 학점 (3년)':'총 이수 시수',hi?'192학점':'3,468시간','교과 '+(hi?'174':'3,366')+' + 창체 '+(hi?'18':'102'),'tx')}${kpi('지정 과목',fx+(hi?'학점':'시수'),'주당','')}${kpi('선택 과목',sl+(hi?'학점':'시수'),hi&&gs?`학생당 ${gs.k}과목 × ${gs.cr}학점`:'주당','')}${kpi('주당 합계',total,'가용 칸 '+avail+'칸 기준',gap===0?'ok':'er')}</div>
+  ${gap===0?note('ok','check',`<b>편제 합계가 가용 칸과 일치해요.</b> 지정 ${fx} + 선택 ${sl} = ${avail}칸이에요.`):note('er','alert',`<b>편제 합계가 가용 칸보다 ${gap>0?gap+'칸 많아요':-gap+'칸 적어요'}.</b> 학점이나 택수를 조정해 주세요.`)}<div style="height:16px"></div>
+  <div class="${hi&&gs?'g2 s':''}" ${hi&&gs?'style="grid-template-columns:minmax(0,8fr) minmax(0,4fr)"':''}>
+   ${cardT(g+'학년 편제',`${schoolName()} · ${hi?'학점':'주당 시수'} 기준`,tbl(['교과(군)','과목','구분',hi?'학점':'시수','개설 방식','선택군·택수'],body,{c:'nb'}))}
+   ${hi&&gs?card('선택군 설정','학생이 여러 과목 중 몇 과목을 고를지 정해요.',`<div class="list"><div class="li"><div class="sp"><b>개설 과목 수</b><small>선택 가능한 과목 전체</small></div>${stp(`subjects.sel.${g}.n`,gs.n,3,14)}</div><div class="li"><div class="sp"><b>택수 (고를 과목 수)</b><small>학생당 선택 과목 수</small></div>${stp(`subjects.sel.${g}.k`,gs.k,1,7)}</div><div class="li"><div class="sp"><b>과목당 학점</b><small>주당 시수와 같아요</small></div>${stp(`subjects.sel.${g}.cr`,gs.cr,1,5)}</div></div><div class="note bl mt">${ic('info',18)}<div><b>${gs.n}택 ${gs.k}</b>이에요. 학생은 ${gs.n}과목 중 ${gs.k}과목을 고르고, 반편성에서 <b>타임 ${gs.k}개</b>가 필요해요. 학생당 선택 학점은 ${gs.k*gs.cr}학점이에요.</div></div>`):''}
+  </div>`;
+ }
+});
+
+/* --- 수강신청 가져오기 --- */
+const IMP_STEPS=['파일 올리기','열 자동 인식','검증·오류 보정','가져오기 완료'];
+const IMP_MAP=[['학번','학번',99],['성명','이름',99],['성별','성별',97],['선택1','선택과목 1',98],['선택2','선택과목 2',98],['선택3','선택과목 3',98],['선택4','선택과목 4',98],['선택5','무시',64],['신청시각','무시',93],['비고','메모',71]];
+const IMP_OPT=['학번','이름','성별','선택과목 1','선택과목 2','선택과목 3','선택과목 4','메모','무시'];
+const IMP_ERR=[[27,'과목명이 시스템과 달라요','물리1','‘물리학’으로 보정'],[58,'같은 과목을 두 번 신청했어요','화학, 화학','두 번째 선택을 ‘생명과학’(2지망 기록)으로 보정'],[87,'학번 형식이 달라요','2-4-13','‘20413’으로 보정'],[140,'선택과목이 5개예요 (택수 4)','5과목 선택','마지막 선택 ‘세계사’를 제외하고 4과목으로 보정'],[120,'없는 과목이에요','지구과학2','‘지구과학’으로 보정'],[171,'성별 값이 비어 있어요','(빈 칸)','학적 명부와 대조해 ‘여’로 보정'],[33,'학번이 중복돼요','20309 (2회)','두 번째 행을 ‘20310’으로 보정']];
+const impInit=()=>({step:1,fixed:{},map:IMP_MAP.map(r=>r[1])});
+ACT['imp-go']=el=>{const s=V('import',impInit);s.step=+el.dataset.s;render(true)};
+ACT['imp-sample']=()=>{const s=V('import',impInit);s.step=2;touch();toast('샘플 파일을 불러왔어요. (프로토타입)');render(true)};
+ACT['imp-fix']=el=>{const s=V('import',impInit);s.fixed[el.dataset.i]=!s.fixed[el.dataset.i];touch();render(true)};
+ACT['imp-fixall']=()=>{const s=V('import',impInit);IMP_ERR.forEach((e,i)=>s.fixed[i]=1);touch();toast('AI 보정을 모두 적용했어요.');render(true)};
+ACT['imp-done']=()=>{const s=V('import',impInit);s.step=4;setSt('import','done');touch();render(true)};
+ACT['imp-reset']=()=>{S.v.import=impInit();setSt('import','doing');render(true)};
+view('import',{
+ d:'수강신청 결과 엑셀 파일을 올리면 열을 자동으로 맞추고 오류를 찾아 고쳐 줘요. 학생이 직접 신청하는 화면은 없고, 가져오기만 지원해요.',
+ act:()=>btn('엑셀 양식 다운로드','toast',{i:'download',d:{m:'수강신청 가져오기 양식을 내려받았어요. (프로토타입)'}}),
+ body(){
+  const s=V('import',impInit),st=s.step,nfix=Object.values(s.fixed).filter(Boolean).length;
+  const stepper=`<div class="steps" role="list">${IMP_STEPS.map((t,i)=>`<div class="stp ${st===i+1?'on':st>i+1?'dn':''}" role="listitem"><button ${i+1<st?`data-act="imp-go" data-s="${i+1}"`:'disabled'} aria-label="${t}"><i>${st>i+1?ic('check',14):i+1}</i>${t}</button></div>`).join('')}</div>`;
+  let b='';
+  if(st===1)b=`<div class="g2 s" style="grid-template-columns:minmax(0,8fr) minmax(0,4fr)">${card('수강신청 파일','hscredit 같은 외부 수강신청 시스템에서 내려받은 결과 파일을 올려 주세요.',`<div class="drop">${ic('upload',36)}<b>엑셀 파일을 여기에 끌어다 놓으세요</b><span class="mut sm">.xlsx · .csv 파일을 지원해요</span><div class="row mt" style="justify-content:center">${btn('파일 선택','toast',{d:{m:'프로토타입에서는 샘플 파일로 진행해 보세요.'}})}${btn('샘플 파일로 해 보기','imp-sample',{k:'p'})}</div></div>`)}${card('가져오는 순서','',`<div class="list">${IMP_STEPS.slice(1).map((t,i)=>`<div class="li"><span class="bdg bl pl">${i+2}</span><div class="sp"><b>${t}</b><small>${['AI가 열 이름을 읽고 시스템 항목에 맞춰요.','오류 행을 찾고 보정안을 보여 줘요.','선택과목별 신청 인원을 확인해요.'][i]}</small></div></div>`).join('')}</div>`)}</div>`;
+  if(st===2)b=card('열 자동 인식',`파일: <b>hscredit_2학년_수강신청_결과.xlsx</b> · 200행 · 10열`,`<div class="row" style="margin-bottom:14px">${AIB('AI가 열을 맞췄어요')}<span class="sm mut">확인이 필요한 열은 노란색으로 표시했어요.</span></div>`+tbl(['파일의 열 이름','샘플 값','시스템 항목','인식 정확도'],IMP_MAP.map((r,i)=>[`<b>${r[0]}</b>`,['20101','안하준','남','물리학','화학','경제','한국지리','세계사','2026-10-08 09:12','이동수업 희망'][i],sel(`import.map.${i}`,IMP_OPT,s.map[i],'s'),`<div class="row" style="gap:8px"><div style="width:90px">${bar(r[2],r[2]>=90?'ok':'wn')}</div><span class="num sm ${r[2]>=90?'':'b7'}" ${r[2]<90?'style="color:var(--wn-t)"':''}>${r[2]}%</span></div>`]),{c:'nb'}).replace('class="tw"','class="tw" style="margin:0 -24px"')+`<div class="row mt">${btn('이전','imp-go',{d:{s:1}})}<span class="sp"></span>${btn('검증하기','imp-go',{k:'p',d:{s:3}})}</div>`);
+  if(st===3){const ok=nfix===IMP_ERR.length;
+   b=`<div class="kpis" style="margin-bottom:20px">${kpi('전체 행','200행','','tx')}${kpi('정상',193+nfix+'행','','ok')}${kpi('오류',IMP_ERR.length-nfix+'행','AI 보정안이 있어요',ok?'ok':'er')}</div>`+card('입력 검증 · 오류 보정','오류마다 AI 보정안을 보여 드려요. 하나씩 적용하거나 한 번에 적용할 수 있어요.',tbl(['행','학생','오류','원본 값','AI 보정안',{t:'',c:'r'}],IMP_ERR.map((e,i)=>{const t=STUS[e[0]];return [e[0]+2,`<b>${t.id}</b> ${t.n}`,e[1],`<code>${e[2]}</code>`,s.fixed[i]?`<span class="mut sm" style="text-decoration:line-through">${e[3]}</span> ${bdg('적용됨','bk')}`:`${AIB()} <span class="sm">${e[3]}</span>`,btn(s.fixed[i]?'되돌리기':'적용','imp-fix',{k:'s',d:{i}})]}),{c:'nb'}).replace('class="tw"','class="tw" style="margin:0 -24px"'),btn('AI 보정 모두 적용','imp-fixall',{k:'ai',i:'sparkle',dis:ok}))+`<div class="row">${btn('이전','imp-go',{d:{s:2}})}<span class="sp"></span>${btn('가져오기','imp-done',{k:'p',dis:!ok})}</div>`}
+  if(st===4){const cc={};STUS.forEach(x=>Object.values(x.secs).forEach(id=>{const k=SECMAP[id].k;cc[k]=(cc[k]||0)+1}));
+   b=`<div class="note ok">${ic('check',20)}<div><b>200명의 수강신청 내역을 가져왔어요.</b> 선택과목별 신청 인원은 아래와 같아요.</div></div><div style="height:16px"></div>`+card('선택과목별 신청 인원','학생 200명 × 4과목 = 800건',COURSES.map(c=>{const n=cc[c.k]||0;return `<div class="mrow"><span>${c.n}</span>${bar(n/130*100)}<span>${n}명</span></div>`}).join(''))+`<div class="row">${btn('다시 가져오기','imp-reset')}<span class="sp"></span>${S.level==='high'?btn('반편성으로 이동','go',{k:'p',d:{r:'classing'}}):btn('과목·편제로 이동','go',{k:'p',d:{r:'subjects'}})}</div>`}
+  return saveRow()+stepper+b;
+ }
+});
+
+/* ===== 1. 시수편제·반편성 (2/2): 반편성 · 시수표 · 담당교사 배정 · 구조 진단 ===== */
+const secCnt=id=>STUS.filter(s=>Object.values(s.secs).includes(id)).length;
+const courseReq=k=>CMAP[k]?Object.values(CMAP[k].cnt).reduce((a,b)=>a+b,0)*25:0;
+const slotList=T=>TSLOT[T].map(([d,p])=>slotTxt(d,p)).join(' · ');
+
+/* --- 반편성 (고등학교) --- */
+const clInit=()=>({tab:'count',std:25,cnt:Object.fromEntries(COURSES.map(c=>[c.k,Object.values(c.cnt).reduce((a,b)=>a+b,0)])),fixed:true,link:true,ai:false,busy:false,ran:false,q:'',lim:10,un:[17,88,154],
+ opt:{sep:true,grp:true,score:true,sex:true,split:false,bal:2,rules:[['분리','김○○ ↔ 이○○','같은 분반 금지'],['동반','박○○ + 최○○','같은 분반 배정']]}});
+ACT['cl-ai']=()=>{const s=V('classing',clInit);s.ai=true;touch();render(true)};
+ACT['cl-run']=()=>{const s=V('classing',clInit);s.busy=true;render(true);setTimeout(()=>{s.busy=false;s.ran=true;s.tab='result';setSt('classing','done');touch();toast('학생 배정을 마쳤어요.');render(true)},1300)};
+ACT['cl-more']=()=>{V('classing').lim+=12;render(true)};
+ACT['cl-un']=el=>{const s=V('classing');s.un=s.un.filter(i=>i!=el.dataset.i);touch();toast('정원이 남는 분반에 배정했어요.');render(true)};
+ACT['cl-sex']=el=>{const o=V('classing').opt;if(el.dataset.k==='sex'&&o.sex)o.split=false;if(el.dataset.k==='split'&&o.split)o.sex=false};
+view('classing',{
+ d:'분반 수를 정하고, 동시에 열리는 분반을 타임으로 묶은 뒤 학생을 배정해요. 고등학교에서만 쓰는 단계예요.',
+ act:()=>btn('결과 내려받기','toast',{i:'download',d:{m:'학생별 분반표를 엑셀로 내려받았어요. (프로토타입)'}}),
+ body(){
+  const s=V('classing',clInit),o=s.opt;
+  const T=[['count','분반 수 산정'],['time','타임 구성'],['opt','배정 옵션'],['result','결과']];
+  const stepper=`<div class="steps" role="tablist">${T.map(([k,t],i)=>`<div class="stp ${s.tab===k?'on':T.findIndex(x=>x[0]===s.tab)>i?'dn':''}"><button role="tab" aria-selected="${s.tab===k}" data-act="tab" data-g="classing" data-k="${k}"><i>${T.findIndex(x=>x[0]===s.tab)>i?ic('check',14):i+1}</i>${t}</button></div>`).join('')}</div>`;
+  let b='';
+  if(s.tab==='count'){
+   const tot=Object.values(s.cnt).reduce((a,b)=>a+b,0);
+   b=`<div class="kpis" style="margin-bottom:20px">${kpi('선택과목','9개','9택 4','tx')}${kpi('신청 건수','800건','학생 200명 × 4과목','')}${kpi('분반 합계',tot+'분반','타임 4개 × 8분반',tot===32?'ok':'wn')}${kpi('분반 기준 인원',s.std+'명','허용 ±3명','')}</div>`+
+   card('분반 수 산정','신청 인원을 기준 인원으로 나눠 분반 수를 정해요. 분반 수는 직접 바꿀 수 있어요.',tbl(['과목','신청 인원','권장 분반','분반 수','분반당 인원','판정'],COURSES.map(c=>{const req=courseReq(c.k),rec=Math.round(req/s.std),n=s.cnt[c.k],per=(req/n).toFixed(1),okp=Math.abs(req/n-s.std)<=3;return [`<b>${c.n}</b>`,req+'명',rec+'분반',stp(`classing.cnt.${c.k}`,n,1,8),per+'명',okp?bdg('적정','bk'):bdg('인원 편차 큼','ba')]}),{c:'nb'}).replace('class="tw"','class="tw" style="margin:0 -24px"'),`<div class="row">기준 인원 ${stp('classing.std',s.std,15,35)}</div>`)+
+   `<div class="g2">${card('고정반(통반) 편성','같은 학생이 같은 분반을 이어서 듣도록 고정해요.',`<div class="li" style="border:0;padding:0"><div class="sp"><b>고정반 사용</b><small>경제·사회문화처럼 학기를 이어서 듣는 과목에 알맞아요.</small></div>${sw('classing.fixed',s.fixed,'고정반 사용')}</div>`)}${card('1·2학기 연계','1학기 분반을 2학기 배정에 반영해요.',`<div class="li" style="border:0;padding:0"><div class="sp"><b>1·2학기 연계</b><small>2학기 반편성에서 1학기 분반을 우선 유지해요.</small></div>${sw('classing.link',s.link,'1·2학기 연계')}</div>`)}</div>`;
+  }
+  if(s.tab==='time'){
+   b=`<div class="row" style="margin-bottom:16px">${btn('AI로 타임 수와 고정반 후보 추천','cl-ai',{k:'ai',i:'sparkle'})}<span class="sm mut">타임 하나에 속한 분반은 같은 시간에 열려요. 한 학생이 한 타임에서 한 분반만 들어요.</span></div>`+
+   (s.ai?note('ai','sparkle',`<b>타임 4개, 타임당 8분반이 가장 균형 좋아요.</b> 학생 200명이 모든 타임에 25명씩 나뉘어요. 고정반 후보는 <b>경제 1반 · 사회·문화 1반</b>이에요. 2학기에도 같은 학생이 이어서 들으면 시간표 변경이 가장 적어요.`)+'<div style="height:16px"></div>':'')+
+   `<div class="g4 s">${['A','B','C','D'].map(t=>{const ss=SECS.filter(x=>x.T===t);return card('타임 '+t,slotList(t),`<div class="chips">${ss.map(x=>`<span class="chip" style="--h:${CMAP[x.k].hue}">${secName(x)}</span>`).join('')}</div><div class="row mt1 sm mut">${ss.length}분반 · ${200}명 ${s.ai&&s.fixed&&['ECO1','SOC1'].some(i=>ss.some(x=>x.id===i))?AIB('고정반 후보'):''}</div>`)}).join('')}</div>`+note('ok','check','같은 타임 안에서 과목이 겹치는 학생은 <b>0명</b>이에요. 타임별 시간은 <span class="link" data-act="go" data-r="conditions">조건 설정 · 동시수업</span>에서 이어서 정해요.');
+  }
+  if(s.tab==='opt'){
+   b=`<div class="g2 s">${card('학생 분리·동반','같은 분반에 두지 않거나, 함께 두어야 하는 학생을 정해요.',`<div class="list">${o.rules.map(r=>`<div class="li"><span class="bdg ${r[0]==='분리'?'br':'bk'} pl">${r[0]}</span><div class="sp"><b>${r[1]}</b><small>${r[2]}</small></div></div>`).join('')}</div><div class="mt1">${btn('+ 규칙 추가','toast',{k:'s',d:{m:'학생을 검색해 규칙을 추가해요. (프로토타입)'}})}</div>`)}
+   ${card('그룹 분리','친구 관계 조정이 필요한 학생 그룹을 서로 다른 분반으로 나눠요.',`<div class="li" style="border:0;padding:0"><div class="sp"><b>그룹 분리 사용</b><small>그룹 3개 · 학생 11명</small></div>${sw('classing.opt.grp',o.grp,'그룹 분리')}</div>`)}</div>
+   <div class="g2 s mt">${card('성적·성별 균형','분반 사이의 평균 성적과 성비 차이를 줄여요.',`<div class="li" style="padding-top:0"><div class="sp"><b>성적 균형</b><small>분반 평균 편차 ±3점 이내</small></div>${sw('classing.opt.score',o.score,'성적 균형')}</div><div class="li"><div class="sp"><b>성별 균형</b><small>분반마다 남녀 비율을 비슷하게</small></div><label class="sw"><input type="checkbox" data-bind="classing.opt.sex" data-after="cl-sex" data-k="sex" ${o.sex?'checked':''} aria-label="성별 균형"><i></i></label></div><div class="li"><div class="sp"><b>남녀 분반</b><small>남학생반·여학생반으로 나눠요 (성별 균형과 함께 쓸 수 없어요)</small></div><label class="sw"><input type="checkbox" data-bind="classing.opt.split" data-after="cl-sex" data-k="split" ${o.split?'checked':''} aria-label="남녀 분반"><i></i></label></div>`)}
+   ${card('분반 인원 균형','가장 큰 분반과 가장 작은 분반의 인원 차이를 제한해요.',`<div class="li" style="border:0;padding:0"><div class="sp"><b>최대 인원 차이</b><small>${o.bal}명 이내로 맞춰요</small></div>${stp('classing.opt.bal',o.bal,0,6)}</div>`)}</div>
+   <div class="row mt">${s.busy?`<span class="sm mut">${ic('refresh',16)} 학생을 배정하는 중이에요…</span>`:''}<span class="sp"></span>${btn(s.busy?'배정하는 중…':'학생 배정 실행','cl-run',{k:'p',i:'play',dis:s.busy})}</div>`;
+  }
+  if(s.tab==='result'){
+   if(!s.ran)b=`<section class="card"><div class="empty">${ic('layers',40)}<b>아직 배정 결과가 없어요</b>배정 옵션을 확인하고 학생 배정을 실행해 보세요.<div class="mt">${btn('배정 옵션으로 이동','tab',{k:'p',d:{g:'classing',k:'opt'}})}</div></div></section>`;
+   else{
+    const q=s.q.trim(),list=STUS.filter(x=>x.secs.A&&(!q||(x.n+x.id).includes(q)));
+    b=`<div class="kpis" style="margin-bottom:20px">${kpi('배정 완료',200-s.un.length+'명','전체 200명','ok')}${kpi('미배정',s.un.length+'명',s.un.length?'아래에서 확인해 주세요':'모두 배정됐어요',s.un.length?'wn':'ok')}${kpi('같은 타임 충돌','0명','','ok')}${kpi('분반 평균 성적 편차','±1.8점','목표 ±3점','')}${kpi('분반 인원 차이','1명','목표 '+o.bal+'명 이내','')}</div>`+
+    cardT('학생별 분반표',`총 ${list.length}명 중 ${Math.min(s.lim,list.length)}명을 보고 있어요.`,`<div class="row" style="padding:0 20px 14px"><span class="srch">${ic('search',17)}<input class="inp" data-bind="classing.q" data-live aria-label="학생 검색" placeholder="이름 또는 학번 검색" value="${esc(s.q)}"></span></div>`+tbl(['학번','이름','성별','타임 A','타임 B','타임 C','타임 D'],list.slice(0,s.lim).map(x=>[x.id,`<b>${x.n}</b>`,x.sx,...['A','B','C','D'].map(t=>secName(SECMAP[x.secs[t]]))]),{c:'nb'})+(list.length>s.lim?`<div class="row" style="padding:14px 20px;justify-content:center;border-top:1px solid var(--ln2)">${btn('더 보기','cl-more',{k:'s'})}</div>`:''))+
+    (s.un.length?card('미배정 학생',`${AIB('AI 제안')} 정원이 남는 분반으로 배정할 수 있어요.`,`<div class="list">${s.un.map(i=>`<div class="li"><div class="sp"><b>${STUS[i].id} ${STUS[i].n}</b><small>${STUS[i].why}</small></div>${btn('남는 자리에 배정','cl-un',{k:'s',d:{i}})}</div>`).join('')}</div>`):'')+
+    card('분반별 인원','타임마다 학생 200명이 8개 분반으로 나뉘어요.',`<div class="g4">${['A','B','C','D'].map(t=>`<div><div class="b7" style="margin-bottom:8px">타임 ${t}</div>${SECS.filter(x=>x.T===t).map(x=>{const n=secCnt(x.id);return `<div class="mrow" style="grid-template-columns:96px 1fr 30px;padding:5px 0"><span class="sm">${secName(x)}</span>${bar(n/28*100)}<span class="sm">${n}</span></div>`}).join('')}</div>`).join('')}</div>`);
+   }
+  }
+  return saveRow()+stepper+b;
+ }
+});
+
+/* --- 시수표 --- */
+const TORDER=[...new Set([...Object.values(HOMET).flat(),...COURSES.flatMap(c=>c.t)])];
+const hoursInit=()=>({tab:'t',vt:''});
+view('hours',{
+ d:'교사별·학급별 시수를 한눈에 보고, 가상학급과 분반별 강의실, 총시수까지 확인해요.',
+ act:()=>btn('엑셀로 내려받기','toast',{i:'download',d:{m:'시수표를 엑셀로 내려받았어요. (프로토타입)'}}),
+ body(){
+  const s=V('hours',hoursInit),th=teacherHours();
+  const T=tabs('hours',[['t','교사×학급'],['v','가상학급(소강의실)'],['r','분반별 강의실'],['c','총시수 검증']],s.tab);
+  let b='';
+  if(s.tab==='t'){
+   const cl=[1,2,3,4,5,6,7,8];const rows=TORDER.map(n=>{const cnt=cl.map(c=>LL.filter(l=>l.c===c&&l.t===n).length),mv=SECS.filter(x=>x.t===n).length*3;return{n,cnt,mv,tot:cnt.reduce((a,b)=>a+b,0)+mv}});
+   const colSum=cl.map((c,i)=>rows.reduce((a,r)=>a+r.cnt[i],0)),mvSum=rows.reduce((a,r)=>a+r.mv,0);
+   b=cardT('교사 × 학급 시수','2학년 8개 학급 · 원반수업과 이동수업을 나눠서 보여 드려요.',tbl(['교사',...cl.map(c=>({t:'2-'+c,c:'c'})),{t:'이동수업',c:'c'},{t:'합계',c:'c'}],[...rows.map(r=>[`<b>${r.n}</b> <span class="xs mut4">${TLM[r.n].sj}</span>`,...r.cnt.map(v=>v?`<b style="color:var(--pr-t)">${v}</b>`:'<span class="mut4">·</span>'),r.mv?`<b style="color:var(--ai-t)">${r.mv}</b>`:'<span class="mut4">·</span>',`<b>${r.tot}</b>`]),{c:'sub',r:['합계',...colSum,mvSum,colSum.reduce((a,b)=>a+b,0)+mvSum]}],{c:'dense'}))+`<div class="legend"><span style="color:var(--pr-t)">■ 원반수업 (학급 교실)</span><span style="color:var(--ai-t)">■ 이동수업 (타임 분반)</span></div>`;
+  }
+  if(s.tab==='v'){
+   const list=SECS.filter(x=>!s.vt||x.T===s.vt);
+   b=cardT('가상학급 (소강의실)','분반마다 가상학급을 만들고, 학생이 모이는 소강의실을 정해요.',`<div class="row" style="padding:0 20px 14px">${seg('hours.vt',[['','전체'],['A','타임 A'],['B','타임 B'],['C','타임 C'],['D','타임 D']],s.vt)}</div>`+tbl(['가상학급','과목','타임','담당교사','정원','현원','주당','소강의실'],list.map(x=>[`<b>2-선택${x.T}-${x.id.slice(3)||x.q}</b>`,secName(x),bdg('타임 '+x.T,'bi'),x.t,'25명',secCnt(x.id)+'명','3시간',x.room]),{c:'nb'}));
+  }
+  if(s.tab==='r'){
+   const dup=[];Object.keys(TSLOT).forEach(t=>{const m={};SECS.filter(x=>x.T===t).forEach(x=>{(m[x.room]=m[x.room]||[]).push(x.id)});Object.entries(m).forEach(([r,a])=>{if(a.length>1)dup.push([t,r,a])})});
+   b=(dup.length?note('er','alert','같은 타임에서 강의실이 겹친 분반이 있어요.'):note('ok','check','<b>같은 타임 안에서 강의실이 겹치는 분반이 없어요.</b> 과학 실험 과목은 실험실을 우선 배정했어요.'))+'<div style="height:16px"></div>'+cardT('분반별 강의실','분반이 열리는 시간과 강의실을 확인해요.',tbl(['분반','타임','수업 시간','강의실','위치','담당교사'],SECS.map(x=>[`<b>${secName(x)}</b>`,bdg('타임 '+x.T,'bi'),`<span class="sm">${slotList(x.T)}</span>`,x.room,roomLoc(x.room),x.t]),{c:'nb'}));
+  }
+  if(s.tab==='c'){
+   const cl=[1,2,3,4,5,6,7,8],bad=TORDER.filter(n=>TLM[n].ty==='교사'&&(th[n].tot>RANGE[1]||th[n].tot<RANGE[0]));
+   b=`<div class="kpis" style="margin-bottom:20px">${kpi('학급별 총시수','32시간','원반 20 + 이동 12','ok')}${kpi('편제 대비 시수','일치','10과목 · 9선택','ok')}${kpi('기준을 벗어난 교사',bad.length+'명',`주 ${RANGE[0]}~${RANGE[1]}시간 기준`,bad.length?'wn':'ok')}</div>`+
+   cardT('학급별 총시수 검증','학급마다 수업 칸과 편제 시수가 맞는지 확인해요.',tbl(['학급','원반수업','이동수업','합계','가용 칸','판정'],cl.map(c=>{const h=LL.filter(l=>l.c===c).length;return [`<b>2-${c}</b>`,h+'시간','12시간',h+12+'시간','32칸',h+12===32?bdg('일치','bk'):bdg('불일치','br')]}),{c:'nb'}))+
+   cardT('교사별 시수 기준','주 '+RANGE[0]+'~'+RANGE[1]+'시간을 벗어난 교사예요. 2학년 외 학년 담당분을 포함한 값이에요.',bad.length?tbl(['교사','교과','2학년','타 학년','합계','판정'],bad.map(n=>[`<b>${n}</b>`,TLM[n].sj,th[n].h+th[n].m+'시간',th[n].o+'시간',th[n].tot+'시간',th[n].tot>RANGE[1]?bdg('초과','br'):bdg('미달','ba')]),{c:'nb'}):`<div class="empty">${ic('check',32)}<b>모두 기준 안에 있어요</b></div>`);
+  }
+  return saveRow()+T+b;
+ }
+});
+
+/* --- 담당교사 배정 --- */
+const AGRP=[['kor','국어',['KOR'],[]],['mat','수학',['MAT'],[]],['eng','영어',['ENG'],[]],['soc','사회',['HIK','MOR'],['ECO','LAW','SOC','GEO','WHI']],['sci','과학',[],['PHY','CHE','BIO','EAR']],['art','체육·예술',['PE','MUS','ART'],[]],['etc','기타',['INF','CAR'],[]]];
+const asInit=()=>{const t={};SECS.forEach(x=>t[x.id]=x.t);t.BIO2='조은서';return{tab:'subj',g:'sci',tch:t,sub:{kor:1,mat:1,eng:1,soc:1,sci:0,art:1,etc:1},ok:false}};
+const asConf=tch=>{const out=[];['A','B','C','D'].forEach(T=>{const m={};SECS.filter(x=>x.T===T).forEach(x=>{(m[tch[x.id]]=m[tch[x.id]]||[]).push(x)});Object.entries(m).forEach(([t,a])=>{if(a.length>1)out.push({T,t,a})})});return out};
+ACT['as-g']=el=>{const s=V('assign',asInit);s.g=el.dataset.g;render(true)};
+ACT['as-submit']=()=>{const s=V('assign',asInit);if(asConf(s.tch).some(c=>c.a.some(x=>AGRP.find(g=>g[0]===s.g)[3].includes(x.k)))){toast('같은 타임에 담당이 겹친 분반이 있어요. 먼저 고쳐 주세요.');return}s.sub[s.g]=1;touch();toast('교과 배정을 수업계에 제출했어요.');render(true)};
+ACT['as-ok']=()=>{const s=V('assign',asInit);s.ok=true;setSt('assign','done');touch();toast('수업계 검토를 마치고 확정했어요.');render(true)};
+view('assign',{
+ d:'교과 협의 담당이 교과별로 담당교사를 정해 제출하면, 수업계가 시수와 분반 위치, 같은 타임 충돌을 검토해 확정해요.',
+ act:()=>btn('시수 현황 내려받기','toast',{i:'download',d:{m:'교사별 시수 현황을 내려받았어요. (프로토타입)'}}),
+ body(){
+  const s=V('assign',asInit),cf=asConf(s.tch),th=teacherHours(s.tch),nsub=Object.values(s.sub).filter(Boolean).length;
+  const T=tabs('assign',[['subj','교과별 배정·제출',nsub+'/7'],['rev','수업계 검토',cf.length?cf.length:'', 'er'],['hr','교사별 시수 현황']],s.tab);
+  let b='';
+  if(s.tab==='subj'){
+   const g=AGRP.find(x=>x[0]===s.g),hrows=[];
+   g[2].forEach(k=>{const a=HOMET[k];a.forEach((t,i)=>{const cl=a.length>1?(i?'2-5~2-8':'2-1~2-4'):'2-1~2-8',n=a.length>1?4:8;hrows.push([`<b>${SUBJ[k].n}</b> <span class="xs mut4">원반수업</span>`,'—',SUBJ[k].h*n+'시간',t,cl+' 교실','<span class="bdg bk">정상</span>'])})});
+   const srows=SECS.filter(x=>g[3].includes(x.k)).map(x=>{const bad=cf.some(c=>c.a.includes(x));return {c:bad?'bad':'',r:[`<b>${secName(x)}</b>`,bdg('타임 '+x.T,'bi'),x.h+'시간',sel(`assign.tch.${x.id}`,TL.filter(t=>t.sj===x.n).map(t=>t.n),s.tch[x.id],'s'),x.room,bad?bdg('같은 타임 충돌','br'):bdg('정상','bk')]}});
+   const gconf=cf.filter(c=>c.a.some(x=>g[3].includes(x.k)));
+   b=`<div class="edl" style="grid-template-columns:230px minmax(0,1fr)"><div class="card" style="padding:8px"><div class="list" role="list">${AGRP.map(x=>{const c=cf.some(c=>c.a.some(y=>x[3].includes(y.k)));return `<button class="li" style="border:0;padding:12px;border-radius:10px;text-align:left;width:100%;${x[0]===s.g?'background:var(--nav-a)':''}" data-act="as-g" data-g="${x[0]}"><span class="sp" style="font-weight:700;${x[0]===s.g?'color:var(--pr-t)':''}">${x[1]}</span>${c?bdg('충돌','br'):s.sub[x[0]]?bdg('제출','bk'):bdg('작성 중','ba')}</button>`}).join('')}</div></div>
+   <div>${gconf.length?note('er','alert',`<b>같은 타임에 담당이 겹쳤어요.</b> ${gconf.map(c=>`타임 ${c.T}의 ${c.a.map(secName).join('·')}을(를) ${c.t} 선생님이 함께 맡고 있어요.`).join(' ')} 담당교사를 바꿔 주세요.`)+'<div style="height:16px"></div>':''}
+   ${cardT(g[1]+' 교과 배정',s.sub[g[0]]?'제출을 마친 교과예요. 수정하면 다시 제출해야 해요.':'담당교사를 확인하고 제출해 주세요.',tbl(['수업 단위','타임','시수','담당교사','강의실','상태'],[...hrows,...srows],{c:'nb'}),s.sub[g[0]]?bdg('제출됨','bk'):btn('수업계에 제출','as-submit',{k:'p'}))}</div></div>`;
+  }
+  if(s.tab==='rev'){
+   const need=8*20+SECS.length*3,got=Object.values(th).reduce((a,x)=>a+x.h+x.m,0),rooms=SECS.filter(x=>x.room).length,allsub=nsub===7;
+   const ck=(ok,t,d,x='')=>`<div class="li"><span style="color:var(--${ok?'ok':'er'})">${ic(ok?'check':'alert',22)}</span><div class="sp"><b>${t}</b><small>${d}</small></div>${x}</div>`;
+   b=card('수업계 검토','세 가지를 모두 통과하면 담당교사를 확정할 수 있어요.',`<div class="list">${ck(need===got,'총시수 일치',`편제 필요 ${need}시간 · 배정 ${got}시간`)}${ck(rooms===32,'분반 위치',`분반 ${SECS.length}개 중 ${rooms}개에 강의실이 있어요`)}${ck(!cf.length,'같은 타임 담당 충돌',cf.length?cf.map(c=>`타임 ${c.T}: ${c.t} · ${c.a.map(secName).join(', ')}`).join(' / '):'겹치는 담당이 없어요',cf.length?btn('고치러 가기','as-fix',{k:'s'}):'')}${ck(allsub,'교과별 제출',`7개 교과 중 ${nsub}개가 제출됐어요`)}</div>`)+
+   `<div class="row">${s.ok?note('ok','check','<b>담당교사를 확정했어요.</b> 이제 구조 진단과 조건 설정을 이어서 진행해요.'):''}<span class="sp"></span>${btn(s.ok?'확정 완료':'수업계 최종 확정','as-ok',{k:'p',dis:!!cf.length||!allsub||s.ok})}</div>`;
+  }
+  if(s.tab==='hr'){
+   const rows=TORDER.map(n=>({n,...th[n]})).sort((a,b)=>b.tot-a.tot);
+   b=cardT('교사별 시수 현황','2학년과 타 학년 담당분을 합친 주당 시수예요. 기준은 주 '+RANGE[0]+'~'+RANGE[1]+'시간이에요.',tbl(['교사','교과','원반','이동','타 학년','합계','기준 대비','판정'],rows.map(r=>{const t=TLM[r.n],reg=t.ty==='교사',st=!reg?bdg(t.ty,'ba'):r.tot>RANGE[1]?bdg('초과','br'):r.tot<RANGE[0]?bdg('미달','ba'):bdg('적정','bk');return [`<b>${r.n}</b>`,t.sj,r.h,r.m,r.o,`<b>${r.tot}</b>`,`<div style="width:130px">${bar(r.tot/24*100,r.tot>RANGE[1]?'er':r.tot<RANGE[0]&&reg?'wn':'ok')}</div>`,st]}),{c:'nb dense'}));
+  }
+  return saveRow()+T+b;
+ }
+});
+ACT['as-fix']=()=>{const s=V('assign',asInit);s.tab='subj';s.g='sci';render(true)};
+
+/* --- 구조 진단 --- */
+const dgInit=()=>({fixA:false,fixB:false,busy:false});
+ACT['dg-run']=()=>{const s=V('diagnose',dgInit);s.busy=true;render(true);setTimeout(()=>{s.busy=false;touch();toast('진단을 마쳤어요.');render(true)},1000)};
+ACT['dg-fix']=el=>{const s=V('diagnose',dgInit);s['fix'+el.dataset.k]=true;if(s.fixA&&s.fixB)setSt('diagnose','done');touch();toast('조정안을 적용했어요.');render(true)};
+view('diagnose',{
+ d:'시간표를 만들기 전에 ‘시간표가 안 나오는 구조’인지 미리 점검해요. 문제가 있으면 AI가 원인과 조정안을 알려 줘요.',
+ act:()=>btn(V('diagnose',dgInit).busy?'진단하는 중…':'진단 다시 실행','dg-run',{i:'refresh',dis:V('diagnose',dgInit).busy}),
+ body(){
+  const s=V('diagnose',dgInit),left3=(s.fixA?33:32)-15,def3=18-left3,un=(s.fixA?0:1)+(s.fixB?0:1);
+  const g=[['1학년',32,0,32],['2학년',32,12,20],['3학년',s.fixA?33:32,15,18]];
+  const ft=(n)=>{const h0=teacherHours()[n],m=TM[n]?TM[n].days:null;let need,av;if(h0.h===0){need=h0.m;av=SECS.filter(x=>x.t===n).reduce((a,x)=>a+TSLOT[x.T].filter(([d,p])=>avail(n,d,p)).length,0)}else{need=h0.h;av=FREE.filter(([d,p])=>avail(n,d,p)).length}return [n,TM[n]?bdg(TM[n].ty,'ba'):'교사',m?m.map(d=>DAYS[d]).join('·'):'—',need+'시간'+(h0.h===0?' (이동수업)':''),av+'칸',av-need===0?bdg('여유 없음','ba'):bdg('여유 '+(av-need)+'칸','bk')]};
+  return saveRow()+(un?note('wn','alert',`<b>시간표를 만들기 전에 해결할 항목이 ${un}건 있어요.</b> 아래 AI 조정안을 적용하거나 구조를 직접 고쳐 주세요.`):note('ok','check','<b>시간표를 만들 수 있는 구조예요.</b> 모든 점검을 통과했어요. 이제 시간표를 생성해 보세요.'))+'<div style="height:16px"></div>'+
+  `<div class="g2">${cardT('동시수업 후 남는 원반수업 칸','가용 칸에서 동시수업(타임) 칸을 빼고 남는 칸이 원반수업 시수보다 많아야 해요.',tbl(['학년','가용 칸','동시수업','남는 칸','필요 원반','판정'],g.map((r,i)=>{const left=r[1]-r[2],ok=left>=r[3];return {c:ok?'':'bad',r:[`<b>${r[0]}</b>`,r[1],r[2],left,r[3],ok?bdg('충분','bk'):bdg((r[3]-left)+'칸 부족','br')]}}),{c:'nb'}))}
+  ${cardT('동시수업 그룹 간 교사 겹침','서로 다른 타임에 같은 교사가 배정돼 같은 시간에 겹치면 시간표가 안 나와요.',s.fixB?`<div class="empty" style="padding:30px">${ic('check',32)}<b>겹치는 교사가 없어요</b></div>`:tbl(['학년','타임','교사','겹치는 시간','판정'],[['<b>3학년</b>','타임 B · D','신유나 (화학)','화 3교시',bdg('겹침','br')]],{c:'nb'}))}</div>
+  ${cardT('필요 시간 대비 가용 칸','학년별로 필요한 시간과 가용 칸을 비교하고, 출근일이 제한된 교사의 여유를 확인해요.',`<div style="padding:0 24px 8px">${g.map(r=>{const need=r[2]+r[3],av=r[1];return `<div class="mrow" style="grid-template-columns:70px 1fr 120px"><b>${r[0]}</b>${bar(need/av*100,need>av?'er':'ok')}<span style="font-weight:600">${need} / ${av}칸 ${need>av?'⚠':''}</span></div>`}).join('')}</div>`+tbl(['교사','구분','출근 가능 요일','필요 시간','가용 칸','판정'],['임도현','윤서아','배수빈','연지호'].map(ft),{c:'nb dense'}))}
+  ${card('원인 설명과 조정안','AI가 문제의 원인을 풀어 쓰고, 영향이 적은 조정안을 골라 드려요.',`<div class="note ai">${ic('sparkle',18)}<div>${un?`<b>3학년 시간표가 안 나오는 이유예요.</b> ${s.fixA?'':'3학년은 동시수업 15칸을 빼면 남는 칸이 17칸인데 원반수업이 18시간이라 1칸이 모자라요. '}${s.fixB?'':'또 타임 B와 D에 신유나 선생님이 함께 들어 있어 화요일 3교시가 겹쳐요.'}`:'모든 문제가 해결됐어요. 조정한 내용은 시수표와 조건 설정에 이미 반영됐어요.'}</div></div><div class="list mt1">
+   ${s.fixA?'':`<div class="li"><span class="bdg bk pl">추천</span><div class="sp"><b>금요일 7교시 공강을 수업 칸으로 바꾸기</b><small>3학년 가용 칸 +1 · 교육과정 변경 없음 · 교직원 협의 필요</small></div>${btn('적용','dg-fix',{k:'p s',d:{k:'A'}})}</div><div class="li"><span class="bdg pl">대안</span><div class="sp"><b>3학년 타임 5의 주당 시수를 3 → 2시간으로 줄이기</b><small>편제 학점 변경 필요 · 교육과정위원회 승인 필요</small></div>${btn('적용','dg-fix',{k:'s',d:{k:'A'}})}</div>`}
+   ${s.fixB?'':`<div class="li"><span class="bdg bk pl">추천</span><div class="sp"><b>3학년 타임 D 화학 2반 담당을 권혁준 선생님으로 바꾸기</b><small>겹침 해소 · 권혁준 선생님 주당 시수 +3 (현재 14시간)</small></div>${btn('적용','dg-fix',{k:'p s',d:{k:'B'}})}</div>`}
+   ${s.fixA&&s.fixB?`<div class="li"><div class="sp"><b>적용한 조정안</b><small>① 금요일 7교시 공강 → 수업 칸 · ② 타임 D 화학 2반 담당 변경</small></div>${btn('시간표 생성으로','go',{k:'p s',d:{r:'generate'}})}</div>`:''}</div>`)}`;
+ }
+});
+
+/* ===== 2. 시간표 만들기 (1/2): AI로 한 번에 · 조건 설정 · 생성 · 품질 분석 ===== */
+function qualityModel(){
+ const hs=hv(),ss=sv(),n=k=>ss.filter(x=>x.k===k).length;
+ const dup=hs.filter(h=>h.k==='dup').length;
+ const M=[{k:'gap',t:'퐁당퐁당 회피',v:Math.max(40,Math.round(100-n('gap')*0.8)),d:`교사 수업 사이 공강 1칸이 ${n('gap')}건`},{k:'run',t:'교사 연강 균형',v:Math.max(40,100-n('run')*8),d:`4시간 이상 연속 수업 ${n('run')}건`},{k:'bal',t:'요일별 수업량 균형',v:Math.max(40,100-n('bal')*8),d:`요일별 편차가 큰 교사 ${n('bal')}명`},{k:'edge',t:'1·7교시 상한 준수',v:Math.max(40,Math.round(100-n('edge')*2.5)),d:`상한을 넘은 교사 ${n('edge')}명`},{k:'pos',t:'주요 교과 오전 배치',v:Math.max(40,Math.round(100-n('pos')*1.2)),d:`국·수·영이 6·7교시인 수업 ${n('pos')}개`}];
+ const avg=M.reduce((a,m)=>a+m.v,0)/M.length,total=Math.max(0,Math.round(avg-hs.length*8));
+ const grade=total>=95?'A+':total>=90?'A':total>=85?'A−':total>=80?'B+':total>=75?'B':total>=70?'B−':'C';
+ const hard=[{t:'교사 중복 배정 없음',n:hs.filter(h=>h.k==='dbl').length,d:'같은 교사가 같은 시간에 두 학급에 들어가지 않아요'},{t:'교사 불가 시간 준수',n:hs.filter(h=>h.k==='una').length,d:'불가 시간과 시간강사 출근일을 지켜요'},{t:'학급 하루 같은 과목 1회',n:dup,d:'한 학급이 같은 날 같은 과목을 두 번 듣지 않아요'},{t:'동시수업(타임) 정합성',n:0,d:'타임 4개가 반편성과 같은 시간에 열려요'},{t:'창체·공강 칸 비움',n:0,d:'창체·공강 칸에는 수업이 없어요'},{t:'특별실 동시 사용 한도',n:0,d:'특별실 사용 학급 수가 한도를 넘지 않아요'}];
+ return{hs,ss,M,total,grade,hard};
+}
+const gradeColor=g=>g[0]==='A'?'ok':g[0]==='B'?'':'wn';
+
+/* --- AI로 한 번에 만들기 --- */
+const AGSTAGES=['수강신청 파일 분석','교실·특별실 배정','담당교사 확인','요일·교시 배치','필수 조건 검증과 균형 조정'];
+const agInit=()=>({phase:'in',pct:0,mode:'bal',text:'최민호 선생님은 금요일 4·6교시에 수업을 넣지 말아 주세요.\n정하윤 선생님은 월요일·화요일 1교시를 비워 주세요.\n체육은 가능하면 오후에 배치하고, 주요 교과는 오전을 우선해 주세요.'});
+ACT['ag-chip']=el=>{const s=V('ai-gen',agInit);s.text=(s.text.trim()+'\n'+el.dataset.t).trim();render(true)};
+ACT['ag-run']=()=>{const s=V('ai-gen',agInit);s.phase='run';s.pct=0;render(true);const iv=setInterval(()=>{s.pct=Math.min(100,s.pct+8+Math.random()*6);if(s.pct>=100){clearInterval(iv);s.phase='done';['ai-gen','generate','conditions'].forEach(r=>setSt(r,'done'));setSt('quality','doing');touch()}if(S.route==='ai-gen')render(true)},320)};
+ACT['ag-reset']=()=>{V('ai-gen',agInit).phase='in';render(true)};
+view('ai-gen',{
+ d:'수강신청 파일과 제한사항만 넣으면 교실·교사·시간을 한 번에 배정해요. 결과는 아래 화면들에 채워지고 그대로 수정할 수 있어요.',
+ body(){
+  const s=V('ai-gen',agInit),done=ST.import==='done',stage=Math.min(4,Math.floor(s.pct/20)),q=s.phase==='done'?qualityModel():null;
+  const main=s.phase==='in'?card('1. 수강신청 파일','',`<div class="li" style="border:0;padding:0"><span style="color:var(--pr)">${ic('file',26)}</span><div class="sp"><b>hscredit_2학년_수강신청_결과.xlsx</b><small>${done?'검증을 마친 파일 · 200명 · 800건':'샘플 파일을 사용해요 · 200명 · 800건'}</small></div>${done?bdg('가져오기 완료','bk'):bdg('샘플','ba')}${btn('다른 파일','go',{k:'s',d:{r:'import'}})}</div>`)+card('2. 제한사항',`문장으로 적으면 AI가 조건으로 바꿔요. ${AIB()}`,`<textarea class="ta" rows="5" data-bind="ai-gen.text" data-nr aria-label="제한사항" placeholder="예: 최민호 선생님은 금요일 4·6교시 불가">${esc(s.text)}</textarea><div class="chips mt1">${['교사별 불가 시간을 지켜 주세요.','시간강사는 출근일에만 배정해 주세요.','교사 연강은 최대 3시간까지만 해 주세요.','퐁당퐁당 수업은 되도록 피해 주세요.'].map(t=>`<button class="chip" data-act="ag-chip" data-t="${t}">+ ${t.replace(/ 주세요\.| 해 주세요\.| 피해 주세요\./,'').replace(/\.$/,'')}</button>`).join('')}</div>`)+card('3. 생성 방식','',`<div class="row">${seg('ai-gen.mode',[['fast','속도 우선'],['bal','균형'],['q','품질 우선']],s.mode)}<span class="sm mut">${{fast:'약 20초 · 필수 조건 위주',bal:'약 1분 · 필수 조건과 균형을 함께',q:'약 3분 · 균형 지표를 최대한 높여요'}[s.mode]}</span></div>`)+`<div class="row">${btn('AI로 한 번에 만들기','ag-run',{k:'p',i:'sparkle'})}</div>`
+  :s.phase==='run'?card('시간표를 만드는 중이에요','창을 닫지 않아도 돼요. 단계마다 결과를 확인하고 있어요.',`<div class="row" style="margin-bottom:14px"><div class="sp">${bar(s.pct)}</div><b class="num">${Math.floor(s.pct)}%</b></div><div class="list">${AGSTAGES.map((t,i)=>`<div class="li"><span style="color:var(--${i<stage?'ok':i===stage?'pr':'ln3'})">${i<stage?ic('check',20):i===stage?`<span class="spin" style="display:inline-block">${ic('refresh',20)}</span>`:ic('clock',20)}</span><b ${i>stage?'class="mut4"':''}>${t}</b></div>`).join('')}</div>`)
+  :`<div class="note ok">${ic('check',20)}<div><b>시간표 초안을 만들었어요.</b> 수업 ${LL.length}개와 이동수업 ${SECS.length}분반을 배치했어요.</div></div><div style="height:16px"></div><div class="kpis" style="margin-bottom:20px">${kpi('종합 등급',q.grade,q.total+'점',gradeColor(q.grade))}${kpi('필수 조건 위반',q.hs.length+'건',q.hs.length?'시간표 수정에서 고칠 수 있어요':'모두 충족했어요',q.hs.length?'er':'ok')}${kpi('수업 배치',LL.length+'개','원반수업 · 8개 학급','tx')}${kpi('이동수업',SECS.length+'분반','타임 4개','tx')}</div>`+card('다음으로 할 일','',`<div class="list"><div class="li"><span class="bdg br pl">${q.hs.length}건</span><div class="sp"><b>필수 조건 위반 고치기</b><small>선택한 수업과 맞바꿀 수 있는 후보를 변경이 적은 순서로 보여 줘요.</small></div>${btn('시간표 수정 열기','go',{k:'p s',d:{r:'edit'}})}</div><div class="li"><span class="bdg bl pl">분석</span><div class="sp"><b>품질 분석 보기</b><small>종합 등급과 개선이 필요한 항목을 확인해요.</small></div>${btn('품질 분석','go',{k:'s',d:{r:'quality'}})}</div><div class="li"><span class="bdg pl">확인</span><div class="sp"><b>시간표 보기</b><small>학급별·교사별·학생별·교실별로 둘러봐요.</small></div>${btn('시간표 보기','go',{k:'s',d:{r:'view'}})}</div></div>`)+`<div class="row">${btn('처음부터 다시','ag-reset')}</div>`;
+  const side=card('결과가 채워지는 화면','AI가 만든 결과는 별도 화면이 아니라 아래 화면들에 그대로 들어가요.',`<div class="list">${[['교실','시간표 보기 · 교실별','view','door'],['교사','담당교사 배정 · 교사별 시수 현황','assign','users'],['시간','시간표 수정 · 시간표 생성','edit','clock'],['조건','조건 설정의 모든 탭','conditions','sliders']].map(x=>`<button class="li" style="text-align:left;width:100%" data-act="go" data-r="${x[2]}"><span style="color:var(--pr)">${ic(x[3],22)}</span><div class="sp"><b>${x[0]}</b><small>${x[1]}</small></div>${ic('arrow',16)}</button>`).join('')}</div>`);
+  return `<div class="g2 s" style="grid-template-columns:minmax(0,7fr) minmax(0,4fr)"><div>${main}</div><div>${side}</div></div>`;
+ }
+});
+
+/* --- 조건 설정 --- */
+const ROOMS0=[['물리실','물리학',1],['화학실','화학',1],['생물실','생명과학',2],['지구과학실','지구과학',1],['음악실','음악',1],['미술실','미술',1],['컴퓨터실','정보',1],['체육관','체육',1],['운동장','체육',1]];
+const RULES0=[['연강 제한','교사가 하루에 연속으로 수업할 수 있는 최대 시간','4','시간 이하','must'],['1·4·7교시 상한','교사별로 1·4·7교시에 들어가는 주당 최대 횟수','2','회 이하','want'],['최대 출근일수','시간강사·순회교사가 주당 출근하는 최대 일수','3','일 이하','must'],['퐁당퐁당 기피','수업-공강-수업이 반복되는 패턴을 피해요','mid','','want'],['요일별 수업량','요일마다 교사 수업량 차이를 줄여요','1','시간 이내','want'],['오전·오후 배치','체육은 오후, 주요 교과는 오전을 우선해요','pm','','want']];
+const cdInit=()=>({tab:'room',rooms:ROOMS0.map(r=>({n:r[0],s:r[1],cap:r[2],on:true})),blocks:[{n:'1학년 과학탐구실험',sz:2,pos:'1·2 / 3·4 / 6·7',lunch:false,on:true},{n:'3학년 물리학Ⅱ 실험',sz:2,pos:'3·4 / 6·7',lunch:false,on:true},{n:'체육 (희망 시)',sz:2,pos:'5·6',lunch:false,on:false}],rules:RULES0.map(r=>({n:r[0],d:r[1],p:r[2],u:r[3],i:r[4]})),t:'정하윤',fa:{c:'1',d:'0',p:'3'},nl:'',parsed:null,applied:{}});
+const UTEACH=()=>TORDER;
+ACT['cd-u']=el=>{const s=V('conditions',cdInit),t=s.t,k=el.dataset.d+','+el.dataset.p;const u=UNAV[t]||(UNAV[t]=new Set());u.has(k)?u.delete(k):u.add(k);touch();toast(hv().length?`필수 조건 위반 ${hv().length}건 (시간표 수정에서 확인)`:'필수 조건 위반 0건');render(true)};
+ACT['cd-day']=el=>{const m=TM[el.dataset.t],d=+el.dataset.d;m.days=m.days.includes(d)?m.days.filter(x=>x!==d):[...m.days,d].sort();touch();render(true)};
+ACT['cd-fix']=()=>{const s=V('conditions',cdInit),l=lessonAt(+s.fa.c,+s.fa.d,+s.fa.p);if(!l){toast('그 칸은 수업 칸이 아니에요. 다른 칸을 골라 주세요.');return}l.lock=true;touch();toast(`2-${l.c} ${SUBJ[l.s].n}을(를) ${slotTxt(l.d,l.p)}에 고정했어요.`);render(true)};
+ACT['cd-unlock']=el=>{LL[+el.dataset.id].lock=false;touch();render(true)};
+const NLKIND=[[/불가|넣지|빼 |비워|제외|안 돼|말아/,'배정 제한 · 불가 시간'],[/연강|연속/,'연강(블럭)'],[/오전|오후|우선|가능하면|선호/,'생성 규칙 · 배치'],[/고정|꼭|반드시/,'필수·고정 배정']];
+function parseNL(text){
+ return text.split(/[\n.。!?]+/).map(x=>x.trim()).filter(Boolean).map(s=>{
+  const teacher=TL.find(t=>s.includes(t.n)),subj=Object.values(SUBJ).find(x=>s.includes(x.n)),days=[...new Set([...s.matchAll(/([월화수목금](?:[·,\s]*[월화수목금])*)요일/g)].flatMap(m=>[...m[1].matchAll(/[월화수목금]/g)].map(x=>'월화수목금'.indexOf(x[0]))))].sort();
+  let periods=[];const rg=s.match(/(\d)\s*[~\-]\s*(\d)\s*교시/),ls=s.match(/(\d(?:\s*[·,]\s*\d)*)\s*교시/);
+  if(rg)for(let i=+rg[1];i<=+rg[2];i++)periods.push(i);else if(ls)periods=[...ls[1].matchAll(/\d/g)].map(m=>+m[0]);else if(/오전/.test(s)&&/오후/.test(s))periods=[];else if(/오전/.test(s))periods=[1,2,3,4];else if(/오후/.test(s))periods=[5,6,7];
+  const kind=(NLKIND.find(k=>k[0].test(s+' '))||[0,'확인 필요'])[1];
+  return{s,teacher:teacher&&teacher.n,subj:subj&&subj.n,days,periods,kind};
+ });
+}
+ACT['nl-parse']=()=>{const s=V('conditions',cdInit),el=$('#nltext');s.nl=el?el.value:s.nl;s.parsed=parseNL(s.nl);s.applied={};render(true)};
+ACT['nl-apply']=el=>{const s=V('conditions',cdInit),p=s.parsed[+el.dataset.i];
+ if(p.kind.startsWith('배정 제한')&&p.teacher&&p.days.length&&p.periods.length){const u=UNAV[p.teacher]||(UNAV[p.teacher]=new Set());p.days.forEach(d=>p.periods.forEach(q=>u.add(d+','+q)));toast(`${p.teacher} 선생님의 불가 시간 ${p.days.length*p.periods.length}칸을 추가했어요.`)}
+ else toast(`‘${p.kind}’에 조건을 추가했어요. (프로토타입)`);s.applied[el.dataset.i]=1;touch();render(true)};
+view('conditions',{
+ d:'특별실, 고정 배정, 연강, 동시수업, 배정 제한, 생성 규칙을 정해요. 문장으로 적으면 AI가 조건으로 바꿔 줘요.',
+ act:()=>btn('저장','save',{k:'p'}),
+ body(){
+  const s=V('conditions',cdInit);
+  const T=tabs('conditions',[['room','특별실'],['fix','필수·고정 배정'],['block','연강(블럭)'],['time','동시수업(타임)'],['limit','배정 제한'],['rule','생성 규칙'],['nl','자연어 조건']],s.tab).replace('>자연어 조건<','>자연어 조건 '+AIB()+'<');
+  let b='';
+  if(s.tab==='room')b=cardT('특별실','과목별로 쓰는 특별실과 같은 시간에 쓸 수 있는 학급 수를 정해요.',tbl(['특별실','사용 과목','동시 사용 학급 수','사용'],s.rooms.map((r,i)=>[`<b>${r.n}</b>`,r.s,stp(`conditions.rooms.${i}.cap`,r.cap,1,4),sw(`conditions.rooms.${i}.on`,r.on,r.n+' 사용')]),{c:'nb'}),btn('+ 특별실 추가','toast',{k:'s',d:{m:'특별실을 추가해요. (프로토타입)'}}));
+  if(s.tab==='fix'){const fl=LL.filter(l=>l.lock);
+   b=cardT('필수·고정 배정','반드시 그 시간에 있어야 하는 수업을 잠가요. 잠근 수업은 시간표 수정에서도 움직이지 않아요.',(fl.length?tbl(['학급','과목','교사','요일·교시','구분',''],fl.map(l=>[`<b>2-${l.c}</b>`,SUBJ[l.s].n,l.t,slotTxt(l.d,l.p),bdg('고정','bl'),btn('해제','cd-unlock',{k:'s',d:{id:l.id}})]),{c:'nb'}):`<div class="empty">${ic('lock',32)}<b>고정한 수업이 없어요</b></div>`)+`<div class="row" style="padding:18px 24px;border-top:1px solid var(--ln2)"><div class="fld"><label>학급</label>${sel('conditions.fa.c',[1,2,3,4,5,6,7,8].map(c=>[c,'2-'+c]),s.fa.c,'s')}</div><div class="fld"><label>요일</label>${sel('conditions.fa.d',DAYS.map((d,i)=>[i,d]),s.fa.d,'s')}</div><div class="fld"><label>교시</label>${sel('conditions.fa.p',[1,2,3,4,5,6,7].map(p=>[p,p+'교시']),s.fa.p,'s')}</div><div class="fld"><label>&nbsp;</label>${btn('이 칸의 수업 고정','cd-fix',{k:'s'})}</div></div>`);}
+  if(s.tab==='block')b=cardT('연강(블럭)','한 과목을 연속 2시간 이상 이어서 배치하는 규칙이에요.',tbl(['대상','연강 단위','허용 위치','점심 걸침','사용'],s.blocks.map((r,i)=>[`<b>${r.n}</b>`,stp(`conditions.blocks.${i}.sz`,r.sz,2,3)+' <span class="xs mut">시간</span>',`<span class="sm">${r.pos}</span>`,sw(`conditions.blocks.${i}.lunch`,r.lunch,'점심 걸침 허용'),sw(`conditions.blocks.${i}.on`,r.on,r.n+' 사용')]),{c:'nb'}))+note('bl','info','2학년 샘플 시간표에는 연강 규칙이 없어서 연강이 배치되지 않았어요.');
+  if(s.tab==='time')b=`<div class="row" style="margin-bottom:16px">${bdg('반편성 연동됨','bk')}<span class="sm mut">타임은 반편성의 분반 묶음이에요. 분반이 바뀌면 이 화면도 함께 바뀌어요.</span><span class="sp"></span>${S.level==='high'?btn('반편성에서 수정','go',{k:'s',d:{r:'classing'}}):''}</div><div class="g2 s">${['A','B','C','D'].map(t=>card('타임 '+t,`주 3시간 · 8분반`,`<div class="chips" style="margin-bottom:12px">${TSLOT[t].map(([d,p])=>`<span class="chip on">${slotTxt(d,p)}</span>`).join('')}</div><div class="sm mut">${SECS.filter(x=>x.T===t).map(secName).join(' · ')}</div>`)).join('')}</div>`;
+  if(s.tab==='limit'){
+   const t=s.t,tm=TM[t],u=UNAV[t]||new Set();
+   const gc=`<div class="gc" style="grid-template-columns:44px repeat(5,1fr);max-width:520px"><span></span>${DAYS.map(d=>`<span class="b7 c" style="text-align:center">${d}</span>`).join('')}${[1,2,3,4,5,6,7].map(p=>`<span class="b7" style="line-height:40px;text-align:center">${p}</span>`+DAYS.map((d,di)=>{const off=tm&&!tm.days.includes(di),k=BLOCK[di+','+p]||TSK[di+','+p];return `<button class="${off?'k':u.has(di+','+p)?'u':''}" ${off||BLOCK[di+','+p]?'disabled':`data-act="cd-u" data-d="${di}" data-p="${p}"`} aria-label="${d}요일 ${p}교시 ${off?'출근하지 않는 날':u.has(di+','+p)?'불가':'가능'}">${off?'—':u.has(di+','+p)?'불가':BLOCK[di+','+p]?'·':'가능'}</button>`}).join('')).join('')}</div>`;
+   b=card('교사별 불가 시간','칸을 눌러 수업을 넣을 수 없는 시간을 정해요. 바꾸면 시간표 수정의 필수 위반이 바로 다시 계산돼요.',`<div class="row" style="margin-bottom:14px"><div class="fld"><label>교사</label>${sel('conditions.t',UTEACH(),t,'')}</div>${tm?bdg(tm.ty+' · 출근 '+tm.days.map(d=>DAYS[d]).join('·'),'ba'):''}</div>${gc}`)+
+   `<div class="g2 s">${cardT('시간강사·순회교사 출근일','출근하지 않는 요일에는 수업이 배정되지 않아요.',tbl(['교사','구분','출근일'],Object.entries(TM).map(([n,m])=>[`<b>${n}</b>`,bdg(m.ty,'ba'),`<div class="chips">${DAYS.map((d,i)=>`<button class="chip sq ${m.days.includes(i)?'on':''}" data-act="cd-day" data-t="${n}" data-d="${i}" aria-pressed="${m.days.includes(i)}">${d}</button>`).join('')}</div>`]),{c:'nb dense'}))}
+   ${cardT('육아시간','육아시간을 쓰는 교사는 해당 교시에 수업을 넣지 않아요.',tbl(['교사','기간','제외 시간'],[['<b>정하윤</b>','2026.03.02 ~ 2026.12.31','월·화 1교시']],{c:'nb'}),btn('+ 추가','toast',{k:'s',d:{m:'육아시간을 추가해요. (프로토타입)'}}))}</div>`;
+  }
+  if(s.tab==='rule')b=cardT('생성 규칙','필수는 반드시 지키고, 권장은 가능한 만큼 지켜요. 끔으로 두면 무시해요.',tbl(['규칙','설명','값','중요도'],s.rules.map((r,i)=>[`<b>${r.n}</b>`,`<span class="sm mut">${r.d}</span>`,r.n==='퐁당퐁당 기피'?sel(`conditions.rules.${i}.p`,[['low','약하게'],['mid','보통'],['high','강하게']],r.p,'s'):r.n==='오전·오후 배치'?sel(`conditions.rules.${i}.p`,[['pm','체육 오후 우선'],['am','주요 교과 오전 우선'],['none','제한 없음']],r.p,'s'):`<span class="row" style="gap:6px"><input class="inp s n" style="width:56px" data-bind="conditions.rules.${i}.p" value="${r.p}" aria-label="${r.n} 값"><span class="xs mut">${r.u}</span></span>`,seg(`conditions.rules.${i}.i`,[['must','필수'],['want','권장'],['off','끔']],r.i)]),{c:'nb'}));
+  if(s.tab==='nl'){
+   b=card('자연어 조건 입력',`교사 이름, 요일, 교시를 문장으로 적어 보세요. ${AIB()}`,`<textarea id="nltext" class="ta" rows="5" aria-label="조건 문장" placeholder="예: 최민호 선생님은 금요일 4·6교시에 수업을 넣지 말아 주세요.">${esc(s.nl||agInit().text)}</textarea><div class="row mt1">${btn('조건으로 바꾸기','nl-parse',{k:'ai',i:'sparkle'})}<span class="xs mut">문장마다 대상·요일·교시·유형을 찾아 드려요.</span></div>`)+
+   (s.parsed?(s.parsed.length?card('이렇게 이해했어요','맞으면 적용해 주세요. 불가 시간은 적용하면 ‘배정 제한’에 바로 반영돼요.',`<div class="list">${s.parsed.map((p,i)=>`<div class="li" style="align-items:flex-start"><div class="sp"><b style="font-weight:600">${esc(p.s)}</b><div class="chips mt1">${p.teacher?bdg('교사 '+p.teacher,'bl'):''}${p.subj?bdg('과목 '+p.subj,'bl'):''}${p.days.length?bdg(p.days.map(d=>DAYS[d]).join('·')+'요일'):''}${p.periods.length?bdg(p.periods.join('·')+'교시'):''}${bdg(p.kind,p.kind==='확인 필요'?'ba':'bi')}</div></div>${s.applied[i]?bdg('적용됨','bk'):btn('적용','nl-apply',{k:'p s',d:{i}})}</div>`).join('')}</div>`):note('wn','alert','문장을 찾지 못했어요. 한 문장에 교사 이름과 요일·교시를 함께 적어 주세요.')):'');
+  }
+  return saveRow()+T+b;
+ }
+});
+
+/* --- 시간표 생성 --- */
+const genInit=()=>({phase:'idle',pct:0,pick:0,limit:'60초',n:3});
+ACT['gn-run']=()=>{const s=V('generate',genInit);s.phase='run';s.pct=0;render(true);const iv=setInterval(()=>{s.pct=Math.min(100,s.pct+7+Math.random()*7);if(s.pct>=100){clearInterval(iv);s.phase='done';setSt('generate','done');touch()}if(S.route==='generate')render(true)},300)};
+ACT['gn-fail']=()=>{const s=V('generate',genInit);s.phase='fail';render(true)};
+ACT['gn-pick']=el=>{V('generate').pick=+el.dataset.i;touch();render(true)};
+view('generate',{
+ d:'조건에 맞는 시간표 후보를 만들고 비교해요. 만들지 못하면 원인을 구조 진단으로 이어서 찾아봐요.',
+ body(){
+  const s=V('generate',genInit),q=qualityModel(),stage=['필수 조건 배치','동시수업(타임) 배치','원반수업 배치','균형 최적화'];
+  const run=s.phase==='run'?card('후보를 만드는 중이에요','',`<div class="row" style="margin-bottom:14px"><div class="sp">${bar(s.pct)}</div><b class="num">${Math.floor(s.pct)}%</b></div><div class="chips">${stage.map((t,i)=>`<span class="chip ${Math.floor(s.pct/25.1)===i?'on':''}">${s.pct/25>i+1?'✓ ':''}${t}</span>`).join('')}</div>`):'';
+  const fail=s.phase==='fail'?note('er','alert','<b>시간표를 만들지 못했어요.</b> 3학년은 동시수업 15칸과 원반수업 18시간을 합쳐 33칸이 필요한데, 가용 칸은 32칸이에요.<div class="mt1">'+btn('구조 진단 열기','go',{k:'p s',d:{r:'diagnose'}})+'</div>')+'<div style="height:16px"></div>':'';
+  const cand=s.phase==='done'?cardT('후보 비교','후보를 골라 이어서 수정해요. 프로토타입에서는 후보 1이 현재 시간표예요.',tbl(['선택','후보','성격','종합 등급','필수 위반','퐁당퐁당','교사 연강'],[[0,'후보 1','균형형',q.grade+' · '+q.total+'점',q.hs.length+'건',q.ss.filter(x=>x.k==='gap').length+'건','0건'],[1,'후보 2','교사 선호형','B+ · 78점','1건','24건','0건'],[2,'후보 3','연강 최소형','B · 74점','3건','36건','0건']].map(r=>[`<label><input type="radio" name="pick" ${s.pick===r[0]?'checked':''} data-act="gn-pick" data-i="${r[0]}" aria-label="${r[1]} 선택"></label>`,`<b>${r[1]}</b>`,r[2],r[3],r[4],r[5],r[6]]),{c:'nb'}),btn('후보 1로 시간표 수정 열기','go',{k:'p',d:{r:'edit'}})):'';
+  return `<div class="kpis" style="margin-bottom:20px">${kpi('가용 칸',32+'칸','주 35칸 − 창체·공강 3칸','tx')}${kpi('동시수업(타임)','4개','주 12칸','tx')}${kpi('원반수업','160개','8학급 × 20시간','tx')}${kpi('교사 제약','4명','출근일·불가 시간','wn')}</div>`+fail+
+  card('생성 실행','현재 조건 설정과 담당교사 배정으로 후보를 만들어요.',`<div class="row"><div class="fld"><label>후보 수</label>${stp('generate.n',3,1,5)}</div><div class="fld"><label>제한 시간</label>${sel('generate.limit',['30초','60초','3분'],s.limit,'s')}</div><span class="sp"></span><button class="link" data-act="gn-fail" style="margin-right:12px">실패 시나리오 보기</button>${btn(s.phase==='run'?'생성 중…':'시간표 생성','gn-run',{k:'p',i:'play',dis:s.phase==='run'})}</div>`)+run+cand;
+ }
+});
+
+/* --- 품질 분석 --- */
+ACT['q-go']=el=>{const e=V('edit',edInit);if(el.dataset.c)e.c=+el.dataset.c;e.tab=el.dataset.tab||'hard';go('edit')};
+view('quality',{
+ d:'종합 등급과 필수 조건, 품질 지표를 확인하고 개선이 필요한 항목은 시간표 수정으로 바로 이동해요.',
+ act:()=>btn('분석 결과 내려받기','toast',{i:'download',d:{m:'품질 분석 리포트를 내려받았어요. (프로토타입)'}}),
+ body(){
+  const q=qualityModel(),top=q.ss.slice().sort((a,b)=>b.w-a.w).slice(0,7);
+  const ver=q.hs.length;
+  return `<div class="g2 s" style="grid-template-columns:minmax(0,4fr) minmax(0,8fr)">${card('종합 등급','2학년 샘플 시간표 기준이에요.',`<div class="row" style="gap:22px"><div class="ring" style="--v:${q.total};background:conic-gradient(var(--${gradeColor(q.grade)==='ok'?'ok':gradeColor(q.grade)==='wn'?'wn':'pr'}) calc(var(--v)*1%),var(--sf3) 0)"><div><b>${q.grade}</b><small>${q.total}점</small></div></div><div class="sp">${ver?note('er','alert',`필수 조건 위반 <b>${ver}건</b>이 있어요. 점수에서 ${ver*8}점이 깎였어요.`):note('ok','check','필수 조건을 모두 충족했어요.')}</div></div>`)}
+  ${card('품질 지표','100점에 가까울수록 교사와 학급의 시간표가 고르고 편해요.',q.M.map(m=>`<div class="mrow"><span class="b7" style="font-size:13.5px">${m.t}</span><div><div class="bar ${m.v>=85?'ok':m.v>=70?'':'wn'}"><i style="width:${m.v}%"></i></div><small class="mut xs">${m.d}</small></div><span>${m.v}</span></div>`).join(''))}</div>
+  ${cardT('필수 조건','하나라도 어기면 시간표를 공개할 수 없어요.',tbl(['조건','설명','상태',''],q.hard.map(h=>[`<b>${h.t}</b>`,`<span class="sm mut">${h.d}</span>`,h.n?bdg('위반 '+h.n+'건','br'):bdg('충족','bk'),h.n?btn('고치러 가기','q-go',{k:'s',d:{tab:'hard'}}):'']),{c:'nb'}))}
+  ${cardT('개선이 필요한 항목','영향이 큰 순서예요.',top.length?tbl(['항목','내용','대상',''],top.map(x=>[bdg({gap:'퐁당퐁당',run:'연강',bal:'수업량',edge:'1·7교시',pos:'주요 교과'}[x.k],x.w>=3?'br':'ba'),x.m,x.c?`2-${x.c} · ${x.t}`:`${x.t} 선생님 · ${DAYS[x.d]}요일`,x.c?btn('수정에서 보기','q-go',{k:'s',d:{c:x.c,tab:'soft'}}):btn('수정에서 보기','q-go',{k:'s',d:{tab:'soft'}})]),{c:'nb'}):`<div class="empty">${ic('check',32)}<b>개선할 항목이 없어요</b></div>`)}`;
+ }
+});
+
+/* ===== 2. 시간표 만들기 (2/2): 시간표 수정 · 시간표 보기 · 공개·내보내기 ===== */
+const edInit=()=>({c:3,sel:null,tab:'hard',sim:false,hist:[],auto:null});
+const E=()=>V('edit',edInit);
+const dupDay=c=>{const m={};let n=0;LL.filter(l=>l.c===c).forEach(l=>{const k=l.d+l.s;m[k]=(m[k]||0)+1;if(m[k]===2)n++});return n};
+const swapPos=(a,b)=>{[a.d,b.d]=[b.d,a.d];[a.p,b.p]=[b.p,a.p]};
+const movedList=()=>LL.filter(l=>BASE[l.id].d!==l.d||BASE[l.id].p!==l.p);
+function withBase(fn){const cur=LL.map(l=>({d:l.d,p:l.p}));LL.forEach((l,i)=>{l.d=BASE[i].d;l.p=BASE[i].p});const r=fn();LL.forEach((l,i)=>{l.d=cur[i].d;l.p=cur[i].p});return r}
+function swapCands(l){
+ if(l.lock)return[];
+ const b0=hv().length,s0=sum(sv()),d0=dupDay(l.c),out=[];
+ LL.filter(m=>m.c===l.c&&m.id!==l.id&&!m.lock).forEach(m=>{swapPos(l,m);const h=hv().length,sd=sum(sv())-s0,dp=dupDay(l.c)>d0;swapPos(l,m);out.push({m,hd:h-b0,sd,dp})});
+ return out.sort((a,b)=>(a.dp-b.dp)||(a.hd-b.hd)||(a.sd-b.sd));
+}
+const updEdSt=()=>setSt('edit',hv().length?'warn':'done');
+function trySwap(a,b,silent){
+ const x=LL[a],y=LL[b];if(a===b||!x||!y)return false;
+ if(x.c!==y.c){toast('같은 학급 안에서만 맞바꿀 수 있어요.');return false}
+ if(x.lock||y.lock){toast('잠긴 수업은 옮길 수 없어요.');return false}
+ const before=hv().length,e=E();swapPos(x,y);e.hist.push([a,b]);e.sel=null;e.c=x.c;touch();updEdSt();
+ const after=hv().length;
+ if(!silent)toast(after<before?`필수 조건 위반이 ${before}건에서 ${after}건으로 줄었어요.`:after>before?`필수 조건 위반이 ${after-before}건 늘었어요. 되돌리기로 취소할 수 있어요.`:'수업을 맞바꿨어요.');
+ render(true);return true;
+}
+ACT.cell=el=>{const e=E(),id=+el.dataset.id;if(e.sel==null)e.sel=id;else if(e.sel===id)e.sel=null;else{trySwap(e.sel,id);return}render(true)};
+ACT.lock=el=>{const l=LL[+el.dataset.id];l.lock=!l.lock;touch();toast(l.lock?'수업을 잠갔어요. 움직이지 않아요.':'잠금을 해제했어요.');render(true)};
+ACT['ed-c']=el=>{const e=E();e.c=+el.dataset.c;e.sel=null;render(true)};
+ACT['ed-undo']=()=>{const e=E(),h=e.hist.pop();if(!h)return;swapPos(LL[h[0]],LL[h[1]]);e.sel=null;updEdSt();touch();toast('마지막 변경을 되돌렸어요.');render(true)};
+ACT['ed-sim']=()=>{const e=E();e.sim=!e.sim;render(true)};
+ACT['ed-pick']=el=>{const e=E();e.sel=null;e.c=+el.dataset.c;e.sel=+el.dataset.id;render(true)};
+ACT['ed-apply']=el=>trySwap(+el.dataset.a,+el.dataset.b);
+ACT['ed-auto']=()=>{
+ const e=E(),before=hv().length;if(!before){toast('고칠 필수 조건 위반이 없어요.');return}
+ const moved=new Set();let it=0;
+ while(it++<8){
+  const hs=hv();if(!hs.length)break;let ok=false;
+  for(const h of hs){for(const id of h.ids){const l=LL[id];if(l.lock)continue;const c=swapCands(l).find(x=>!x.dp&&x.hd<0);if(c){swapPos(l,c.m);e.hist.push([l.id,c.m.id]);moved.add(l.id);moved.add(c.m.id);ok=true;break}}if(ok)break}
+  if(!ok)break;
+ }
+ const after=hv().length;e.auto={before,after,n:moved.size};e.sel=null;updEdSt();touch();
+ toast(after?`자동 조정으로 ${before}건 중 ${before-after}건을 고쳤어요. 남은 ${after}건은 직접 확인해 주세요.`:`자동 조정으로 필수 조건 위반 ${before}건을 모두 고쳤어요.`);render(true);
+};
+ACT['ed-reset']=()=>{LL.forEach((l,i)=>{l.d=BASE[i].d;l.p=BASE[i].p});const e=E();e.hist=[];e.sel=null;e.auto=null;updEdSt();touch();toast('처음 상태로 되돌렸어요.');render(true)};
+document.addEventListener('dragstart',e=>{const c=e.target.closest&&e.target.closest('.cell[data-id][draggable=true]');if(!c)return;e.dataTransfer.setData('text/plain',c.dataset.id);e.dataTransfer.effectAllowed='move';c.classList.add('drag')});
+document.addEventListener('dragend',()=>$$('.cell.drag').forEach(x=>x.classList.remove('drag')));
+document.addEventListener('dragover',e=>{if(S.route==='edit'&&e.target.closest&&e.target.closest('.cell[data-id]'))e.preventDefault()});
+document.addEventListener('drop',e=>{const c=e.target.closest&&e.target.closest('.cell[data-id]');if(!c||S.route!=='edit')return;e.preventDefault();trySwap(+e.dataTransfer.getData('text/plain'),+c.dataset.id)});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('cl')&&e.target.dataset.act){e.preventDefault();e.target.click()}});
+function editCell(c,d,p,o){
+ if(BLOCK[d+','+p])return cBlk(d,p);
+ if(TSK[d+','+p])return cTime(d,p,o.mini);
+ const l=o.base?LL.find(x=>x.c===c&&BASE[x.id].d===d&&BASE[x.id].p===p):lessonAt(c,d,p);
+ if(!l)return '<div class="cell blk"><b>빈 칸</b></div>';
+ const bad=!o.base&&o.hs.some(h=>h.ids.includes(l.id)),warn=!o.base&&!bad&&o.ss.some(x=>x.id===l.id),moved=!o.base&&(BASE[l.id].d!==l.d||BASE[l.id].p!==l.p),sb=SUBJ[l.s];
+ const ro=o.ro;
+ return `<div class="cell ${ro?'':'cl'} ${o.mini?'mini':''} ${bad?'bad':''} ${warn?'warn':''} ${o.sel===l.id?'sel':''} ${moved&&o.sim?'mv':''} ${l.lock?'lked':''}" style="--h:${sb.hue}" ${ro?'':`data-act="cell" data-id="${l.id}" tabindex="0" role="button" aria-label="${sb.n} ${l.t} ${slotTxt(d,p)}${bad?' 필수 조건 위반':''}${l.lock?' 잠김':''}"`} ${!ro&&!l.lock?'draggable="true"':''}><b>${sb.n}</b><span>${l.t}</span>${o.mini?'':`<em>${roomOf(l)}</em>`}${ro||o.base?'':`<button class="lk" data-act="lock" data-id="${l.id}" aria-label="${l.lock?'잠금 해제':'잠금'}">${ic(l.lock?'lock':'unlock',14)}</button>`}${bad?`<span class="wr">${ic('alert',16)}</span>`:''}</div>`;
+}
+view('edit',{
+ d:'수업을 누른 뒤 바꿀 칸을 누르면 맞바꿔요. 끌어서 놓아도 되고, 자물쇠로 수업을 잠글 수 있어요. 바꿀 때마다 필수 조건이 다시 계산돼요.',
+ act:()=>btn('되돌리기','ed-undo',{i:'undo',dis:!E().hist.length})+btn('자동 조정','ed-auto',{i:'wand'})+btn(E().sim?'수정 화면으로':'변경 전·후 보기','ed-sim',{k:E().sim?'p':'',i:'eye'}),
+ body(){
+  const e=E();if(e.sel!=null&&LL[e.sel]&&LL[e.sel].c!==e.c)e.c=LL[e.sel].c;const hs=hv(),ss=sv(),c=e.c,mv=movedList(),locks=LL.filter(l=>l.lock).length,sel=e.sel!=null?LL[e.sel]:null;
+  const cbad=k=>hs.filter(h=>h.cls.includes(k)||h.ids.some(i=>LL[i].c===k)).length;
+  const picker=`<div class="chips" role="group" aria-label="학급 선택" style="margin-bottom:16px">${[1,2,3,4,5,6,7,8].map(k=>`<button class="chip ${k===c?'on':''}" data-act="ed-c" data-c="${k}" aria-pressed="${k===c}">2-${k}${cbad(k)?`<i class="sti" style="background:var(--er)"></i>`:''}</button>`).join('')}</div>`;
+  const kp=`<div class="kpis" style="margin-bottom:20px">${kpi('필수 조건 위반',hs.length+'건',hs.length?'공개 전에 고쳐야 해요':'모두 충족',hs.length?'er':'ok')}${kpi('균형도 개선',ss.length+'건','퐁당퐁당·연강·편차','wn')}${kpi('변경한 수업',mv.length+'개','처음 상태 기준','')}${kpi('잠근 수업',locks+'개','움직이지 않아요','tx')}</div>`+(e.auto?note(e.auto.after?'wn':'ok',e.auto.after?'alert':'check',`<b>자동 조정 결과:</b> 필수 위반 ${e.auto.before}건 → ${e.auto.after}건 · 수업 ${e.auto.n}개를 옮겼어요.`)+'<div style="height:16px"></div>':'');
+  if(e.sim){
+   const hb=withBase(()=>hv().length),tn=[...new Set(mv.map(l=>l.t))],cn=[...new Set(mv.map(l=>l.c))];
+   const o0={base:true,mini:true,ro:true},o1={hs,ss,mini:true,ro:true,sim:true};
+   return saveRow(`<span class="bdg bl pl">v3 · 수정 중</span>`)+kp+picker+`<div class="g2 s">${card('변경 전','처음 상태 · 필수 위반 '+hb+'건',ttGrid((d,p)=>editCell(c,d,p,o0),{c:'sm'}))}${card('변경 후','현재 · 필수 위반 '+hs.length+'건',ttGrid((d,p)=>editCell(c,d,p,o1),{c:'sm'}))}</div>`+
+   (mv.length?cardT('변경 영향 분석',`수업 ${mv.length}개 · 교사 ${tn.length}명 · 학급 ${cn.length}개가 바뀌었어요.`,tbl(['학급','과목','교사','변경 전','변경 후'],mv.map(l=>[`<b>2-${l.c}</b>`,SUBJ[l.s].n,l.t,slotTxt(BASE[l.id].d,BASE[l.id].p),`<b style="color:var(--pr-t)">${slotTxt(l.d,l.p)}</b>`]),{c:'nb'})):note('bl','info','아직 변경한 수업이 없어요. 수업을 맞바꾸면 여기에서 전·후를 비교할 수 있어요.'));
+  }
+  const o={hs,ss,sel:e.sel};
+  const hardTxt=h=>h.k==='dup'?[`2-${h.cls[0]} ${SUBJ[h.s].n} · ${DAYS[h.d]}요일`,'같은 날 같은 과목이 두 번 있어요']:[`${h.t} 선생님 · ${slotTxt(h.d,h.p)}`,h.k==='dbl'?`${h.cls.map(k=>'2-'+k).join('·')} 학급에 동시에 배정됐어요`:`2-${h.cls[0]} · ${TM[h.t]&&!TM[h.t].days.includes(h.d)?TM[h.t].ty+' 출근일이 아니에요':'불가 시간으로 설정돼 있어요'}`];
+  const hardL=hs.map(h=>{const t=hardTxt(h);return `<div class="pl er">${ic('alert',18)}<div class="sp"><b>${t[0]}</b><small>${t[1]}</small></div>${btn('보기','ed-pick',{k:'s',d:{c:h.cls[0],id:h.ids[0]}})}</div>`}).join('')||`<div class="empty" style="padding:26px">${ic('check',30)}<b>필수 위반이 없어요</b>공개할 수 있는 상태예요.</div>`;
+  const softL=ss.slice().sort((a,b)=>b.w-a.w).slice(0,8).map(x=>`<div class="pl wn">${ic('info',18)}<div class="sp"><b>${x.t} 선생님 · ${DAYS[x.d]}요일</b><small>${x.m}</small></div>${x.c?btn('보기','ed-pick',{k:'s',d:{c:x.c,id:x.id}}):''}</div>`).join('');
+  const cands=sel?swapCands(sel).slice(0,4):[];
+  const selCard=sel?card('선택한 수업',`${slotTxt(sel.d,sel.p)} · 2-${sel.c}`,`<div class="row"><b style="font-size:16px">${SUBJ[sel.s].n}</b><span class="mut">${sel.t} 선생님 · ${roomOf(sel)}</span></div>${sel.lock?note('bl','lock','잠긴 수업이라 옮길 수 없어요. 자물쇠를 눌러 해제해 주세요.'):`<div class="b7 mt" style="font-size:13.5px">변경이 가장 적은 이동 후보</div><div class="mt1">${cands.map((x,i)=>`<div class="cand ${i===0?'best':''}"><div class="row"><b>${slotTxt(x.m.d,x.m.p)} ${SUBJ[x.m.s].n}(${x.m.t})와 맞바꾸기</b></div><div class="chips mt1" style="gap:6px">${bdg(x.hd<0?'필수 위반 '+x.hd:x.hd>0?'필수 위반 +'+x.hd:'필수 위반 변화 없음',x.hd<0?'bk':x.hd>0?'br':'')}${bdg(x.sd<0?'균형 '+x.sd:x.sd>0?'균형 +'+x.sd:'균형 변화 없음',x.sd<0?'bk':x.sd>0?'ba':'')}${x.dp?bdg('같은 날 같은 과목','ba'):''}</div><div class="row mt1"><small class="mut">영향 · 교사 2명 · 학급 1개 · 2칸 이동</small><span class="sp"></span>${btn('적용','ed-apply',{k:'s p',d:{a:sel.id,b:x.m.id}})}</div></div>`).join('')||'<p class="mut sm">맞바꿀 수 있는 수업이 없어요.</p>'}</div>`}`,'',{c:'mt'}):'';
+  const asideProb=card('문제점','',tabs('edit',[['hard','필수 조건 위반',hs.length,hs.length?'er':''],['soft','균형도 개선',ss.length,'wn']],e.tab).replace('class="tabs"','class="tabs" style="gap:18px;margin-bottom:14px"')+(e.tab==='hard'?hardL:softL),'',{c:'mt'});
+  return saveRow(`<span class="bdg bl pl">v3 · 수정 중</span>`,btn('처음 상태로','ed-reset',{k:'g s'}))+kp+picker+
+  `<div class="edl"><section class="card" style="margin:0"><div class="ch"><div><div class="ct">2-${c} 시간표</div><div class="cd">${e.sel!=null?'바꿀 칸을 눌러 맞바꾸세요. 같은 수업을 다시 누르면 선택이 풀려요.':'수업을 눌러 선택하세요.'}</div></div></div><div class="cb">${ttGrid((d,p)=>editCell(c,d,p,o))}<div class="legend mt1"><span><i style="--h:215"></i>원반수업</span><span><i style="--h:265"></i>이동수업(타임)</span><span style="color:var(--er-t)">▢ 필수 위반</span><span style="color:var(--wn-t)">▢ 균형 개선</span><span>🔒 잠금</span></div></div></section><aside>${selCard.replace(' mt"','"').replace(/margin-bottom:20px/,'')}${asideProb}</aside></div>`;
+ }
+});
+
+/* --- 시간표 보기 --- */
+const ROOMS_ALL=[...Array.from({length:8},(_,i)=>`2-${i+1} 교실`),'음악실','미술실','컴퓨터실','체육관','운동장','물리실','화학실','생물실','생물실1','생물실2','지구과학실','선택강의실1','선택강의실2','선택강의실3','선택강의실4','선택강의실5'];
+const vwInit=()=>({tab:'class',g:2,c:3,t:'최민호',s:0,r:'2-3 교실'});
+const freeCell='<div class="cell" style="--h:215;background:transparent;border-style:dashed;opacity:.45"><span>비어 있음</span></div>';
+const lessonBox=(l,sub)=>cBox(SUBJ[l.s].n,sub||l.t,roomOf(l),SUBJ[l.s].hue);
+const secBox=(x,sub)=>cBox(secName(x),sub||x.t,x.room,CMAP[x.k].hue);
+ACT['vw-print']=()=>{try{window.print()}catch(e){toast('인쇄 창을 열 수 없어요.')}};
+view('view',{
+ d:'학급별·교사별·학생별·교실별로 시간표를 둘러봐요. 분반 강의실과 특별실도 함께 보여 줘요.',
+ act:()=>btn('인쇄','vw-print',{i:'printer'})+btn('엑셀·PDF 내보내기','go',{k:'p',i:'download',d:{r:'publish'}}),
+ body(){
+  const s=V('view',vwInit),T=tabs('view',[['class','학급별'],['teacher','교사별'],['student','학생별'],['room','교실별']],s.tab);
+  let pick='',grid='',info='';
+  if(s.tab==='class'){
+   pick=seg('view.g',[[1,'1학년'],[2,'2학년'],[3,'3학년']],s.g)+(s.g===2?`<div class="fld">${sel('view.c',[1,2,3,4,5,6,7,8].map(c=>[c,'2-'+c]),s.c,'')}</div>`:'');
+   if(s.g!==2)return saveRow()+T+`<div class="row" style="margin-bottom:16px">${pick}</div><section class="card"><div class="empty">${ic('calendar',40)}<b>${s.g}학년 시간표는 샘플에 없어요</b>프로토타입에는 2학년 8개 학급만 들어 있어요.</div></section>`;
+   grid=ttGrid((d,p)=>{if(BLOCK[d+','+p])return cBlk(d,p);if(TSK[d+','+p])return cTime(d,p);const l=lessonAt(s.c,d,p);return l?lessonBox(l):freeCell});
+   info=`2-${s.c} · 주 ${LL.filter(l=>l.c===s.c).length+12}시간 (원반 ${LL.filter(l=>l.c===s.c).length} + 이동 12)`;
+  }
+  if(s.tab==='teacher'){
+   pick=`<div class="fld">${sel('view.t',TORDER,s.t,'')}</div>`;const n=s.t,hrs=teacherHours()[n];
+   grid=ttGrid((d,p)=>{if(BLOCK[d+','+p])return cBlk(d,p);const l=LL.find(x=>x.t===n&&x.d===d&&x.p===p);if(l)return lessonBox(l,`2-${l.c} 학급`);const T=TSK[d+','+p],x=T&&SECS.find(y=>y.T===T&&y.t===n);if(x)return secBox(x,`타임 ${T} · ${secCnt(x.id)}명`);return TM[n]&&!TM[n].days.includes(d)?'<div class="cell blk" style="opacity:.6"><span>출근 안 함</span></div>':freeCell});
+   info=`${n} 선생님 · ${TLM[n].sj} · 2학년 주 ${hrs.h+hrs.m}시간`+(TM[n]?` · ${TM[n].ty} (출근 ${TM[n].days.map(d=>DAYS[d]).join('·')})`:'');
+  }
+  if(s.tab==='student'){
+   pick=`<div class="fld">${sel('view.s',STUS.filter(x=>x.secs.A).slice(0,60).map(x=>[STUS.indexOf(x),`${x.id} ${x.n}`]),s.s,'')}</div>`;const st=STUS[s.s];
+   grid=ttGrid((d,p)=>{if(BLOCK[d+','+p])return cBlk(d,p);const T=TSK[d+','+p];if(T){const x=SECMAP[st.secs[T]];return secBox(x,`${x.t} · 타임 ${T}`)}const l=lessonAt(st.c,d,p);return l?lessonBox(l):freeCell});
+   info=`${st.id} ${st.n} · 2-${st.c} · 선택 ${['A','B','C','D'].map(t=>secName(SECMAP[st.secs[t]])).join(', ')}`;
+  }
+  if(s.tab==='room'){
+   pick=`<div class="fld">${sel('view.r',ROOMS_ALL,s.r,'')}</div>`;const r=s.r;
+   grid=ttGrid((d,p)=>{if(BLOCK[d+','+p])return cBlk(d,p);const l=LL.find(x=>x.d===d&&x.p===p&&roomOf(x)===r);if(l)return cBox(SUBJ[l.s].n,`2-${l.c} · ${l.t}`,'',SUBJ[l.s].hue);const T=TSK[d+','+p],x=T&&SECS.find(y=>y.T===T&&y.room===r);if(x)return cBox(secName(x),x.t,'타임 '+T,CMAP[x.k].hue);return freeCell});
+   const use=LL.filter(x=>roomOf(x)===r).length+SECS.filter(x=>x.room===r).length*3;info=`${r} · ${roomLoc(r)} · 주 ${use}시간 사용`;
+  }
+  return saveRow(`<span class="bdg bl pl">v3 · 수정 중</span>`)+T+`<div class="row" style="margin-bottom:16px">${pick}<span class="sp"></span><span class="sm mut">${info}</span></div>`+`<section class="card"><div class="cb">${grid}<div class="legend mt1"><span><i style="--h:215"></i>원반수업</span><span><i style="--h:265"></i>이동수업(타임)</span><span><i style="background:var(--sf3);border-color:var(--ln)"></i>창체·공강</span></div></div></section>`;
+ }
+});
+
+/* --- 공개·내보내기 --- */
+const pbInit=()=>({st:'draft',aud:{t:true,s:true,p:false},ex:{}});
+ACT['pb-fix']=()=>modal('시간표를 확정할까요?','<p>확정하면 v3이 공식 시간표가 돼요. 확정한 뒤에도 새 버전을 만들어 고칠 수 있고, 이전 버전은 모두 보관돼요.</p>',btn('취소','mclose')+btn('확정하기','pb-fixok',{k:'p'}));
+ACT['pb-fixok']=()=>{const s=V('publish',pbInit);s.st='fixed';setSt('publish','doing');closeModal();touch();toast('v3을 확정했어요.');render(true)};
+ACT['pb-pub']=()=>{const s=V('publish',pbInit);s.st='pub';setSt('publish','done');setSt('view','done');touch();toast('교직원에게 시간표를 공개했어요.');render(true)};
+ACT['pb-unpub']=()=>{V('publish',pbInit).st='fixed';touch();render(true)};
+ACT['pb-ex']=el=>{const s=V('publish',pbInit);s.ex[el.dataset.k]='run';render(true);setTimeout(()=>{s.ex[el.dataset.k]='done';if(S.route==='publish')render(true);toast('파일을 만들었어요. (프로토타입)')},900)};
+view('publish',{
+ d:'시간표를 확정하고 버전을 관리해요. 공개하기 전에 엑셀·PDF로 내보낼 수도 있어요.',
+ act:()=>'',
+ body(){
+  const s=V('publish',pbInit),hn=hv().length,st=s.st,stp3=[['draft','작성 중'],['fixed','확정'],['pub','공개']],ix=stp3.findIndex(x=>x[0]===st);
+  const vers=[['v1','AI 초안','10. 21. 오전 10:12','3건','보관'],['v2','조건 보정','10. 21. 오전 11:40',hn>2?hn+'건':'2건','보관'],['v3','직접 수정','현재',hn+'건',st==='draft'?'수정 중':st==='fixed'?'확정':'공개 중']];
+  const EX=[['teacher','교사별 시간표','교사 1명당 한 장'],['class','학급별 시간표','학급 1개당 한 장'],['student','학생별 시간표','학생 200명, 분반 포함'],['attend','이동수업 출석부','분반 32개 명단'],['diff','변경 전·후 비교표','v2 → v3 차이']];
+  const flow=`<div class="steps" style="margin-bottom:0">${stp3.map((x,i)=>`<div class="stp ${i===ix?'on':i<ix?'dn':''}"><span style="display:flex;align-items:center;gap:10px"><i>${i<ix?ic('check',14):i+1}</i>${x[1]}</span></div>`).join('')}</div>`;
+  return saveRow(`<span class="bdg bl pl">v3 ${st==='draft'?'수정 중':st==='fixed'?'확정':'공개 중'}</span>`)+
+  (hn&&st==='draft'?note('wn','alert',`<b>필수 조건 위반 ${hn}건이 남아 있어 확정할 수 없어요.</b> 시간표 수정에서 모두 고쳐 주세요.<div class="mt1">${btn('시간표 수정 열기','go',{k:'p s',d:{r:'edit'}})}</div>`)+'<div style="height:16px"></div>':'')+
+  card('확정과 공개','작성 → 확정 → 공개 순서로 진행해요.',flow+`<div class="row mt">${st==='draft'?btn('확정하기','pb-fix',{k:'p',dis:!!hn}):st==='fixed'?btn('교직원에게 공개','pb-pub',{k:'p',i:'send'}):btn('공개 취소','pb-unpub')}<span class="sp"></span><div class="row" style="gap:16px">${[['t','교사'],['s','학생'],['p','학부모']].map(([k,t])=>`<label class="row" style="gap:8px;font-size:13.5px">${sw('publish.aud.'+k,s.aud[k],t+'에게 공개')}${t}</label>`).join('')}</div></div>${st==='pub'?'<div style="height:12px"></div>'+note('ok','check','<b>공개했어요.</b> 교사는 나의 일과에서, 학생은 시간표 보기에서 확인할 수 있어요.'):''}`)+
+  cardT('버전 관리','공개한 버전과 수정 기록을 보관해요.',tbl(['버전','내용','저장 시각','필수 위반','상태'],vers.map(v=>[`<b>${v[0]}</b>`,v[1],v[2],v[3],bdg(v[4],v[4]==='보관'?'':v[4]==='수정 중'?'ba':'bk')]),{c:'nb'}))+
+  card('엑셀·PDF 내보내기','필요한 자료를 골라 한 번에 내려받아요.',`<div class="g3 s">${EX.map(x=>`<div class="opt" style="cursor:default"><b>${x[1]}</b><p>${x[2]}</p><div class="row mt1">${btn(s.ex[x[0]]==='run'?'만드는 중…':s.ex[x[0]]==='done'?'다시 내보내기':'엑셀','pb-ex',{k:'s',i:'download',d:{k:x[0]},dis:s.ex[x[0]]==='run'})}${btn('PDF','pb-ex',{k:'s',d:{k:x[0]}})}${s.ex[x[0]]==='done'?bdg('완료','bk'):''}</div></div>`).join('')}</div>`);
+ }
+});
+
+/* ===== 홈 · 3. 시간표 운영 [2단계, 모바일 우선] ===== */
+const FLOW=[['g1','1','반편성을 위한 시수편제','무엇을·누가·몇 시간 가르칠지 정하는 단계예요. 수업계 담당자와 교과 협의 담당이 함께해요.'],['g2','2','시간표 만들기','조건 설정 → 생성 → 점검·수정 → 공개 순서로 진행해요.'],['g3','3','시간표 운영','공개 이후의 일과 업무예요. 일반 교사도 쓰는 영역이라 모바일을 우선으로 봐요.'],['g4','4','고사 시간표','시험 설정 → 시험반 구성 → 과목 배치 → 감독 배정 → 출력으로 이어져요.']];
+const NEXT={import:['수강신청 파일을 가져오면 반편성을 시작할 수 있어요.','가져오기 이어서 하기'],classing:['학생 배정을 실행해 분반표를 만들어요.','반편성 열기'],assign:['담당교사 배정의 같은 타임 충돌을 해결하고 확정해요.','담당교사 배정 열기'],diagnose:['구조 진단에서 시간표가 안 나오는 문제를 먼저 풀어요.','구조 진단 열기'],conditions:['조건 설정을 확인해요.','조건 설정 열기'],generate:['시간표를 생성하고 후보를 비교해요.','시간표 생성 열기'],edit:['시간표 수정에서 필수 조건 위반을 고쳐요.','시간표 수정 열기'],publish:['시간표를 확정하고 공개해요.','공개·내보내기 열기']};
+function issuesNow(){
+ const out=[],hr=V('teachers',tInit).list.filter(t=>t.hr).length;
+ if(hr<24)out.push(['teachers',`담임이 정해지지 않은 학급 ${24-hr}개`,'교사 관리']);
+ const nc=asConf(V('assign',asInit).tch).length;if(nc)out.push(['assign',`같은 타임에 담당이 겹친 분반 ${nc}건`,'담당교사 배정']);
+ const d=V('diagnose',dgInit),nd=(d.fixA?0:1)+(d.fixB?0:1);if(nd)out.push(['diagnose',`시간표가 안 나오는 구조 ${nd}건`,'구조 진단']);
+ const h=hv().length;if(h)out.push(['edit',`필수 조건 위반 ${h}건`,'시간표 수정']);
+ return out;
+}
+view('home',{
+ d:'반편성부터 시간표 공개까지, 학교 시간표를 한 곳에서 만들고 운영해요.',
+ act:()=>S.role==='class'?btn('AI로 한 번에 만들기','go',{k:'p',i:'sparkle',d:{r:'ai-gen'}}):btn('나의 일과 보기','go',{k:'p',i:'calendar',d:{r:'ops-my'}}),
+ body(){
+  const cls=S.role==='class',order=['import','classing','assign','diagnose','conditions','generate','edit','publish'].filter(allowed),nx=order.find(r=>ST[r]!=='done'),iss=issuesNow();
+  const banner=cls?card('다음으로 할 일','',nx?`<div class="row"><span style="color:var(--pr)">${ic('arrow',26)}</span><div class="sp"><b style="font-size:16px">${META[nx].t}</b><div class="mut">${NEXT[nx][0]}</div></div>${btn(NEXT[nx][1],'go',{k:'p',d:{r:nx}})}</div>`:`<div class="row"><span style="color:var(--ok)">${ic('check',26)}</span><b style="font-size:16px">1·2단계를 모두 마쳤어요.</b></div>`)+'':'';
+  const issues=cls&&iss.length?card('확인이 필요한 항목','',`<div class="list">${iss.map(x=>`<div class="li"><span style="color:var(--wn)">${ic('alert',20)}</span><div class="sp"><b>${x[1]}</b><small>${x[2]}</small></div>${btn('열기','go',{k:'s',d:{r:x[0]}})}</div>`).join('')}</div>`):'';
+  const flow=FLOW.map(f=>{const g=NAV.find(x=>x.g===f[0]),items=g.items.filter(i=>allowed(i.r));if(!items.length)return '';const done=items.filter(i=>ST[i.r]==='done').length,s2=!!g.s2;
+   return `<section class="card" style="margin:0"><div class="ch" style="flex-direction:column;align-items:flex-start;gap:6px"><div class="row"><span class="bdg bl pl">${f[1]}</span>${s2?bdg('2단계'):''}</div><div class="ct">${f[2]}</div><div class="cd">${f[3]}</div></div><div class="cb">${s2?`<div class="xs mut" style="margin-bottom:8px">프로토타입에서 둘러볼 수 있어요</div>`:`<div class="row" style="margin-bottom:8px"><div class="sp">${bar(done/items.length*100,done===items.length?'ok':'')}</div><span class="xs mut num">${done}/${items.length} 완료</span></div>`}<div class="list">${items.map(i=>`<button class="li" style="padding:9px 0;text-align:left;width:100%" data-act="go" data-r="${i.r}"><span style="color:var(--tx3)">${ic(i.i,17)}</span><span class="sp" style="font-weight:600;color:var(--tx2)">${i.t}</span>${i.ai?'<b class="ai-dot">AI</b>':''}${stIcon(i.r)}</button>`).join('')}</div></div></section>`}).join('');
+  return banner+issues+`<div class="g4 s" style="margin-bottom:20px">${flow}</div>`+
+  `<div class="g2 s">${card('설계 가정','프로토타입은 아래 가정으로 만들었어요. 다르게 하고 싶은 부분은 말씀해 주세요.',`<div class="list">${['학생이 직접 신청하는 수강신청 화면은 범위 밖이고, 가져오기만 지원해요.','중학교는 같은 구조에서 반편성 메뉴만 숨겨요. 왼쪽 위 ‘학교급 보기’로 확인해 보세요.','AI는 별도 메뉴 없이 각 화면의 보조 기능과 ‘한 번에 만들기’ 한 곳으로만 둬요.','화면 틀은 AI 교무실 시수편제 화면처럼 사이드바 + 상단 경로 + 카드·표 구조예요.'].map(t=>`<div class="li" style="align-items:flex-start"><span style="color:var(--pr)">${ic('check',18)}</span><span>${t}</span></div>`).join('')}</div>`)}${card('역할별 사용 범위','오른쪽 위 사용자 메뉴에서 역할을 바꿔 메뉴가 어떻게 달라지는지 볼 수 있어요.',`<div class="list">${[['수업계','모든 단계 · 시간표 만들기와 공개까지 맡아요.','class'],['교과 협의 담당','과목·편제, 시수표, 담당교사 배정과 시간표 운영을 써요.','dept'],['일반 교사','시간표 보기와 시간표 운영(모바일)을 써요.','teacher']].map(x=>`<div class="li"><div class="sp"><b>${x[0]}</b><small>${x[1]}</small></div>${S.role===x[2]?bdg('보는 중','bl'):btn('이 역할로 보기','role',{k:'s',d:{v:x[2]}})}</div>`).join('')}</div>`)}</div>`;
+ }
+});
+
+/* --- 공통: 폰 틀 · 계산 --- */
+const busyAt=(t,d,p)=>LL.some(x=>x.t===t&&x.d===d&&x.p===p)||SECS.some(x=>x.t===t&&TSLOT[x.T].some(([a,b])=>a===d&&b===p));
+const dayOf=(n,d)=>[1,2,3,4,5,6,7].map(p=>{if(BLOCK[d+','+p])return{p,k:'blk'};const l=LL.find(x=>x.t===n&&x.d===d&&x.p===p);if(l)return{p,k:'home',l};const T=TSK[d+','+p],x=T&&SECS.find(y=>y.T===T&&y.t===n);return x?{p,k:'sec',x}:{p,k:'free'}});
+const phone=(title,sub,inner)=>{const tb=[['ops-my','일과','calendar'],['ops-swap','교환','swap'],['ops-notice','알림','bell'],['ops-find','더보기','menu']],on=r=>r===S.route||(r==='ops-find'&&['ops-meet','ops-find','ops-attend','ops-event'].includes(S.route));
+ return `<div class="phone" role="group" aria-label="모바일 화면 미리보기"><div class="ph-sb"><span>9:41</span><span>5G ▮▮▮</span></div><div class="ph-hd"><b>${title}</b><span>${sub}</span></div><div class="ph-bd">${inner}</div><nav class="ph-tabs" aria-label="모바일 메뉴">${tb.map(t=>`<button class="${on(t[0])?'on':''}" data-act="go" data-r="${t[0]}">${ic(t[2],20)}${t[1]}</button>`).join('')}</nav></div>`};
+const ops=(left,ph)=>`<div class="ops"><div>${left}</div><div>${ph}</div></div>`;
+ACT['sim-d']=el=>{S.sim.d=+el.dataset.v;render(true)};
+ACT['sim-p']=el=>{S.sim.p=+el.dataset.v;render(true)};
+const simCtl=()=>`<div class="row" style="align-items:flex-start;gap:24px"><div class="fld"><label>요일</label><div class="chips">${DAYS.map((d,i)=>`<button class="chip sq ${S.sim.d===i?'on':''}" data-act="sim-d" data-v="${i}" aria-pressed="${S.sim.d===i}">${d}</button>`).join('')}</div></div><div class="fld"><label>지금이 몇 교시인가요? (실시간 시뮬레이션)</label><div class="chips">${[1,2,3,4,5,6,7].map(p=>`<button class="chip sq ${S.sim.p===p?'on':''}" data-act="sim-p" data-v="${p}" aria-pressed="${S.sim.p===p}">${p}</button>`).join('')}</div></div></div>`;
+const dayLabel=()=>{const t=new Date();return (t.getDay()+6)%7===S.sim.d?`${t.getMonth()+1}월 ${t.getDate()}일 ${DAYS[S.sim.d]}요일`:`${DAYS[S.sim.d]}요일 시간표`};
+
+/* --- 나의 일과 --- */
+view('ops-my',{
+ d:'오늘 내 수업을 교시 순서대로 보고, 지금 수업과 다음 수업을 바로 확인해요. 수업교환·결보강이 승인되면 바로 반영돼요.',
+ body(){
+  const m=V('opsmy',()=>({t:'최민호'})),rows=dayOf(m.t,S.sim.d),nx=rows.find(r=>r.p>S.sim.p&&(r.k==='home'||r.k==='sec')),n=rows.filter(r=>r.k==='home'||r.k==='sec').length;
+  const ok=V('swap',swInit).reqs.find(r=>r.st==='ok'&&r.who===m.t);
+  const card2=r=>{const cur=r.p===S.sim.p,t=`${PSTART[r.p-1]}–${PEND[r.p-1]}`;
+   if(r.k==='blk'||r.k==='free')return `<div class="pc free ${cur?'cur':''}"><small>${r.p}교시 · ${t} · ${r.k==='blk'?(BLOCK[S.sim.d+','+r.p]===1?'창체':'공강'):'공강'}</small></div>`;
+   const nm=r.k==='home'?`${SUBJ[r.l.s].n} · 2-${r.l.c}`:secName(r.x),rm=r.k==='home'?roomOf(r.l):r.x.room,h=r.k==='home'?SUBJ[r.l.s].hue:CMAP[r.x.k].hue;
+   return `<div class="pc ${cur?'cur':''}"><div class="bar-l"><span class="pn">${r.p}</span><span class="sb2" style="--h:${h}"></span><div class="sp"><b>${nm}</b><br><small>${t} · ${rm}${r.k==='sec'?' · 타임 '+r.x.T:''}</small></div>${cur?'<span class="bdg bl">수업 중</span>':nx&&nx.p===r.p?'<span class="bdg">다음</span>':''}</div></div>${r.p===4?'<div class="xs mut4" style="text-align:center;margin-top:10px">점심시간 12:50–13:40</div>':''}`};
+  const inner=(ok?`<div class="note bl" style="margin-top:6px">${ic('swap',16)}<div><b>수업교환 승인</b><br>${ok.from} ↔ ${ok.to}</div></div>`:'')+`<div class="pc" style="background:var(--pr-s);border-color:var(--pr-l)"><small>${dayLabel()}</small><div class="b7" style="font-size:16px;margin-top:2px">수업 ${n}시간${nx?` · 다음은 ${nx.p}교시`:''}</div>${nx?`<small>${nx.k==='home'?`2-${nx.l.c} ${SUBJ[nx.l.s].n}`:secName(nx.x)} · ${nx.k==='home'?roomOf(nx.l):nx.x.room}</small>`:'<small>남은 수업이 없어요</small>'}</div>`+rows.map(card2).join('');
+  const left=card('이 화면에서 하는 일','',`<div class="list">${[['오늘 일과','교시 순서대로 수업·공강·창체를 한눈에 봐요.'],['실시간 반영','수업교환·결보강이 승인되면 바로 바뀌어요.'],['이동수업 안내','선택 분반은 타임과 소강의실을 함께 보여 줘요.']].map(x=>`<div class="li"><span style="color:var(--pr)">${ic('check',18)}</span><div class="sp"><b>${x[0]}</b><small>${x[1]}</small></div></div>`).join('')}</div>`)+card('미리보기 설정','실제 앱에서는 지금 시각과 로그인한 교사로 자동 설정돼요.',`<div class="fld" style="margin-bottom:16px"><label>교사</label>${sel('opsmy.t',TORDER,m.t,'')}</div>${simCtl()}`);
+  return ops(left,phone('나의 일과',`${m.t} 선생님`,inner));
+ }
+});
+
+/* --- 수업교환·결보강 --- */
+const swInit=()=>({tab:'new',t:'최민호',kind:'교환',li:0,pi:0,reason:'',reqs:[{id:1,who:'한서준',kind:'교환',from:'목 7교시 · 2-3 영어',to:'금 6교시 · 2-3 수학(최민호)',reason:'학부모 상담',st:'wait'},{id:2,who:'오지민',kind:'결보강',from:'금 5교시 · 2-7 영어',to:'보강: 서도윤',reason:'연수 참석',st:'wait'},{id:3,who:'최민호',kind:'교환',from:'화 3교시 · 2-2 수학',to:'목 2교시 · 2-2 영어(한서준)',reason:'현장학습 인솔',st:'ok'}]});
+const myLessons=n=>LL.filter(l=>l.t===n).sort((a,b)=>a.d-b.d||a.p-b.p);
+const swCands=l=>LL.filter(m=>m.c===l.c&&m.t!==l.t&&!busyAt(l.t,m.d,m.p)&&avail(l.t,m.d,m.p)&&!busyAt(m.t,l.d,l.p)&&avail(m.t,l.d,l.p)).sort((a,b)=>a.d-b.d||a.p-b.p).slice(0,5);
+const subCands=l=>TORDER.filter(n=>n!==l.t&&TLM[n].ty==='교사'&&!busyAt(n,l.d,l.p)&&avail(n,l.d,l.p)).slice(0,5);
+ACT['sw-t']=()=>{const s=V('swap',swInit);s.li=0;s.pi=0};
+ACT['sw-k']=()=>{V('swap',swInit).pi=0};
+ACT['sw-submit']=()=>{const s=V('swap',swInit),l=myLessons(s.t)[+s.li];if(!l)return;const cs=s.kind==='교환'?swCands(l):subCands(l),c=cs[+s.pi];if(!c){toast('상대 수업을 골라 주세요.');return}
+ s.reqs.unshift({id:Date.now(),who:s.t,kind:s.kind,from:`${slotTxt(l.d,l.p)} · 2-${l.c} ${SUBJ[l.s].n}`,to:s.kind==='교환'?`${slotTxt(c.d,c.p)} · 2-${c.c} ${SUBJ[c.s].n}(${c.t})`:`보강: ${c}`,reason:s.reason||'사유 없음',st:'wait'});s.tab='mine';s.reason='';touch();toast('신청했어요. 수업계 승인을 기다려요.');render(true)};
+ACT['sw-do']=el=>{const s=V('swap',swInit),r=s.reqs.find(x=>x.id==el.dataset.id),ok=el.dataset.v==='ok';r.st=ok?'ok':'no';NOTI.unshift({id:Date.now(),t:`${r.kind==='교환'?'수업교환':'결보강'}이 ${ok?'승인':'반려'}됐어요`,d:r.from,at:'방금',rd:0,r:'ops-swap'});touch();toast(ok?'승인했어요. 신청한 교사에게 알림을 보냈어요.':'반려했어요.');render(true)};
+const stBdg=s=>s==='wait'?bdg('승인 대기','ba'):s==='ok'?bdg('승인','bk'):bdg('반려','br');
+view('ops-swap',{
+ d:'교사가 모바일에서 수업교환이나 결강 보강을 신청하면, 수업계가 승인해요. 승인된 내용은 나의 일과에 바로 반영돼요.',
+ body(){
+  const s=V('swap',swInit),ls=myLessons(s.t),l=ls[+s.li]||ls[0],cs=l?(s.kind==='교환'?swCands(l):subCands(l)):[],mine=s.reqs.filter(r=>r.who===s.t),wait=s.reqs.filter(r=>r.st==='wait').length;
+  const left=`<div class="kpis" style="margin-bottom:20px">${kpi('승인 대기',wait+'건','수업계가 처리해요',wait?'wn':'ok')}${kpi('이번 주 승인',s.reqs.filter(r=>r.st==='ok').length+'건','')}${kpi('반려',s.reqs.filter(r=>r.st==='no').length+'건','','tx')}</div>`+cardT('승인 요청 (수업계 화면)',S.role==='class'?'승인하거나 반려하면 신청한 교사에게 알림이 가요.':'수업계만 승인할 수 있어요. 지금은 목록만 볼 수 있어요.',tbl(['신청자','유형','변경 내용','사유','상태',''],s.reqs.map(r=>[`<b class="nw">${r.who}</b>`,bdg(r.kind,r.kind==='교환'?'bl':'bi'),`<span class="sm">${r.from}<br><span class="mut">→ ${r.to}</span></span>`,`<span class="nw">${r.reason}</span>`,stBdg(r.st),S.role==='class'&&r.st==='wait'?`<div class="row" style="gap:6px;flex-wrap:nowrap">${btn('승인','sw-do',{k:'p s',d:{id:r.id,v:'ok'}})}${btn('반려','sw-do',{k:'s',d:{id:r.id,v:'no'}})}</div>`:''],),{c:'nb'}));
+  const form=`<div class="fld" style="margin-top:6px"><label>교사 (미리보기)</label>${sel('swap.t',TORDER,s.t,'s',' data-after="sw-t"')}</div><div style="margin-top:10px">${seg('swap.kind',[['교환','수업교환'],['결보강','결강·보강']],s.kind).replace(/data-act="set"/g,'data-act="set"')}</div>
+   <div class="fld" style="margin-top:12px"><label>바꿀 내 수업</label>${sel('swap.li',ls.map((x,i)=>[i,`${slotTxt(x.d,x.p)} · 2-${x.c} ${SUBJ[x.s].n}`]),s.li,'s',' data-after="sw-t"')}</div>
+   <div class="fld" style="margin-top:12px"><label>${s.kind==='교환'?'교환할 수 있는 수업':'보강 가능한 교사'} (${cs.length})</label>${cs.length?`<div class="list">${cs.map((c,i)=>`<label class="li" style="padding:9px 0;cursor:pointer"><input type="radio" name="swp" ${+s.pi===i?'checked':''} data-act="sw-pi" data-i="${i}"><div class="sp"><b style="font-size:13.5px">${s.kind==='교환'?`${slotTxt(c.d,c.p)} · ${SUBJ[c.s].n}(${c.t})`:`${c}`}</b><small>${s.kind==='교환'?'두 교사 모두 그 시간에 가능해요':`${slotTxt(l.d,l.p)}에 수업이 없어요`}</small></div></label>`).join('')}</div>`:'<small class="mut">조건에 맞는 후보가 없어요.</small>'}</div>
+   <div class="fld" style="margin-top:12px"><label>사유</label><input class="inp s" data-bind="swap.reason" data-nr value="${esc(s.reason)}" placeholder="예: 학부모 상담"></div><button class="pbtn" data-act="sw-submit">신청하기</button>`;
+  const mineL=mine.length?mine.map(r=>`<div class="pc"><div class="row" style="gap:6px">${bdg(r.kind,r.kind==='교환'?'bl':'bi')}${stBdg(r.st)}</div><div class="sm" style="margin-top:6px">${r.from}<br><span class="mut">→ ${r.to}</span></div><small>${r.reason}</small></div>`).join(''):`<div class="empty" style="padding:30px 10px"><b>신청한 내역이 없어요</b></div>`;
+  const inner=`<div class="seg" style="margin:6px 0 0;width:100%"><button style="flex:1" class="${s.tab==='new'?'on':''}" data-act="set" data-p="swap.tab" data-v="new">신청</button><button style="flex:1" class="${s.tab==='mine'?'on':''}" data-act="set" data-p="swap.tab" data-v="mine">내 요청 ${mine.length}</button></div>`+(s.tab==='new'?form:mineL);
+  return ops(left,phone('수업교환·결보강',`${s.t} 선생님`,inner));
+ }
+});
+ACT['sw-pi']=el=>{V('swap',swInit).pi=+el.dataset.i};
+
+/* --- 변경 알림 --- */
+const ntInit=()=>({ch:{push:true,mail:true,sms:false},cat:{swap:true,table:true,attend:true,meet:true}});
+ACT['nt-read']=el=>{const n=NOTI.find(x=>x.id==el.dataset.id);n.rd=1;render(true)};
+ACT['nt-all']=()=>{NOTI.forEach(n=>n.rd=1);toast('모두 읽음으로 바꿨어요.');render(true)};
+view('ops-notice',{
+ d:'시간표가 바뀌거나 수업교환이 승인되면 바로 알려 드려요. 받을 알림과 방법은 내가 정해요.',
+ body(){
+  const s=V('noti',ntInit);
+  const left=card('받을 알림','종류별로 켜고 꺼요.',`<div class="list">${[['swap','수업교환·결보강 요청과 승인'],['table','시간표 공개·변경'],['attend','이동수업 출석부 제출 요청'],['meet','회의 시간 요청']].map(([k,t])=>`<div class="li"><div class="sp"><b>${t}</b></div>${sw('noti.cat.'+k,s.cat[k],t)}</div>`).join('')}</div>`)+card('받는 방법','',`<div class="list">${[['push','앱 알림'],['mail','이메일'],['sms','문자 메시지']].map(([k,t])=>`<div class="li"><div class="sp"><b>${t}</b></div>${sw('noti.ch.'+k,s.ch[k],t)}</div>`).join('')}</div>`);
+  const inner=`<div class="row" style="margin-top:6px"><b>${unread()}건 안 읽음</b><span class="sp"></span><button class="link xs" data-act="nt-all">모두 읽음</button></div>`+NOTI.map(n=>`<button class="nti ${n.rd?'rd':''}" data-act="nt-read" data-id="${n.id}"><i></i><div><b>${n.t}</b><small>${n.d} · ${n.at}</small></div></button>`).join('');
+  return ops(left,phone('변경 알림',`안 읽은 알림 ${unread()}건`,inner));
+ }
+});
+
+/* --- 회의 시간 찾기 --- */
+const MGROUPS=[['수학과 협의회',['최민호','정하윤']],['영어과 협의회',['한서준','오지민']],['2학년 담임',['박지훈','최민호','한서준','강태영','이수연','정하윤','오지민','윤태호']],['과학과 협의회',['김도현','장예린','신유나','권혁준','조은서','홍민재','류시현']]];
+const mtInit=()=>({sel:['최민호','정하윤','한서준','박지훈'],dur:1});
+ACT['mt-g']=el=>{V('meet',mtInit).sel=MGROUPS[+el.dataset.i][1].slice();render(true)};
+ACT['mt-t']=el=>{const s=V('meet',mtInit),n=el.dataset.n;s.sel=s.sel.includes(n)?s.sel.filter(x=>x!==n):[...s.sel,n];render(true)};
+ACT['mt-send']=()=>{toast('회의 요청을 보냈어요. 참석자에게 알림이 가요.')};
+view('ops-meet',{
+ d:'참석할 교사를 고르면 모두 비어 있는 시간을 찾아 줘요. 2학년 샘플 시간표를 기준으로 계산해요.',
+ body(){
+  const s=V('meet',mtInit),N=s.sel.length;
+  const fr=(d,p)=>s.sel.filter(n=>!busyAt(n,d,p)&&avail(n,d,p)).length,all=[];
+  for(let d=0;d<5;d++)for(let p=1;p<=7;p++){if(BLOCK[d+','+p])continue;if(s.dur===1){if(fr(d,p)===N&&N)all.push([d,p])}else if(p<7&&p!==4&&!BLOCK[d+','+(p+1)]&&fr(d,p)===N&&fr(d,p+1)===N&&N)all.push([d,p])}
+  const lab=([d,p])=>s.dur===1?`${slotTxt(d,p)} (${PSTART[p-1]}–${PEND[p-1]})`:`${DAYS[d]} ${p}~${p+1}교시 (${PSTART[p-1]}–${PEND[p]})`;
+  const hm=`<div class="hm"><div class="h"></div>${DAYS.map(d=>`<div class="h">${d}</div>`).join('')}${[1,2,3,4,5,6,7].map(p=>`<div class="h">${p}</div>`+DAYS.map((d,di)=>{if(BLOCK[di+','+p])return '<div class="z">창체·공강</div>';const n=fr(di,p),a=N&&n===N&&(s.dur===1||all.some(x=>x[0]===di&&x[1]===p));return `<div class="${a?'a':!N?'b':n>=N/2?'b':n>0?'o':'x'}">${a?'모두 가능':n+'/'+N}</div>`}).join('')).join('')}</div>`;
+  const left=card('참석자',`${N}명 선택`,`<div class="chips" style="margin-bottom:12px">${MGROUPS.map((g,i)=>`<button class="chip" data-act="mt-g" data-i="${i}">${g[0]}</button>`).join('')}</div><div class="chips">${TORDER.map(n=>`<button class="chip ${s.sel.includes(n)?'on':''}" data-act="mt-t" data-n="${n}" aria-pressed="${s.sel.includes(n)}">${n}</button>`).join('')}</div><div class="row mt1"><span class="lbl">회의 시간</span>${seg('meet.dur',[[1,'1교시'],[2,'2교시 연속']],s.dur)}</div>`)+card('공통 공강',all.length?`모두 가능한 시간이 ${all.length}개 있어요.`:'모두 가능한 시간이 없어요. 참석자를 줄여 보세요.',`<div class="ttw">${hm}</div>`);
+  const inner=`<div class="pc" style="background:var(--pr-s);border-color:var(--pr-l)"><small>참석 ${N}명</small><div class="b7" style="font-size:15px">${s.sel.slice(0,3).join(', ')}${N>3?' 외 '+(N-3)+'명':''}</div></div><div class="b7" style="margin:14px 2px 0;font-size:14px">추천 시간</div>`+(all.length?all.slice(0,4).map((x,i)=>`<div class="pc"><div class="bar-l"><div class="sp"><b>${lab(x)}</b>${i===0?'<br><small>가장 빠른 시간이에요</small>':''}</div>${i===0?bdg('추천','bl'):''}</div></div>`).join('')+`<button class="pbtn" data-act="mt-send">회의 요청 보내기</button>`:`<div class="empty" style="padding:30px 8px"><b>모두 가능한 시간이 없어요</b>참석자를 줄여 보세요.</div>`);
+  return ops(left,phone('회의 시간 찾기','참석 교사들의 공통 공강',inner));
+ }
+});
+
+/* --- 학생 위치 찾기 --- */
+const fdInit=()=>({q:'',s:27});
+ACT['fd-s']=el=>{V('find',fdInit).s=+el.dataset.i;render(true)};
+function whereIs(st,d,p){
+ if(BLOCK[d+','+p])return{t:BLOCK[d+','+p]===1?'창체 활동':'수업 없음',room:BLOCK[d+','+p]===1?'동아리 활동실':'—',loc:'',who:'',hue:215,k:'blk'};
+ const T=TSK[d+','+p];if(T){const x=SECMAP[st.secs[T]];return{t:secName(x),room:x.room,loc:roomLoc(x.room),who:x.t+' 선생님',hue:CMAP[x.k].hue,k:'sec'}}
+ const l=lessonAt(st.c,d,p);return l?{t:SUBJ[l.s].n,room:roomOf(l),loc:roomLoc(roomOf(l)),who:l.t+' 선생님',hue:SUBJ[l.s].hue,k:'home'}:{t:'수업 없음',room:'—',loc:'',who:'',hue:215,k:'blk'};
+}
+view('ops-find',{
+ d:'학생 이름이나 학번을 검색하면 지금 어느 교실에 있는지 알려 줘요. 이동수업 중인 학생도 바로 찾을 수 있어요.',
+ body(){
+  const s=V('find',fdInit),q=s.q.trim(),res=STUS.filter(x=>x.secs.A&&(!q||(x.n+x.id).includes(q))).slice(0,8),st=STUS[s.s],w=whereIs(st,S.sim.d,S.sim.p);
+  const rs=`<div class="card" style="margin:0 0 10px;padding:14px;border-color:var(--pr)"><small class="mut">${DAYS[S.sim.d]}요일 ${S.sim.p}교시 (${PSTART[S.sim.p-1]}–${PEND[S.sim.p-1]})</small><div class="b7" style="font-size:19px;margin-top:4px">${w.room}</div><div>${w.t}${w.who?' · '+w.who:''}</div>${w.loc?`<div class="mt1">${bdg(w.loc,'bl')}${w.k==='sec'?bdg('이동수업','bi'):''}</div>`:''}</div>`;
+  const left=card('학생 찾기','',`<span class="srch" style="display:flex;margin-bottom:12px">${ic('search',17)}<input class="inp" style="width:100%" data-bind="find.q" data-live placeholder="이름 또는 학번" aria-label="학생 검색" value="${esc(s.q)}"></span><div class="chips">${res.map(x=>`<button class="chip ${STUS.indexOf(x)===s.s?'on':''}" data-act="fd-s" data-i="${STUS.indexOf(x)}">${x.id} ${x.n}</button>`).join('')||'<span class="mut sm">검색 결과가 없어요.</span>'}</div>`)+card('시간 설정','실제 앱에서는 지금 시각으로 자동 설정돼요.',simCtl())+card(`${st.n} 학생의 하루`,`${st.id} · 2-${st.c}`,`<div class="list">${[1,2,3,4,5,6,7].map(p=>{const x=whereIs(st,S.sim.d,p);return `<div class="li" style="padding:9px 0"><span class="bdg ${p===S.sim.p?'bl':''}" style="width:26px;justify-content:center">${p}</span><div class="sp"><b style="font-size:14px">${x.t}</b></div><span class="sm mut">${x.room}</span></div>`}).join('')}</div>`);
+  const inner=`<div class="srch" style="display:flex;margin-top:6px"><span class="inp" style="display:flex;align-items:center;width:100%;padding-left:12px;gap:8px;color:var(--tx3)">${ic('search',16)}<span>${st.id} ${st.n}</span></span></div><div style="height:10px"></div>`+rs+`<div class="note bl">${ic('pin',16)}<div>${w.k==='sec'?`이동수업 중이에요. ${w.loc}으로 가면 만날 수 있어요.`:w.k==='home'?'학급 교실에서 수업 중이에요.':'지금은 교실 수업이 없어요.'}</div></div>`;
+  return ops(left,phone('학생 위치 찾기',`${DAYS[S.sim.d]}요일 ${S.sim.p}교시 기준`,inner));
+ }
+});
+
+/* --- 행사·시수 관리 --- */
+const evInit=()=>({ev:[{id:1,date:'10. 23. (금)',name:'현장체험학습',who:'2학년 전체',d:4,ps:[1,2,3,4,5,6],on:true},{id:2,date:'10. 28. (수)',name:'진로 특강',who:'2학년 전체',d:2,ps:[3,4],on:true},{id:3,date:'11. 03. (화)',name:'학년 독서 활동',who:'2학년 전체',d:1,ps:[5,6],on:true},{id:4,date:'11. 11. (수)',name:'체육대회',who:'2학년 전체',d:2,ps:[1,2,3,4,5],on:false}]});
+const evLost=e=>{const m={};let tm=0;e.ps.forEach(p=>{if(BLOCK[e.d+','+p])return;if(TSK[e.d+','+p]){tm++;return}LL.filter(l=>l.d===e.d&&l.p===p).forEach(l=>{m[l.s]=(m[l.s]||0)+1})});return{m,tm}};
+view('ops-event',{
+ d:'행사로 빠지는 수업 시수를 계산해 교과별 운영 시수에 반영해요. 보충이 필요한 교과도 알려 줘요.',
+ act:()=>btn('+ 행사 추가','toast',{k:'p',d:{m:'행사 정보를 입력해 추가해요. (프로토타입)'}}),
+ body(){
+  const s=V('event',evInit),on=s.ev.filter(e=>e.on),lost={};let tmLost=0;
+  on.forEach(e=>{const r=evLost(e);Object.entries(r.m).forEach(([k,v])=>lost[k]=(lost[k]||0)+v/8);tmLost+=r.tm});
+  const rows=Object.entries(SUBJ).map(([k,x])=>{const base=x.h*34,l=lost[k]||0;return [`<b>${x.n}</b>`,x.h+'시간',base+'시간',l?`<b style="color:var(--er-t)">−${l.toFixed(1)}</b>`:'—',(base-l).toFixed(l?1:0)+'시간',`<div style="width:110px">${bar((base-l)/base*100,l>=1?'wn':'ok')}</div>`,l>=1?bdg('보충 필요','ba'):bdg('이상 없음','bk')]});
+  return `<div class="kpis" style="margin-bottom:20px">${kpi('반영한 행사',on.length+'건',s.ev.length-on.length+'건은 반영 안 함','tx')}${kpi('빠지는 원반수업',Object.values(lost).reduce((a,b)=>a+b,0).toFixed(1)+'시간','학급 평균 · 이번 학기','wn')}${kpi('빠지는 이동수업',tmLost+'시간','선택 분반 공통','wn')}${kpi('보충 필요 교과',Object.values(lost).filter(v=>v>=1).length+'개','결손 1시간 이상',Object.values(lost).some(v=>v>=1)?'er':'ok')}</div>`+
+  cardT('행사 목록','행사별로 어느 수업이 빠지는지 계산해요. ‘시수 반영’을 끄면 계산에서 빠져요.',tbl(['날짜','행사','대상','시간','빠지는 수업 (8개 학급 합계)','시수 반영'],s.ev.map((e,i)=>{const r=evLost(e);return [e.date,`<b>${e.name}</b>`,e.who,`${DAYS[e.d]} ${e.ps[0]}~${e.ps[e.ps.length-1]}교시`,`<span class="sm">${Object.entries(r.m).map(([k,v])=>SUBJ[k].n+' '+v).join(' · ')||'—'}${r.tm?` · 선택 ${r.tm}`:''}</span>`,sw(`event.ev.${i}.on`,e.on,e.name+' 시수 반영')]}),{c:'nb'}))+
+  cardT('교과별 운영 시수','연간 34주 기준 편제 시수에서 행사 결손을 뺀 값이에요.',tbl(['교과','주당','연간 편제','행사 결손','운영 예정','진행','상태'],rows,{c:'nb'}));
+ }
+});
+
+/* --- 이동수업 출석부 --- */
+const atInit=()=>({sec:'CHE2',mark:{},sub:{PHY1:1,CHE1:1,BIO1:1,EAR1:1}});
+ACT['at-sec']=el=>{V('attend',atInit).sec=el.dataset.id;render(true)};
+ACT['at-m']=el=>{const s=V('attend',atInit);s.mark[el.dataset.i]=el.dataset.v;render(true)};
+ACT['at-submit']=()=>{const s=V('attend',atInit);s.sub[s.sec]=1;touch();toast('출석부를 제출했어요.');render(true)};
+view('ops-attend',{
+ d:'이동수업은 학급 명단과 달라서 분반별 출석부가 필요해요. 교사가 모바일에서 바로 출석을 체크하고 제출해요.',
+ body(){
+  const s=V('attend',atInit),x=SECMAP[s.sec],T=TSK[S.sim.d+','+S.sim.p],now=SECS.filter(y=>y.T===T),list=now.length?now:SECS.filter(y=>y.T==='A'),roster=STUS.filter(z=>z.secs[x.T]===x.id);
+  const cnt={o:0,l:0,a:0};roster.forEach(z=>cnt[s.mark[z.id]||'o']++);
+  const left=cardT('이동수업 제출 현황',now.length?`${DAYS[S.sim.d]}요일 ${S.sim.p}교시에 열리는 분반이에요.`:'지금은 이동수업 시간이 아니에요. 타임 A 분반을 대신 보여 드려요.',tbl(['분반','교사','강의실','현원','출석부',''],list.map(y=>[`<b>${secName(y)}</b>`,y.t,y.room,secCnt(y.id)+'명',s.sub[y.id]?bdg('제출','bk'):bdg('미제출','ba'),btn('열기','at-sec',{k:'s',d:{id:y.id}})]),{c:'nb'}))+card('시간 설정','',simCtl());
+  const inner=`<div class="pc" style="background:var(--pr-s);border-color:var(--pr-l)"><small>${DAYS[S.sim.d]}요일 · 타임 ${x.T}</small><div class="b7" style="font-size:16px">${secName(x)}</div><small>${x.room} · ${x.t} 선생님</small></div><div class="row" style="margin:12px 2px 4px"><span class="bdg bk">출석 ${cnt.o}</span><span class="bdg ba">지각 ${cnt.l}</span><span class="bdg br">결석 ${cnt.a}</span></div>`+roster.map(z=>{const m=s.mark[z.id]||'o';return `<div class="pc" style="padding:9px 12px"><div class="row" style="gap:8px;margin-bottom:6px"><small>${z.id}</small><b style="font-size:14px">${z.n}</b><span class="sp"></span><small>2-${z.c}</small></div><div class="at">${[['o','출석'],['l','지각'],['a','결석']].map(([k,t])=>`<button class="${m===k?'on '+k:''}" data-act="at-m" data-i="${z.id}" data-v="${k}" aria-pressed="${m===k}">${t}</button>`).join('')}</div></div>`}).join('')+(s.sub[x.id]?`<div class="note ok" style="margin-top:12px">${ic('check',16)}<div>제출을 마쳤어요.</div></div>`:`<button class="pbtn" data-act="at-submit">출석부 제출</button>`);
+  return ops(left,phone('이동수업 출석부',`${secName(x)} · ${roster.length}명`,inner));
+ }
+});
+
+/* ===== 4. 고사 시간표 [2단계] · 공통 설정 ===== */
+const EXS=['국어','수학','영어','한국사','선택 A','선택 B','선택 C','선택 D','도덕'];
+const EXW={'국어':3,'수학':3,'영어':3,'한국사':2,'선택 A':2,'선택 B':2,'선택 C':3,'선택 D':2,'도덕':1};
+const EXD=['11. 4. (수)','11. 5. (목)','11. 6. (금)','11. 9. (월)','11. 10. (화)'];
+const EXT=['09:00–09:50','10:20–11:10','11:40–12:30','13:30–14:20'];
+const exInit=()=>({name:'2026학년도 2학기 중간고사',days:3,np:3,use:Object.fromEntries(EXS.map(x=>[x,true])),method:'cls',slots:['국어','수학','선택 A','영어','한국사','선택 B','선택 C','선택 D','도덕'],sel:null,rule:{subj:true,home:true},asg:null,day:0});
+const EX=()=>V('exam',exInit);
+function fitSlots(s){const N=s.days*s.np;let a=s.slots.slice(0,N).map(x=>s.use[x]?x:'');while(a.length<N)a.push('');const pl=new Set(a.filter(Boolean));EXS.filter(x=>s.use[x]&&!pl.has(x)).forEach(x=>{const i=a.indexOf('');if(i>=0)a[i]=x});s.slots=a;return a}
+const exLoad=(s,a)=>{a=a||fitSlots(s);return Array.from({length:s.days},(_,d)=>a.slice(d*s.np,(d+1)*s.np))};
+const exFlag=day=>day.reduce((n,x,i)=>n+(i&&EXW[x]>=3&&EXW[day[i-1]]>=3?1:0),0);
+const exCost=(s,a)=>{const L=exLoad(s,a),ld=L.map(d=>d.reduce((a,x)=>a+(EXW[x]||0),0)),m=ld.reduce((a,b)=>a+b,0)/ld.length;return ld.reduce((a,b)=>a+(b-m)**2,0)+L.reduce((a,d)=>a+exFlag(d)*6,0)};
+ACT['ex-sub']=el=>{const s=EX();s.use[el.dataset.s]=!s.use[el.dataset.s];touch();render(true)};
+view('exam-setup',{
+ d:'시험 이름, 기간, 하루 교시 수와 시험 과목을 정해요. 여기서 정한 값이 다음 단계의 기준이 돼요.',
+ act:()=>btn('저장','save',{k:'p'}),
+ body(){
+  const s=EX(),N=s.days*s.np,used=EXS.filter(x=>s.use[x]).length;
+  return saveRow()+`<div class="g2 s">${card('기본 정보','',`<div class="frm" style="grid-template-columns:1fr"><div class="fld"><label for="exn">시험 이름</label><input id="exn" class="inp" data-bind="exam.name" data-nr value="${esc(s.name)}"></div><div class="row"><div class="fld"><label>시험 일수</label>${stp('exam.days',s.days,1,5)}</div><div class="fld"><label>하루 교시 수</label>${stp('exam.np',s.np,1,4)}</div><div class="fld"><label>시작일</label><span class="b7" style="line-height:32px">${EXD[0]}</span></div></div></div>`)}${card('교시별 시간','50분 시험 · 교시 사이 30분 휴식',tbl(['교시','시간'],Array.from({length:s.np},(_,i)=>[`<b>${i+1}교시</b>`,EXT[i]]),{c:'nb dense'}).replace('class="tw"','class="tw" style="margin:0 -24px -24px"'))}</div>
+  ${card('시험 과목','시험을 보는 과목을 골라요. 선택 A~D는 반편성의 타임 4개와 같아요. 숫자는 시험 부담(난이도) 점수예요.',`<div class="chips">${EXS.map(x=>`<button class="chip ${s.use[x]?'on':''}" data-act="ex-sub" data-s="${x}" aria-pressed="${!!s.use[x]}">${x} <span class="mut4">${EXW[x]}</span></button>`).join('')}</div><div class="kpis mt">${kpi('시험 칸',N+'칸',s.days+'일 × '+s.np+'교시','tx')}${kpi('시험 과목',used+'개','',used>N?'er':'')}${kpi('빈 칸',Math.max(0,N-used)+'칸','',used>N?'er':'')}</div>${used>N?'<div style="height:12px"></div>'+note('er','alert','과목이 시험 칸보다 많아요. 시험 일수나 교시 수를 늘려 주세요.'):''}`)}`;
+ }
+});
+
+function examRooms(m){
+ const r=Array.from({length:8},(_,k)=>({k,n:0,by:Array(8).fill(0)}));
+ if(m==='cls')for(let k=0;k<8;k++){r[k].by[k]=25;r[k].n=25}
+ else if(m==='mix')STUS.forEach((s,i)=>{const g=i%8;r[g].by[s.c-1]++;r[g].n++});
+ else{const R=rng(99),o=STUS.map((s,i)=>({i,v:R()})).sort((a,b)=>b.v-a.v);o.forEach((x,j)=>{const q=Math.floor(j/8),g=q%2?7-(j%8):j%8,s=STUS[x.i];r[g].by[s.c-1]++;r[g].n++})}
+ return r;
+}
+view('exam-class',{
+ d:'학생을 시험반으로 나누고 시험실을 정해요. 학급 그대로 보거나, 섞어서 부정행위 걱정을 줄일 수 있어요.',
+ act:()=>btn('저장','save',{k:'p'}),
+ body(){
+  const s=EX(),rooms=examRooms(s.method);
+  return saveRow()+`<div class="row" style="margin-bottom:16px">${seg('exam.method',[['cls','학급 기준'],['mix','학번 섞기'],['zig','성적 지그재그']],s.method)}<span class="sm mut">${{cls:'학급 그대로 시험반이 돼요.',mix:'학번 순서대로 여덟 시험반에 돌려 담아요.',zig:'성적순으로 지그재그로 나눠 반 평균을 맞춰요.'}[s.method]}</span></div>`+
+  cardT('시험반 구성','시험반 8개 · 학생 200명',tbl(['시험반','학급별 인원','인원','시험실','감독'],rooms.map(r=>[`<b>시험반 ${r.k+1}</b>`,`<span class="sm">${r.by.map((v,i)=>v?`${i+1}반 ${v}`:'').filter(Boolean).join(' · ')}</span>`,r.n+'명',`2-${r.k+1} 교실`,'정 1 · 부 1']),{c:'nb'}))+note('bl','info','선택 A~D 과목은 시험반이 아니라 분반 강의실에서 봐요. 분반별 시험실은 시수표의 분반별 강의실을 그대로 써요.');
+ }
+});
+
+ACT['ep-cell']=el=>{const s=EX(),i=+el.dataset.i;if(s.sel==null)s.sel=i;else if(s.sel===i)s.sel=null;else{const a=s.slots;[a[s.sel],a[i]]=[a[i],a[s.sel]];s.sel=null;touch()}render(true)};
+ACT['ep-auto']=()=>{const s=EX(),R=rng(5),a=fitSlots(s).slice();let best=exCost(s,a);for(let k=0;k<3000;k++){const i=Math.floor(R()*a.length),j=Math.floor(R()*a.length);if(i===j)continue;[a[i],a[j]]=[a[j],a[i]];const c=exCost(s,a);if(c<=best)best=c;else[a[i],a[j]]=[a[j],a[i]]}s.slots=a;s.sel=null;touch();toast('시험 부담이 고르게 나뉘도록 다시 배치했어요.');render(true)};
+view('exam-place',{
+ d:'과목을 시험 칸에 놓아요. 하루에 어려운 과목이 몰리거나 연달아 나오지 않도록 학생의 시험 부담을 함께 봐요.',
+ act:()=>btn('자동 배치','ep-auto',{i:'wand',k:'ai'}),
+ body(){
+  const s=EX(),L=exLoad(s),ld=L.map(d=>d.reduce((a,x)=>a+(EXW[x]||0),0)),mx=s.np*3,fl=L.reduce((a,d)=>a+exFlag(d),0),gap=Math.max(...ld)-Math.min(...ld);
+  const unp=EXS.filter(x=>s.use[x]&&!s.slots.includes(x));
+  const g=`<div class="ttw"><div class="tt" style="grid-template-columns:62px repeat(${s.days},minmax(0,1fr));min-width:${s.days*130+70}px"><div></div>${L.map((_,d)=>`<div class="tt-h">${EXD[d]}</div>`).join('')}${Array.from({length:s.np},(_,p)=>`<div class="tt-p"><b>${p+1}</b><span>${EXT[p].slice(0,5)}</span></div>`+L.map((day,d)=>{const i=d*s.np+p,x=s.slots[i];return x?`<button class="cell cl ${s.sel===i?'sel':''}" style="--h:${EXW[x]>=3?10:EXW[x]===2?215:150};min-height:72px" data-act="ep-cell" data-i="${i}" aria-label="${EXD[d]} ${p+1}교시 ${x}"><b>${x}</b><span>부담 ${EXW[x]}</span></button>`:`<button class="cell blk cl" data-act="ep-cell" data-i="${i}" aria-label="${EXD[d]} ${p+1}교시 빈 칸"><b>빈 칸</b></button>`}).join('')).join('')}</div></div>`;
+  return `<div class="kpis" style="margin-bottom:20px">${kpi('연달아 어려운 과목',fl+'건','부담 3점 이상이 이어지면 표시',fl?'wn':'ok')}${kpi('일별 부담 차이',gap+'점','가장 큰 날 − 가장 작은 날',gap>2?'wn':'ok')}${kpi('배치한 과목',s.slots.filter(Boolean).length+'개',unp.length?'미배치 '+unp.length+'개':'모두 배치','tx')}</div>
+  <div class="g2 s" style="grid-template-columns:minmax(0,8fr) minmax(0,4fr)">${card('시험 시간표','과목을 누른 뒤 바꿀 칸을 누르면 맞바꿔요.',g+`<div class="legend mt1"><span><i style="--h:10"></i>부담 3</span><span><i style="--h:215"></i>부담 2</span><span><i style="--h:150"></i>부담 1</span></div>`)}${card('일별 시험 부담','',L.map((d,i)=>`<div class="mrow" style="grid-template-columns:78px 1fr 34px"><span class="sm">${EXD[i].split(' ')[0]+' '+EXD[i].split(' ')[1]}</span>${bar(ld[i]/mx*100,ld[i]>mx*.75?'er':ld[i]>mx*.6?'wn':'ok')}<span>${ld[i]}</span></div>${exFlag(d)?`<div class="xs" style="color:var(--wn-t);margin:-4px 0 4px 90px">어려운 과목이 연달아 있어요</div>`:''}`).join('')+(unp.length?note('wn','alert',`배치하지 못한 과목: ${unp.join(', ')}`):''))}</div>`;
+ }
+});
+
+const EXMAP={'국어':HOMET.KOR,'수학':HOMET.MAT,'영어':HOMET.ENG,'한국사':HOMET.HIK,'도덕':HOMET.MOR};
+const exSubjT=sub=>EXMAP[sub]||(sub.startsWith('선택')?SECS.filter(x=>x.T===sub.slice(-1)).map(x=>x.t):[]);
+const proctorPool=()=>TORDER.filter(n=>TLM[n].ty==='교사');
+function proctorAuto(s){
+ const a=fitSlots(s),pool=proctorPool(),cnt={},asg={},home={};
+ pool.forEach(n=>cnt[n]={j:0,b:0});TL.forEach(t=>{if(/^2-/.test(t.hr))home[t.n]=+t.hr.slice(2)});
+ a.forEach((sub,i)=>{if(!sub)return;const ex=s.rule.subj?exSubjT(sub):[],used=new Set();
+  for(let r=1;r<=8;r++){const pick=k=>pool.filter(n=>!used.has(n)&&!ex.includes(n)&&!(s.rule.home&&home[n]===r)).sort((x,y)=>(cnt[x][k]-cnt[y][k])||((cnt[x].j+cnt[x].b)-(cnt[y].j+cnt[y].b)))[0];
+   const j=pick('j');used.add(j);cnt[j].j++;const b=pick('b');used.add(b);cnt[b].b++;asg[i+'|'+r]=[j,b]}});
+ s.asg=asg;
+}
+ACT['pr-auto']=()=>{const s=EX();proctorAuto(s);touch();toast('정·부감독을 자동으로 배정했어요.');render(true)};
+ACT['pr-rule']=()=>{const s=EX();if(s.asg)proctorAuto(s)};
+ACT['pr-edit']=el=>{const s=EX(),k=el.dataset.k,v=(s.asg&&s.asg[k])||['',''],pool=proctorPool(),o=x=>`<option value="">미배정</option>`+pool.map(n=>`<option ${n===x?'selected':''}>${n}</option>`).join('');
+ modal('감독 바꾸기',`<div class="frm"><div class="fld"><label for="prj">정감독</label><select id="prj" class="sel">${o(v[0])}</select></div><div class="fld"><label for="prb">부감독</label><select id="prb" class="sel">${o(v[1])}</select></div></div>`,btn('취소','mclose')+btn('저장','pr-save',{k:'p',d:{k}}))};
+ACT['pr-save']=el=>{const s=EX();if(!s.asg)s.asg={};s.asg[el.dataset.k]=[$('#prj').value,$('#prb').value];closeModal();touch();render(true)};
+view('exam-proctor',{
+ d:'시험실마다 정감독과 부감독을 정해요. 감독 횟수를 고르게 맞추고, 담당 과목 시간과 담임반은 자동으로 빼요.',
+ act:()=>btn('자동 배정','pr-auto',{k:'p',i:'wand'}),
+ body(){
+  const s=EX(),a=fitSlots(s),pool=proctorPool(),cnt={};pool.forEach(n=>cnt[n]={j:0,b:0});
+  if(s.asg)Object.values(s.asg).forEach(([j,b])=>{if(cnt[j])cnt[j].j++;if(cnt[b])cnt[b].b++});
+  const tot=pool.map(n=>cnt[n].j+cnt[n].b),mean=tot.reduce((x,y)=>x+y,0)/pool.length,d=Math.min(s.day,s.days-1);
+  const rows=[];for(let p=0;p<s.np;p++){const i=d*s.np+p,sub=a[i];rows.push([`<b>${p+1}교시</b><br><span class="xs mut">${sub||'—'}</span>`,...Array.from({length:8},(_,r)=>{if(!sub)return '<span class="mut4">—</span>';const v=s.asg&&s.asg[i+'|'+(r+1)];return `<button class="sm" style="text-align:left;width:100%" data-act="pr-edit" data-k="${i}|${r+1}">${v?`<b>정</b> ${v[0]||'—'}<br><b>부</b> ${v[1]||'—'}`:'<span class="mut4">미배정</span>'}</button>`})])}
+  return `<div class="g2 s" style="grid-template-columns:minmax(0,5fr) minmax(0,5fr);margin-bottom:20px">${card('제외 규칙','자동 배정할 때 이 규칙을 지켜요.',`<div class="list"><div class="li"><div class="sp"><b>담당 과목 시험 시간 제외</b><small>예: 수학 시험 시간에는 수학 교사가 감독하지 않아요.</small></div><label class="sw"><input type="checkbox" data-bind="exam.rule.subj" data-after="pr-rule" ${s.rule.subj?'checked':''} aria-label="담당 과목 제외"><i></i></label></div><div class="li"><div class="sp"><b>담임반 제외</b><small>자기 학급 시험실은 감독하지 않아요.</small></div><label class="sw"><input type="checkbox" data-bind="exam.rule.home" data-after="pr-rule" ${s.rule.home?'checked':''} aria-label="담임반 제외"><i></i></label></div></div>`)}${card('배정 현황',s.asg?'자동 배정을 마쳤어요.':'아직 배정하지 않았어요.',`<div class="kpis">${kpi('감독 교사',pool.length+'명','','tx')}${kpi('평균 횟수',s.asg?mean.toFixed(1)+'회':'—','정+부 합계','')}${kpi('횟수 편차',s.asg?(Math.max(...tot)-Math.min(...tot))+'회':'—','최대 − 최소',s.asg&&Math.max(...tot)-Math.min(...tot)>1?'wn':'ok')}</div>`)}</div>`+
+  tabs('exam',Array.from({length:s.days},(_,i)=>[String(i),EXD[i]]),String(d)).replace(/data-act="tab" data-g="exam" data-k="(\d)"/g,'data-act="ex-day" data-k="$1"')+
+  cardT(EXD[d]+' 감독표','칸을 누르면 감독을 직접 바꿀 수 있어요.',tbl(['교시',...Array.from({length:8},(_,i)=>`시험실 ${i+1}`)],rows,{c:'nb'}))+
+  cardT('감독 횟수 집계','정감독과 부감독 횟수를 합쳐 고르게 맞춰요.',tbl(['교사','교과','정감독','부감독','합계','판정'],pool.map(n=>{const c=cnt[n],t=c.j+c.b;return [`<b>${n}</b>`,TLM[n].sj,c.j,c.b,`<b>${t}</b>`,!s.asg?'—':Math.abs(t-mean)>1.5?bdg(t>mean?'많음':'적음','ba'):bdg('적정','bk')]}),{c:'nb dense'}));
+ }
+});
+ACT['ex-day']=el=>{EX().day=+el.dataset.k;render(true)};
+
+view('exam-print',{
+ d:'시험 시간표, 시험반 명단, 감독 배정표를 인쇄하거나 파일로 내려받아요.',
+ act:()=>btn('시험 시간표 인쇄','vw-print',{k:'p',i:'printer'}),
+ body(){
+  const s=EX(),L=exLoad(s);
+  return card(s.name+' 시험 시간표','2학년 · 시험반 8개',`<div class="tw" style="margin:0 -24px -24px"><table class="tbl"><thead><tr><th>구분</th>${L.map((_,i)=>`<th class="c">${EXD[i]}</th>`).join('')}</tr></thead><tbody>${Array.from({length:s.np},(_,p)=>`<tr><td><b>${p+1}교시</b> <span class="xs mut">${EXT[p]}</span></td>${L.map(d=>`<td class="c">${d[p]?`<b>${d[p]}</b>`:'<span class="mut4">—</span>'}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`)+
+  card('내려받기','필요한 자료를 골라요.',`<div class="g3 s">${[['시험 시간표','학생·교사 배부용'],['시험반 명단','시험실 입구 부착용'],['감독 배정표','교사별 감독 일정'],['시험실 안내표','시험실마다 한 장'],['감독 확인서','감독 교사 서명용']].map(x=>`<div class="opt" style="cursor:default"><b>${x[0]}</b><p>${x[1]}</p><div class="row mt1">${btn('PDF','toast',{k:'s',i:'download',d:{m:x[0]+' PDF를 만들었어요. (프로토타입)'}})}${btn('엑셀','toast',{k:'s',d:{m:x[0]+' 엑셀 파일을 만들었어요. (프로토타입)'}})}</div></div>`).join('')}</div>`);
+ }
+});
+
+/* --- 공통 설정 --- */
+const scInit=()=>({name:'인천송도고등학교',code:'0000000000',office:'인천광역시교육청',term:'2학기',days:190,start:'2026-09-01',end:'2027-02-12'});
+view('common-school',{
+ d:'학교 이름과 학년도·학기 정보를 관리해요. 여기서 정한 값이 모든 화면에 쓰여요.',
+ act:()=>btn('저장','save',{k:'p'}),
+ body(){
+  const s=V('school',scInit);
+  return saveRow()+card('학교 정보','',`<div class="frm"><div class="fld"><label for="sn">학교 이름</label><input id="sn" class="inp" data-bind="school.name" data-nr value="${esc(S.level==='high'?s.name:'인천송도중학교')}"></div><div class="fld"><label>학교급</label><div><span class="bdg bl pl">${nameOf()}</span> <span class="link sm" data-act="go" data-r="setup">기초설정에서 바꾸기</span></div></div><div class="fld"><label for="sc">학교 코드</label><input id="sc" class="inp" data-bind="school.code" data-nr value="${esc(s.code)}"></div><div class="fld"><label for="so">교육청</label><input id="so" class="inp" data-bind="school.office" data-nr value="${esc(s.office)}"></div></div>`)+card('학년도·학기','',`<div class="frm"><div class="fld"><label>학년도</label>${sel('year.y',['2026학년도','2025학년도'],V('year').y,'')}</div><div class="fld"><label>학기</label>${sel('school.term',['1학기','2학기'],s.term,'')}</div><div class="fld"><label for="sd">학기 시작일</label><input id="sd" class="inp" data-bind="school.start" data-nr value="${s.start}"></div><div class="fld"><label for="se">학기 종료일</label><input id="se" class="inp" data-bind="school.end" data-nr value="${s.end}"></div><div class="fld"><label for="sdy">연간 수업일수</label><input id="sdy" class="inp" type="number" data-num data-bind="school.days" data-nr value="${s.days}"></div></div>`);
+ }
+});
+
+const yrInit=()=>({to:'2027학년도',carry:{teachers:true,subjects:true,rooms:true,rules:true,class:false,table:false},fresh:8,done:false});
+ACT['yr-go']=()=>modal('2027학년도를 만들까요?','<p>선택한 항목을 2027학년도로 복사해요. 2026학년도 자료는 그대로 남아요.</p>',btn('취소','mclose')+btn('만들기','yr-ok',{k:'p'}));
+ACT['yr-ok']=()=>{V('year2',yrInit).done=true;closeModal();touch();toast('2027학년도를 만들었어요.');render(true)};
+view('common-year',{
+ d:'새 학년도를 만들 때 교사, 과목·편제, 조건 설정을 이어받아요. 학년은 한 학년씩 올라가요.',
+ act:()=>btn('2027학년도 생성','yr-go',{k:'p',dis:V('year2',yrInit).done}),
+ body(){
+  const s=V('year2',yrInit),items=[['teachers','교사 명단','35명'],['subjects','과목·편제','3개 학년'],['rooms','특별실','9곳'],['rules','조건 설정 (규칙·제한)','생성 규칙 6개'],['class','반편성 결과','학생이 바뀌어 새로 만들어요'],['table','시간표','새로 만들어요']];
+  return (s.done?note('ok','check','<b>2027학년도를 만들었어요.</b> 왼쪽 위 학년도 선택에서 바꿔 볼 수 있어요.')+'<div style="height:16px"></div>':'')+
+  `<div class="g2 s">${card('이어받을 항목','체크한 항목만 복사해요.',`<div class="list">${items.map(([k,t,d])=>`<div class="li"><div class="sp"><b>${t}</b><small>${d}</small></div>${sw('year2.carry.'+k,s.carry[k],t)}</div>`).join('')}</div>`)}${card('학년 올리기','2026학년도 학급이 2027학년도로 이어져요.',tbl(['2026학년도','2027학년도','학급'],[['1학년','2학년','8학급'],['2학년','3학년','8학급'],['3학년','졸업','—'],['신입생','1학년',stp('year2.fresh',s.fresh,1,14)+' 학급']],{c:'nb'}).replace('class="tw"','class="tw" style="margin:0 -24px -24px"'))}</div>`;
+ }
+});
+
+const RUSERS=[['김은지','class','교무부'],['최민호','dept','수학과'],['한서준','dept','영어과'],['박지훈','dept','국어과'],['신유나','dept','과학과'],['표지원','dept','사회과'],['이서연','teacher','음악과'],['윤태호','teacher','체육과']];
+view('common-roles',{
+ d:'수업계, 교과 협의 담당, 일반 교사가 쓸 수 있는 화면을 정해요. 오른쪽 위 사용자 메뉴에서 역할을 바꿔 직접 확인할 수 있어요.',
+ act:()=>btn('저장','save',{k:'p'}),
+ body(){
+  const s=V('roles',()=>({u:RUSERS.map(r=>[...r])})),NR={class:'수업계',dept:'교과 협의 담당',teacher:'일반 교사'};
+  const mx=[];NAV.slice(1).forEach(g=>{mx.push({c:'sub',r:[g.t,'','','']});g.items.forEach(i=>mx.push(['　'+i.t,...['c','d','t'].map(l=>i.ro.includes(l)?`<span style="color:var(--ok)">${ic('check',18)}</span>`:'<span class="mut4">—</span>')]))});
+  return `<div class="g2 s" style="grid-template-columns:minmax(0,5fr) minmax(0,6fr)">${cardT('사용자와 역할','사용자마다 역할을 하나씩 정해요.',tbl(['이름','소속','역할'],s.u.map((r,i)=>[`<b>${r[0]}</b>`,r[2],sel(`roles.u.${i}.1`,Object.entries(NR),r[1],'s')]),{c:'nb'}))}${cardT('역할별 사용 범위','✓ 표시된 화면을 쓸 수 있어요.',tbl(['화면',{t:'수업계',c:'c'},{t:'교과 협의',c:'c'},{t:'일반 교사',c:'c'}],mx,{c:'nb dense'}))}</div>`;
+ }
+});
+
+const cnInit=()=>({m:{pub:{app:true,mail:true,sms:false},swap:{app:true,mail:false,sms:false},att:{app:true,mail:false,sms:false},fix:{app:true,mail:true,sms:false},diag:{app:true,mail:false,sms:false}},quiet:'22:00 – 07:00'});
+view('common-noti',{
+ d:'어떤 일이 생겼을 때 누구에게 어떤 방법으로 알릴지 정해요.',
+ act:()=>btn('저장','save',{k:'p'}),
+ body(){
+  const s=V('cnoti',cnInit),R=[['pub','시간표 공개·변경'],['swap','수업교환·결보강 요청'],['att','이동수업 출석부 미제출'],['fix','반편성·담당교사 확정'],['diag','구조 진단 경고']];
+  return cardT('알림 설정','알림마다 받을 방법을 골라요.',tbl(['알림',{t:'앱 알림',c:'c'},{t:'이메일',c:'c'},{t:'문자',c:'c'}],R.map(([k,t])=>[`<b>${t}</b>`,...['app','mail','sms'].map(c=>sw(`cnoti.m.${k}.${c}`,s.m[k][c],t+' '+c))]),{c:'nb'}))+card('방해 금지 시간','이 시간에는 알림을 모아서 아침에 보내요.',`<div class="row">${sel('cnoti.quiet',['사용 안 함','22:00 – 07:00','21:00 – 08:00'],s.quiet,'')}</div>`);
+ }
+});
+
+$('.sqb.in').innerHTML=ic('panel',18);
+boot();
+
+</script>
+</body>
+</html>
